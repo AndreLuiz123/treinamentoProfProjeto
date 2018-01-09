@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="13" tilewidth="16" tileheight="16" nextobjectid="6">
+ <tileset firstgid="1" source="vamoLaAgoraVai.tsx"/>
+ <layer name="chao" width="20" height="13">
+  <data encoding="base64" compression="zlib">
+   eJy7yMDAMJlK+CIUb6YShpm3jUoYZt52KJ9SGmbedCCeRgV61H2j7iPHfZ+phEFmAQDrH7SG
+  </data>
+ </layer>
+ <layer name="parede" width="20" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFxIBiKKaW3slQTA7ApnczFJMDKNE7UICS+MAGKIkPbGAohikIAAAWyApX
+  </data>
+ </layer>
+ <objectgroup name="objParede">
+  <object id="1" x="223" y="58" width="34" height="38"/>
+  <object id="3" x="223" y="138" width="34" height="38"/>
+  <object id="4" x="142" y="72" width="36" height="40"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="5">
+ <tileset firstgid="1" source="treinamentoProfissional.tsx"/>
+ <layer name="graficos" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt1cEJg0AQhlFLVtKIEkjayCIkdaQjR/CQ8wRWRt6Dj73uZfiHgasYoym6JZv6fxk4zNES3ZMt/b8MHF5Ri9Zkrf+XgR/f6BE9E6/7hXPtN/iOPonX/cK59hu0v1CT/YW67C/UZX+hLvsLddlfqKv9GQB9bEANfE0=
+  </data>
+ </layer>
+ <layer name="obstaculo" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt1jERACAMBEE8IwUpGKRNQZEygd2Z0/A/BgAAAMBbZgjoZYWAum47u0NAXZmd9aWhpszO+tLQly8NAAD84gBnKQwQ
+  </data>
+ </layer>
+ <objectgroup name="obstaculoObj">
+  <object id="1" x="1984" y="75" width="47" height="35"/>
+  <object id="2" x="2047" y="123" width="32" height="34"/>
+  <object id="3" x="1902" y="106" width="34" height="37"/>
+ </objectgroup>
+</map>
