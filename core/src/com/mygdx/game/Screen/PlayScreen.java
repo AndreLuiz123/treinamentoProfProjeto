@@ -50,7 +50,7 @@ public class PlayScreen implements Screen{
 
     public PlayScreen(MyGdxGame game ) {
 
-        atlas = new TextureAtlas("link.pack");
+        atlas = new TextureAtlas("treinamentoProfNovo.pack");
 
         this.game = game;
         gameCam = new OrthographicCamera();

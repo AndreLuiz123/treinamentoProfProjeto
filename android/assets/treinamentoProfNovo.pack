@@ -1,0 +1,12 @@
+
+treinamentoProfNovo.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+sprite treinamento prof
+  rotate: false
+  xy: 1, 1
+  size: 701, 760
+  orig: 701, 760
+  offset: 0, 0
+  index: -1

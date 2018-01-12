@@ -23,7 +23,7 @@ public class Heroi extends Sprite {
     public World world;
     public Body b2body;
     public BodyDef bdef;
-    private TextureRegion linkParadoFrente;
+    private TextureRegion linkParadoFrente, paradoCostas, paradoLado;
 
     public enum State {ParadoFrente, AndandoFrente, ParadoLado, AndandoLado, ParadoCostas, AndandoCostas}
 
@@ -33,9 +33,10 @@ public class Heroi extends Sprite {
     private boolean andandoDireita;
     private float posX, posX2, posY, posY2;
     private float vX, vY, xis, ypi;
+    private float rotacao;
 
     public Heroi(World world, PlayScreen screen) {
-        super(screen.getAtlas().findRegion("link"));
+        super(screen.getAtlas().findRegion("sprite treinamento prof"));
         this.world = world;
 
         estadoAtual = State.ParadoFrente;
@@ -45,20 +46,20 @@ public class Heroi extends Sprite {
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
         for (int i = 0; i < 3; i++) {
-            frames.add(new TextureRegion(getTexture(), 27 * i, 69, 20, 30));
+            frames.add(new TextureRegion(getTexture(), 65 * i, 678, 48, 67));
         }
         andandoFrente = new Animation(0.1f, frames);
         frames.clear();
 
-        for (int i = 0; i < 3; i++) {
-            frames.add(new TextureRegion(getTexture(), 27 * i, 5, 20, 30));
+        for (int i = 0; i < 9; i++) {
+            frames.add(new TextureRegion(getTexture(), 65 * i, 540, 48, 63));
         }
 
         andandoCostas = new Animation(0.1f, frames);
         frames.clear();
 
-        for (int i = 0; i < 3; i++) {
-            frames.add(new TextureRegion(getTexture(), 27 * i, 35, 20, 30));
+        for (int i = 0; i < 9; i++) {
+            frames.add(new TextureRegion(getTexture(), 65 * i, 600, 45, 67));
         }
 
         andandoLados = new Animation(0.1f, frames);
@@ -66,8 +67,10 @@ public class Heroi extends Sprite {
 
 
         defineHeroi();
-        linkParadoFrente = new TextureRegion(getTexture(), 27, 69, 20, 30);
-        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 16 / MyGdxGame.PPM, 16 / MyGdxGame.PPM);
+        linkParadoFrente = new TextureRegion(getTexture(), 0, 670, 48, 67);
+        paradoCostas = new TextureRegion(getTexture(), 0, 540, 48, 63);
+        paradoLado = new TextureRegion(getTexture(), 0, 600, 45, 67);
+        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 16 / MyGdxGame.PPM, 24 / MyGdxGame.PPM);
         setRegion(linkParadoFrente);
 
 
@@ -85,7 +88,7 @@ public class Heroi extends Sprite {
     public void defineHeroi() {
 
         bdef = new BodyDef();
-        bdef.position.set(45 / MyGdxGame.PPM, 32 / MyGdxGame.PPM);
+        bdef.position.set(60 / MyGdxGame.PPM, 32 / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -114,6 +117,7 @@ public class Heroi extends Sprite {
             posY = b2body.getPosition().y;
             posY2 = getY();
             vY = 0.3f;
+            rotacao = 90;
 
         }
 
@@ -121,7 +125,7 @@ public class Heroi extends Sprite {
             posY = b2body.getPosition().y;
             posY2 = getY();
             vY = -0.3f;
-
+            rotacao = 270;
         }
 
 
@@ -130,6 +134,7 @@ public class Heroi extends Sprite {
             posX = b2body.getPosition().x;
             posX2 = getX();
             vX = 0.3f;
+            rotacao = 0;
         }
 
 
@@ -138,6 +143,7 @@ public class Heroi extends Sprite {
             posX = b2body.getPosition().x;
             posX2 = getX();
             vX = -0.3f;
+            rotacao = 180;
 
         }
 
@@ -186,11 +192,13 @@ public class Heroi extends Sprite {
                 region = (TextureRegion) andandoFrente.getKeyFrame(stateTimer);
                 break;
             case ParadoLado:
+                region = paradoLado;
                 break;
             case AndandoLado:
                 region = (TextureRegion) andandoLados.getKeyFrame(stateTimer);
                 break;
             case ParadoCostas:
+                region = paradoCostas;
                 break;
             case AndandoCostas:
                 region = (TextureRegion) andandoCostas.getKeyFrame(stateTimer);
@@ -200,13 +208,13 @@ public class Heroi extends Sprite {
                 break;
         }
 
-        if((vX<0 || !andandoDireita)&& !region.isFlipX()){
+        if((vX<0 || andandoDireita)&& region.isFlipX()){
             region.flip(true,false);
-            andandoDireita = false;
+            andandoDireita = true;
         }else{
-            if((vX>0 || andandoDireita)&& region.isFlipX()){
+            if((vX>0 || !andandoDireita)&& !region.isFlipX()){
                 region.flip(true,false);
-                andandoDireita = true;
+                andandoDireita = false;
             }
         }
 
@@ -222,6 +230,7 @@ public class Heroi extends Sprite {
     private State getState() {
 
 
+
         if(vX != 0) {
 
             return State.AndandoLado;
@@ -232,9 +241,21 @@ public class Heroi extends Sprite {
             }else{
                 if(vY<0){
                     return State.AndandoFrente;
+                }else{
+                    if(rotacao == 90){
+                        return  State.ParadoCostas;
+                    }else{
+                        if(rotacao == 270){
+                            return  State.ParadoFrente;
+                        }else{
+                            if(rotacao==0 || rotacao==180){
+                                return  State.ParadoLado;
+                            }
+                        }
+                    }
+
                 }
             }
-
         }
         return State.ParadoFrente;
     }

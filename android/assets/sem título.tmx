@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="13" tilewidth="16" tileheight="16" nextobjectid="6">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="13" tilewidth="16" tileheight="16" nextobjectid="12">
  <tileset firstgid="1" source="vamoLaAgoraVai.tsx"/>
  <layer name="chao" width="20" height="13">
   <data encoding="base64" compression="zlib">
-   eJy7yMDAMJlK+CIUb6YShpm3jUoYZt52KJ9SGmbedCCeRgV61H2j7iPHfZ+phEFmAQDrH7SG
+   eJy7yMDAMJlK+CIUb6YShpl3DYinU4GGmbcNiLdTgR5136j7BoP7PlMJg8wCAKjTvY8=
   </data>
  </layer>
  <layer name="parede" width="20" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFxIBiKKaW3slQTA7ApnczFJMDKNE7UICS+MAGKIkPbGAohikIAAAWyApX
+   eJxjYBgFAwU2QjG1wGYoHir2UwouQjG1AL3dPxgBAJ4BCJk=
   </data>
  </layer>
  <objectgroup name="objParede">
-  <object id="1" x="223" y="58" width="34" height="38"/>
-  <object id="3" x="223" y="138" width="34" height="38"/>
-  <object id="4" x="142" y="72" width="36" height="40"/>
+  <object id="6" x="110" y="95" width="34" height="31"/>
+  <object id="8" x="240" y="64" width="34" height="31"/>
+  <object id="11" x="240" y="130" width="34" height="31"/>
  </objectgroup>
 </map>
