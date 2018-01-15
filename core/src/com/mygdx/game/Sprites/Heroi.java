@@ -34,9 +34,11 @@ public class Heroi extends Sprite {
     private float posX, posX2, posY, posY2;
     private float vX, vY, xis, ypi;
     private float rotacao;
+    public float cooldown;
 
     public Heroi(World world, PlayScreen screen) {
-        super(screen.getAtlas().findRegion("sprite treinamento prof"));
+        super(screen.getAtlas().findRegion("lpc-2"));
+        int S = 64;
         this.world = world;
 
         estadoAtual = State.ParadoFrente;
@@ -46,20 +48,20 @@ public class Heroi extends Sprite {
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
         for (int i = 0; i < 3; i++) {
-            frames.add(new TextureRegion(getTexture(), 65 * i, 678, 48, 67));
+            frames.add(new TextureRegion(getTexture(), S * i, S*10, S, S));
         }
         andandoFrente = new Animation(0.1f, frames);
         frames.clear();
 
         for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), 65 * i, 540, 48, 63));
+            frames.add(new TextureRegion(getTexture(), S * i, S*8, S, S));
         }
 
         andandoCostas = new Animation(0.1f, frames);
         frames.clear();
 
         for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), 65 * i, 600, 45, 67));
+            frames.add(new TextureRegion(getTexture(), S * i, S*9, S, S));
         }
 
         andandoLados = new Animation(0.1f, frames);
@@ -67,10 +69,10 @@ public class Heroi extends Sprite {
 
 
         defineHeroi();
-        linkParadoFrente = new TextureRegion(getTexture(), 0, 670, 48, 67);
-        paradoCostas = new TextureRegion(getTexture(), 0, 540, 48, 63);
-        paradoLado = new TextureRegion(getTexture(), 0, 600, 45, 67);
-        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 16 / MyGdxGame.PPM, 24 / MyGdxGame.PPM);
+        linkParadoFrente = new TextureRegion(getTexture(), 0, S*10, S, S);
+        paradoCostas = new TextureRegion(getTexture(), 0, S*8, S, S);
+        paradoLado = new TextureRegion(getTexture(), 0, S*9, S, S);
+        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 24 / MyGdxGame.PPM, 24 / MyGdxGame.PPM);
         setRegion(linkParadoFrente);
 
 
@@ -88,7 +90,7 @@ public class Heroi extends Sprite {
     public void defineHeroi() {
 
         bdef = new BodyDef();
-        bdef.position.set(60 / MyGdxGame.PPM, 32 / MyGdxGame.PPM);
+        bdef.position.set(35 / MyGdxGame.PPM, 31 / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -108,7 +110,8 @@ public class Heroi extends Sprite {
          setRegion(getFrame(dt));
 
         movimentoControles();
-        movimentos();
+        movimentos(dt);
+        setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - 0.28f*getHeight());
 
     }
 
@@ -118,6 +121,7 @@ public class Heroi extends Sprite {
             posY2 = getY();
             vY = 0.3f;
             rotacao = 90;
+            cooldown = 1.0f;
 
         }
 
@@ -126,6 +130,7 @@ public class Heroi extends Sprite {
             posY2 = getY();
             vY = -0.3f;
             rotacao = 270;
+            cooldown = 1.0f;
         }
 
 
@@ -135,6 +140,8 @@ public class Heroi extends Sprite {
             posX2 = getX();
             vX = 0.3f;
             rotacao = 0;
+            cooldown = 1.0f;
+
         }
 
 
@@ -144,15 +151,23 @@ public class Heroi extends Sprite {
             posX2 = getX();
             vX = -0.3f;
             rotacao = 180;
+            cooldown = 1.0f;
 
         }
 
     }
 
-    public void movimentos() {
+    public void movimentos(float dt) {
 
-        b2body.setLinearVelocity(vX, vY);
-
+        if(cooldown>0) {
+            b2body.setLinearVelocity(vX, vY);
+            cooldown -= dt;
+        } else {
+            b2body.setLinearVelocity(0,0);
+            vX = 0;
+            vY = 0;
+        }
+        /*
         if (vX != 0) {
             setPosition(b2body.getPosition().x, b2body.getPosition().y - getHeight() / 2);
             xis = vX;
@@ -168,13 +183,13 @@ public class Heroi extends Sprite {
         }
 
 
-        if ((b2body.getPosition().x - posX >= 0.3) || (b2body.getPosition().x - posX <= -0.3)) {
+       if ((b2body.getPosition().x - posX >= 0.3) || (b2body.getPosition().x - posX <= -0.3)) {
             vX = 0;
         }
         if ((b2body.getPosition().y - posY >= 0.3) || (b2body.getPosition().y - posY <= -0.3)) {
             vY = 0;
         }
-
+        */
 
     }
 

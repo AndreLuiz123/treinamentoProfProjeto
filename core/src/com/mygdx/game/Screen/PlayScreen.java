@@ -50,7 +50,7 @@ public class PlayScreen implements Screen{
 
     public PlayScreen(MyGdxGame game ) {
 
-        atlas = new TextureAtlas("treinamentoProfNovo.pack");
+        atlas = new TextureAtlas("teste.pack");
 
         this.game = game;
         gameCam = new OrthographicCamera();
@@ -81,7 +81,6 @@ public class PlayScreen implements Screen{
             shape.setAsBox(rect.getWidth()/2/MyGdxGame.PPM, rect.getHeight()/2/MyGdxGame.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
-
 
         }
 
@@ -143,7 +142,7 @@ public class PlayScreen implements Screen{
         renderer.render();
         //player.draw(game.batch);
         //Só esta ai para indicar onde estão os objetos. Quando tudo estiver concluido, esta linha pode ser apagada.
-       // b2dr.render(world, gameCam.combined);
+        b2dr.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();

@@ -1,0 +1,12 @@
+
+teste.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+lpc-2
+  rotate: false
+  xy: 1, 1
+  size: 832, 1344
+  orig: 832, 1344
+  offset: 0, 0
+  index: -1
