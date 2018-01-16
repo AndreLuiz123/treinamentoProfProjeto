@@ -14,6 +14,9 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screen.PlayScreen;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andre Luiz on 16/11/2017.
  */
@@ -35,11 +38,21 @@ public class Heroi extends Sprite {
     private float vX, vY, xis, ypi;
     private float rotacao;
     public float cooldown;
+    public List<String> comandos = new ArrayList<String>();
+    public int comandoAtual = -1;
 
     public Heroi(World world, PlayScreen screen) {
         super(screen.getAtlas().findRegion("lpc-2"));
         int S = 64;
         this.world = world;
+
+        comandos = new ArrayList<String>(){{
+           add("right");
+           add("down");
+           add("left");
+           add("up");
+           add("left");
+        }};
 
         estadoAtual = State.ParadoFrente;
         stateTimer = 0;
@@ -87,6 +100,23 @@ public class Heroi extends Sprite {
 
     }
 
+    public void rodaComando(){
+        if(cooldown > 0 || comandoAtual<0 || comandoAtual > comandos.size()-1) return;
+        if(comandos.get(comandoAtual).equals("right")){
+            andaParaDireita();
+        } else if(comandos.get(comandoAtual).equals("up")){
+            andaParaCima();
+        } else if(comandos.get(comandoAtual).equals("left")){
+            andaParaEsquerda();
+        } else if(comandos.get(comandoAtual).equals("down")){
+            andaParaBaixo();
+        }
+        comandoAtual ++;
+        if(comandoAtual>=comandos.size()){
+            comandoAtual = -1;
+        }
+    }
+
     public void defineHeroi() {
 
         bdef = new BodyDef();
@@ -110,51 +140,74 @@ public class Heroi extends Sprite {
          setRegion(getFrame(dt));
 
         movimentoControles();
+        rodaComando();
         movimentos(dt);
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - 0.28f*getHeight());
 
     }
 
     public void movimentoControles() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            comandoAtual = 0;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            rodaComando();
+        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            posY = b2body.getPosition().y;
-            posY2 = getY();
-            vY = 0.3f;
-            rotacao = 90;
-            cooldown = 1.0f;
+            andaParaCima();
 
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-            posY = b2body.getPosition().y;
-            posY2 = getY();
-            vY = -0.3f;
-            rotacao = 270;
-            cooldown = 1.0f;
+            andaParaBaixo();
         }
 
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
 
-            posX = b2body.getPosition().x;
-            posX2 = getX();
-            vX = 0.3f;
-            rotacao = 0;
-            cooldown = 1.0f;
+            andaParaDireita();
 
         }
 
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && b2body.getLinearVelocity().x >= -2) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
 
-            posX = b2body.getPosition().x;
-            posX2 = getX();
-            vX = -0.3f;
-            rotacao = 180;
-            cooldown = 1.0f;
+            andaParaEsquerda();
 
         }
 
+    }
+
+    private void andaParaEsquerda() {
+        posX = b2body.getPosition().x;
+        posX2 = getX();
+        vX = -0.3f;
+        rotacao = 180;
+        cooldown = 1.0f;
+    }
+
+    private void andaParaBaixo() {
+        posY = b2body.getPosition().y;
+        posY2 = getY();
+        vY = -0.3f;
+        rotacao = 270;
+        cooldown = 1.0f;
+    }
+
+    private void andaParaCima() {
+        posY = b2body.getPosition().y;
+        posY2 = getY();
+        vY = 0.3f;
+        rotacao = 90;
+        cooldown = 1.0f;
+    }
+
+    private void andaParaDireita() {
+        posX = b2body.getPosition().x;
+        posX2 = getX();
+        vX = 0.3f;
+        rotacao = 0;
+        cooldown = 1.0f;
     }
 
     public void movimentos(float dt) {
