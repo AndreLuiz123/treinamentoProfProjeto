@@ -40,6 +40,8 @@ public class Heroi extends Sprite {
     public float cooldown;
     public List<String> comandos = new ArrayList<String>();
     public int comandoAtual = -1;
+    public boolean pode= false;
+
 
     public Heroi(World world, PlayScreen screen) {
         super(screen.getAtlas().findRegion("lpc-2"));
@@ -51,7 +53,7 @@ public class Heroi extends Sprite {
            add("down");
            add("left");
            add("up");
-           add("left");
+           add("right");
         }};
 
         estadoAtual = State.ParadoFrente;
@@ -103,15 +105,28 @@ public class Heroi extends Sprite {
     public void rodaComando(){
         if(cooldown > 0 || comandoAtual<0 || comandoAtual > comandos.size()-1) return;
         if(comandos.get(comandoAtual).equals("right")){
+            System.out.println("direita");
+            vY=0;
             andaParaDireita();
         } else if(comandos.get(comandoAtual).equals("up")){
+            vX=0;
+            System.out.println("cima");
             andaParaCima();
         } else if(comandos.get(comandoAtual).equals("left")){
+            vY=0;
+            System.out.println("esquerda");
             andaParaEsquerda();
         } else if(comandos.get(comandoAtual).equals("down")){
+            vX=0;
+            System.out.println("baixo");
             andaParaBaixo();
         }
-        comandoAtual ++;
+
+
+
+            comandoAtual++;
+
+
         if(comandoAtual>=comandos.size()){
             comandoAtual = -1;
         }
@@ -139,8 +154,9 @@ public class Heroi extends Sprite {
 
          setRegion(getFrame(dt));
 
-        movimentoControles();
         rodaComando();
+
+        movimentoControles();
         movimentos(dt);
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - 0.28f*getHeight());
 
@@ -152,6 +168,9 @@ public class Heroi extends Sprite {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             rodaComando();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
+
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             andaParaCima();
