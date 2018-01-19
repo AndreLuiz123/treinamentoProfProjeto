@@ -95,7 +95,7 @@ public class PlayScreen implements Screen{
         xis=0;
         ypi=0;
 
-        hud = new Hud(game.batch, player);
+        hud = new Hud(game.batch);
 
     }
 
