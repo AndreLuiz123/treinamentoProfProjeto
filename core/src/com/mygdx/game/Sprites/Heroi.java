@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screen.PlayScreen;
 
@@ -38,9 +39,12 @@ public class Heroi extends Sprite {
     private float vX, vY, xis, ypi;
     private float rotacao;
     public float cooldown;
-    public List<String> comandos = new ArrayList<String>();
+    public ArrayList<String> comandos = new ArrayList<String>();
     public int comandoAtual = -1;
     public boolean pode= false;
+    public boolean click= false;
+
+
 
 
     public Heroi(World world, PlayScreen screen) {
@@ -48,17 +52,13 @@ public class Heroi extends Sprite {
         int S = 64;
         this.world = world;
 
-        comandos = new ArrayList<String>(){{
-           add("right");
-           add("down");
-           add("left");
-           add("up");
-           add("right");
-        }};
+        comandos = new ArrayList<String>();
 
         estadoAtual = State.ParadoFrente;
         stateTimer = 0;
         andandoDireita = true;
+
+
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
@@ -132,6 +132,15 @@ public class Heroi extends Sprite {
         }
     }
 
+    public void colocaComandos(String comando){
+
+
+
+            comandos.add(comandos.size(),comando);
+
+
+    }
+
     public void defineHeroi() {
 
         bdef = new BodyDef();
@@ -154,46 +163,59 @@ public class Heroi extends Sprite {
 
          setRegion(getFrame(dt));
 
+        if(pode)
         rodaComando();
 
         movimentoControles();
         movimentos(dt);
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - 0.28f*getHeight());
 
+
     }
 
     public void movimentoControles() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             comandoAtual = 0;
+
+            pode = false;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+
+            comandos.clear();
+
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             rodaComando();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
-
+            pode=true;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            andaParaCima();
+          //  andaParaCima();
+            colocaComandos("up");
 
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-            andaParaBaixo();
+           // andaParaBaixo();
+            colocaComandos("down");
         }
 
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
 
-            andaParaDireita();
-
+          //  andaParaDireita();
+            colocaComandos("right");
         }
 
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
 
-            andaParaEsquerda();
+          //  andaParaEsquerda();
+            colocaComandos("left");
 
         }
+
 
     }
 

@@ -24,6 +24,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Sprites.Heroi;
 
@@ -46,6 +47,7 @@ public class PlayScreen implements Screen{
     private float posX, posX2, posY, posY2;
     private float vX, vY, xis, ypi;
     private TextureAtlas atlas;
+    private Hud hud;
 
 
     public PlayScreen(MyGdxGame game ) {
@@ -93,11 +95,15 @@ public class PlayScreen implements Screen{
         xis=0;
         ypi=0;
 
+        hud = new Hud(game.batch, player);
+
     }
 
     public TextureAtlas getAtlas(){
         return  atlas;
     }
+
+    public MyGdxGame getGame(){ return game;}
 
 
 
@@ -106,16 +112,19 @@ public class PlayScreen implements Screen{
 
     }
 
- /*   public void handleInput(){
+    public void handleInput(){
 
-        ACREDITO QUE ESTE MÉTODO NÃO É MAIS NECESSÁRIO. APESAR DISSO, MANTEREI ELE AQUI ATÉ O FINAL DO PROJETO CASO SUA IMPORTÂNCIA SEJA EVIDENCIADA
+     //   ACREDITO QUE ESTE MÉTODO NÃO É MAIS NECESSÁRIO. APESAR DISSO, MANTEREI ELE AQUI ATÉ O FINAL DO PROJETO CASO SUA IMPORTÂNCIA SEJA EVIDENCIADA
 
-    }*/
+    }
 
     public void update(float dt){
 
 
-     //   handleInput();
+      //  hud.handleInput();
+
+
+
         world.step(dt,6,2);
 
         gameCam.update();
@@ -123,6 +132,8 @@ public class PlayScreen implements Screen{
         renderer.setView(gameCam);
 
         player.update(dt);
+
+
 
     }
 
@@ -143,6 +154,10 @@ public class PlayScreen implements Screen{
         //player.draw(game.batch);
         //Só esta ai para indicar onde estão os objetos. Quando tudo estiver concluido, esta linha pode ser apagada.
         b2dr.render(world, gameCam.combined);
+
+
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
