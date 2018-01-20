@@ -68,6 +68,7 @@ public class Hud {
 
         System.out.println(i);
 
+        /*
         if( personagem.comandos.size()>0){
 
             if(personagem.comandos.get(i-1)=="down") {
@@ -84,7 +85,6 @@ public class Hud {
                 }
             else
                 if(personagem.comandos.get(i-1)=="left"){
-                    table.add(new Label( "Right", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
 
                     personagem.comandos.add(i-1,"D");
 
@@ -96,12 +96,8 @@ public class Hud {
 
                     personagem.comandos.add(i-1,"D");
                 }
-
+                    */
             stage.addActor(table);
-
-        }
-
-
 
 
 
@@ -114,24 +110,28 @@ public class Hud {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 
-            i++;
+            table.add(new Label( "Up", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
+
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
 
-            i++;
+            table.add(new Label( "Down", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
+
         }
 
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
 
-           i++;
+            table.add(new Label( "Right", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
+
         }
 
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
 
-           i++;
+            table.add(new Label( "Left", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
+
 
         }
 
