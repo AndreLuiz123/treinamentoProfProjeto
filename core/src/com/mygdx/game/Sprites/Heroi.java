@@ -64,6 +64,7 @@ public class Heroi extends Sprite {
 
         for (int i = 0; i < 3; i++) {
             frames.add(new TextureRegion(getTexture(), S * i, S*10, S, S));
+
         }
         andandoFrente = new Animation(0.1f, frames);
         frames.clear();

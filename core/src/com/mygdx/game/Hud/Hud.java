@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Sprites.Heroi;
 
+import java.util.ArrayList;
+
 import jdk.nashorn.internal.ir.Labels;
 
 /**
@@ -23,7 +25,8 @@ public class Hud {
     public Stage stage;
     private Viewport viewport;
 
-    private String comandos = "ofnwfe";
+    public ArrayList<String> copiaPersonagem;
+
     public Table table;
     public
 
@@ -32,18 +35,16 @@ public class Hud {
     Label esquerda;
     Label direita;
 
-    public Hud(){
+    private   int i;
 
-        stage.addActor(table);
-    }
 
-    public Hud(SpriteBatch sb){
+    public Hud(SpriteBatch sb, Heroi personagem){
 
 
         viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT);
         stage = new Stage(viewport, sb);
 
-         table = new Table();
+        table = new Table();
         table.top();
         table.setFillParent(true);
 
@@ -56,17 +57,88 @@ public class Hud {
 
 
 
-        table.add(baixo).expandX().padTop(10).right();
-        table.row();
-        table.add(cima).expandX().right();
-        table.row();
-        table.add(esquerda).expandX().right();
-        table.row();
-        table.add(direita).expandX().right();
+        i=0;
 
-        stage.addActor(table);
+
     }
 
+    public void update(Heroi personagem){
+
+
+
+        System.out.println(i);
+
+        if( personagem.comandos.size()>0){
+
+            if(personagem.comandos.get(i-1)=="down") {
+                table.add(new Label( "Down", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right().padTop(10);
+
+                personagem.comandos.add(i-1,"D");
+            }
+            else
+                if(personagem.comandos.get(i-1)=="up") {
+                    table.add(new Label( "Up", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
+
+                    personagem.comandos.add(i-1,"D");
+
+                }
+            else
+                if(personagem.comandos.get(i-1)=="left"){
+                    table.add(new Label( "Right", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
+
+                    personagem.comandos.add(i-1,"D");
+
+                }
+
+            else
+                if(personagem.comandos.get(i-1)=="right"){
+                    table.add(new Label( "Right", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
+
+                    personagem.comandos.add(i-1,"D");
+                }
+
+            stage.addActor(table);
+
+        }
+
+
+
+
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+
+           table.clear();
+            i=0;
+
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+
+            i++;
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+
+            i++;
+        }
+
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+
+           i++;
+        }
+
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+
+           i++;
+
+        }
+
+
+
+
+    }
 
 
 

@@ -95,7 +95,7 @@ public class PlayScreen implements Screen{
         xis=0;
         ypi=0;
 
-        hud = new Hud(game.batch);
+        hud = new Hud(game.batch, player);
 
     }
 
@@ -124,6 +124,7 @@ public class PlayScreen implements Screen{
       //  hud.handleInput();
 
 
+        hud.update(player);
 
         world.step(dt,6,2);
 
