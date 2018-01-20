@@ -18,6 +18,8 @@ import com.mygdx.game.Screen.PlayScreen;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.badlogic.gdx.scenes.scene2d.InputEvent.Type.mouseMoved;
+
 /**
  * Created by Andre Luiz on 16/11/2017.
  */
@@ -216,6 +218,8 @@ public class Heroi extends Sprite {
             colocaComandos("left");
 
         }
+
+
 
 
     }

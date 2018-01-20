@@ -111,27 +111,27 @@ public class Hud {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 
             table.add(new Label( "Up", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-
+            table.row();
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
 
             table.add(new Label( "Down", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-
+            table.row();
         }
 
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
 
             table.add(new Label( "Right", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-
+            table.row();
         }
 
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
 
             table.add(new Label( "Left", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-
+            table.row();
 
         }
 
