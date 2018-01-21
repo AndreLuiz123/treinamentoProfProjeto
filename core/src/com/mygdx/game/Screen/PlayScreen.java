@@ -48,7 +48,7 @@ public class PlayScreen implements Screen{
     private float vX, vY, xis, ypi;
     private TextureAtlas atlas;
     private Hud hud;
-
+    private boolean bul;
 
     public PlayScreen(MyGdxGame game ) {
 
@@ -94,6 +94,7 @@ public class PlayScreen implements Screen{
         posY2=player.b2body.getPosition().y;
         xis=0;
         ypi=0;
+        bul=false;
 
         hud = new Hud(game.batch, player);
 
@@ -114,14 +115,14 @@ public class PlayScreen implements Screen{
 
     public void handleInput(){
 
-     //   ACREDITO QUE ESTE MÉTODO NÃO É MAIS NECESSÁRIO. APESAR DISSO, MANTEREI ELE AQUI ATÉ O FINAL DO PROJETO CASO SUA IMPORTÂNCIA SEJA EVIDENCIADA
+
 
     }
 
     public void update(float dt){
 
 
-      //  hud.handleInput();
+       // handleInput();
 
 
         hud.update(player);
