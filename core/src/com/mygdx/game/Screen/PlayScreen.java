@@ -70,6 +70,8 @@ public class PlayScreen implements Screen{
         world = new World(new Vector2(0,0), true);
         players = new ArrayList<Heroi>();
         players.add(new Heroi(world, this));
+        players.add(new Heroi(world, this));
+        players.get(1).b2body.setTransform(100 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
         b2dr = new Box2DDebugRenderer();
 
         BodyDef bdef = new BodyDef();
@@ -170,10 +172,9 @@ public class PlayScreen implements Screen{
 
         renderer.setView(gameCam);
 
-        players.get(0).update(dt);
-
-
-
+        for (Heroi player : players) {
+            player.update(dt);
+        }
     }
 
 
@@ -200,15 +201,15 @@ public class PlayScreen implements Screen{
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
-        players.get(0).draw(game.batch);
+        for (Heroi player : players) {
+            player.draw(game.batch);
+        }
         game.batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
-
-
     }
 
     @Override
