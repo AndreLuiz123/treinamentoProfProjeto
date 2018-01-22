@@ -28,6 +28,9 @@ import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Sprites.Heroi;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andre Luiz on 15/11/2017.
  */
@@ -43,7 +46,7 @@ public class PlayScreen implements Screen{
     private OrthogonalTiledMapRenderer renderer;
     private World world;
     private Box2DDebugRenderer b2dr;
-    private Heroi player;
+    private List<Heroi> players;
     private float posX, posX2, posY, posY2;
     private float vX, vY, xis, ypi;
     private TextureAtlas atlas;
@@ -65,7 +68,8 @@ public class PlayScreen implements Screen{
         renderer = new OrthogonalTiledMapRenderer(map,1/MyGdxGame.PPM);
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
         world = new World(new Vector2(0,0), true);
-        player = new Heroi(world, this);
+        players = new ArrayList<Heroi>();
+        players.add(new Heroi(world, this));
         b2dr = new Box2DDebugRenderer();
 
         BodyDef bdef = new BodyDef();
@@ -86,12 +90,12 @@ public class PlayScreen implements Screen{
 
         }
 
-        posX=player.b2body.getPosition().x;
-        posY=player.b2body.getPosition().y;
+        posX = players.get(0).b2body.getPosition().x;
+        posY = players.get(0).b2body.getPosition().y;
         vX=0;
         vY=0;
-        posX2=player.b2body.getPosition().x;
-        posY2=player.b2body.getPosition().y;
+        posX2 = players.get(0).b2body.getPosition().x;
+        posY2 = players.get(0).b2body.getPosition().y;
         xis=0;
         ypi=0;
         bul=false;
@@ -116,38 +120,38 @@ public class PlayScreen implements Screen{
 
     public void handleInput(){
             if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-                player.comandoAtual = 0;
-                player.pode = false;
+                players.get(0).comandoAtual = 0;
+                players.get(0).pode = false;
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-                player.comandos.clear();
+                players.get(0).comandos.clear();
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-                player.rodaComando();
+                players.get(0).rodaComando();
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
-                player.pode=true;
+                players.get(0).pode = true;
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-                player.colocaComandos(Heroi.COMMAND_UP);
-                hud.atualizaComandosDoHeroi(player);
+                players.get(0).colocaComandos(Heroi.COMMAND_UP);
+                hud.atualizaComandosDoHeroi(players.get(0));
             }
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-                player.colocaComandos(Heroi.COMMAND_DOWN);
-                hud.atualizaComandosDoHeroi(player);
+                players.get(0).colocaComandos(Heroi.COMMAND_DOWN);
+                hud.atualizaComandosDoHeroi(players.get(0));
             }
 
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-                player.colocaComandos(Heroi.COMMAND_RIGHT);
-                hud.atualizaComandosDoHeroi(player);
+                players.get(0).colocaComandos(Heroi.COMMAND_RIGHT);
+                hud.atualizaComandosDoHeroi(players.get(0));
             }
 
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-                player.colocaComandos(Heroi.COMMAND_LEFT);
-                hud.atualizaComandosDoHeroi(player);
+                players.get(0).colocaComandos(Heroi.COMMAND_LEFT);
+                hud.atualizaComandosDoHeroi(players.get(0));
 
             }
     }
@@ -158,7 +162,7 @@ public class PlayScreen implements Screen{
         handleInput();
 
 
-        hud.update(player);
+        hud.update(players.get(0));
 
         world.step(dt,6,2);
 
@@ -166,7 +170,7 @@ public class PlayScreen implements Screen{
 
         renderer.setView(gameCam);
 
-        player.update(dt);
+        players.get(0).update(dt);
 
 
 
@@ -186,7 +190,7 @@ public class PlayScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        //player.draw(game.batch);
+        //players.get(0).draw(game.batch);
         //Só esta ai para indicar onde estão os objetos. Quando tudo estiver concluido, esta linha pode ser apagada.
         b2dr.render(world, gameCam.combined);
 
@@ -196,7 +200,7 @@ public class PlayScreen implements Screen{
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
-        player.draw(game.batch);
+        players.get(0).draw(game.batch);
         game.batch.end();
     }
 
