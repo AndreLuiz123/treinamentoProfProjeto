@@ -58,7 +58,7 @@ public class Hud {
 
     }
 
-    private void atualizaComandosDoHeroi(Heroi personagem) {
+    public void atualizaComandosDoHeroi(Heroi personagem) {
         table.clear();
         for (String comando: personagem.comandos) {
             table.add(new Label(comando, new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();

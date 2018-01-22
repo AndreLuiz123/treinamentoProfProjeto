@@ -130,20 +130,24 @@ public class PlayScreen implements Screen{
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
                 player.colocaComandos(Heroi.COMMAND_UP);
+                hud.atualizaComandosDoHeroi(player);
             }
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
                 player.colocaComandos(Heroi.COMMAND_DOWN);
+                hud.atualizaComandosDoHeroi(player);
             }
 
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
                 player.colocaComandos(Heroi.COMMAND_RIGHT);
+                hud.atualizaComandosDoHeroi(player);
             }
 
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
                 player.colocaComandos(Heroi.COMMAND_LEFT);
+                hud.atualizaComandosDoHeroi(player);
 
             }
     }
