@@ -26,6 +26,10 @@ import static com.badlogic.gdx.scenes.scene2d.InputEvent.Type.mouseMoved;
 
 public class Heroi extends Sprite {
 
+    public static final String COMMAND_UP = "up";
+    public static final String COMMAND_RIGHT = "right";
+    public static final String COMMAND_LEFT = "left";
+    public static final String COMMAND_DOWN = "down";
     public World world;
     public Body b2body;
     public BodyDef bdef;
@@ -107,21 +111,17 @@ public class Heroi extends Sprite {
 
     public void rodaComando(){
         if(cooldown > 0 || comandoAtual<0 || comandoAtual > comandos.size()-1) return;
-        if(comandos.get(comandoAtual).equals("right")){
-            System.out.println("direita");
+        if(comandos.get(comandoAtual).equals(COMMAND_RIGHT)){
             vY=0;
             andaParaDireita();
-        } else if(comandos.get(comandoAtual).equals("up")){
+        } else if(comandos.get(comandoAtual).equals(COMMAND_UP)){
             vX=0;
-            System.out.println("cima");
             andaParaCima();
-        } else if(comandos.get(comandoAtual).equals("left")){
+        } else if(comandos.get(comandoAtual).equals(COMMAND_LEFT)){
             vY=0;
-            System.out.println("esquerda");
             andaParaEsquerda();
-        } else if(comandos.get(comandoAtual).equals("down")){
+        } else if(comandos.get(comandoAtual).equals(COMMAND_DOWN)){
             vX=0;
-            System.out.println("baixo");
             andaParaBaixo();
         }
 
@@ -169,60 +169,12 @@ public class Heroi extends Sprite {
         if(pode)
         rodaComando();
 
-        movimentoControles();
         movimentos(dt);
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - 0.28f*getHeight());
 
 
     }
 
-    public void movimentoControles() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            comandoAtual = 0;
-
-            pode = false;
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-
-            comandos.clear();
-
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            rodaComando();
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
-            pode=true;
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-          //  andaParaCima();
-            colocaComandos("up");
-
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-           // andaParaBaixo();
-            colocaComandos("down");
-        }
-
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-
-          //  andaParaDireita();
-            colocaComandos("right");
-        }
-
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-
-          //  andaParaEsquerda();
-            colocaComandos("left");
-
-        }
-
-
-
-
-    }
 
     private void andaParaEsquerda() {
         posX = b2body.getPosition().x;

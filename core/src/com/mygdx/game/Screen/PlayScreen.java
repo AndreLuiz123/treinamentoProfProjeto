@@ -96,7 +96,7 @@ public class PlayScreen implements Screen{
         ypi=0;
         bul=false;
 
-        hud = new Hud(game.batch, player);
+        hud = new Hud(game.batch);
 
     }
 
@@ -113,16 +113,45 @@ public class PlayScreen implements Screen{
 
     }
 
+
     public void handleInput(){
+            if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+                player.comandoAtual = 0;
+                player.pode = false;
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+                player.comandos.clear();
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+                player.rodaComando();
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
+                player.pode=true;
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+                player.colocaComandos(Heroi.COMMAND_UP);
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+                player.colocaComandos(Heroi.COMMAND_DOWN);
+            }
 
 
+            if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+                player.colocaComandos(Heroi.COMMAND_RIGHT);
+            }
 
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+                player.colocaComandos(Heroi.COMMAND_LEFT);
+
+            }
     }
 
     public void update(float dt){
 
 
-       // handleInput();
+        handleInput();
 
 
         hud.update(player);

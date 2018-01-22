@@ -25,20 +25,10 @@ public class Hud {
     public Stage stage;
     private Viewport viewport;
 
-    public ArrayList<String> copiaPersonagem;
 
     public Table table;
-    public
 
-    Label cima;
-    Label baixo;
-    Label esquerda;
-    Label direita;
-
-    private   int i;
-
-
-    public Hud(SpriteBatch sb, Heroi personagem){
+    public Hud(SpriteBatch sb){
 
 
         viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT);
@@ -48,124 +38,17 @@ public class Hud {
         table.top();
         table.setFillParent(true);
 
-        baixo = new Label( "Down", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        cima = new Label( "Up", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        direita = new Label( "Right", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        esquerda = new Label( "Left", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
-
-
-
-
-        i=0;
-
-
     }
 
     public void update(Heroi personagem){
-
-
-
-        System.out.println(i);
-
-        /*
-        if( personagem.comandos.size()>0){
-
-            if(personagem.comandos.get(i-1)=="down") {
-                table.add(new Label( "Down", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right().padTop(10);
-
-                personagem.comandos.add(i-1,"D");
-            }
-            else
-                if(personagem.comandos.get(i-1)=="up") {
-                    table.add(new Label( "Up", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-
-                    personagem.comandos.add(i-1,"D");
-
-                }
-            else
-                if(personagem.comandos.get(i-1)=="left"){
-
-                    personagem.comandos.add(i-1,"D");
-
-                }
-
-            else
-                if(personagem.comandos.get(i-1)=="right"){
-                    table.add(new Label( "Right", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-
-                    personagem.comandos.add(i-1,"D");
-                }
-                    */
-            stage.addActor(table);
-
-
+        stage.addActor(table);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-
            table.clear();
-            i=0;
-
         }
-
-        /*
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-
-            table.add(new Label( "Up", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-            table.row();
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-
-            table.add(new Label( "Down", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-            table.row();
-        }
-
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-
-            table.add(new Label( "Right", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-            table.row();
-        }
-
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-
-            table.add(new Label( "Left", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-            table.row();
-
-        }
-                */
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
 
-            table.clear();
-
-            for(int j=0; j<personagem.comandos.size(); j++) {
-                if(personagem.comandos.get(j)=="left") {
-                    table.add(new Label("Left", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-                    table.row();
-                }else {
-                    if (personagem.comandos.get(j) == "right") {
-                        table.add(new Label("Right", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-                        table.row();
-                    }else{
-                        if(personagem.comandos.get(j)=="down") {
-                            table.add(new Label("Down", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-                            table.row();
-                        }else{
-                            if(personagem.comandos.get(j)=="up") {
-                                table.add(new Label("Up", new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
-                                table.row();
-                            }
-                        }
-                    }
-                }
-            }
-
-
-
-
-
+            atualizaComandosDoHeroi(personagem);
         }
 
 
@@ -175,8 +58,13 @@ public class Hud {
 
     }
 
-
-
+    private void atualizaComandosDoHeroi(Heroi personagem) {
+        table.clear();
+        for (String comando: personagem.comandos) {
+            table.add(new Label(comando, new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
+            table.row();
+        }
+    }
 
 
 }
