@@ -27,6 +27,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Sprites.Heroi;
+import com.mygdx.game.Tools.B2WorldCreator;
+import com.mygdx.game.Tools.WorldContactListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +49,7 @@ public class PlayScreen implements Screen{
     private World world;
     private Box2DDebugRenderer b2dr;
     private List<Heroi> players;
-    private float posX, posX2, posY, posY2;
-    private float vX, vY, xis, ypi;
+    private int activePlayer = 0;
     private TextureAtlas atlas;
     private Hud hud;
     private boolean bul;
@@ -71,35 +72,17 @@ public class PlayScreen implements Screen{
         players = new ArrayList<Heroi>();
         players.add(new Heroi(world, this));
         players.add(new Heroi(world, this));
+        players.add(new Heroi(world, this));
         players.get(1).b2body.setTransform(100 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
+        players.get(2).b2body.setTransform(200 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
         b2dr = new Box2DDebugRenderer();
 
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
+        new B2WorldCreator(world, map);
 
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject)object).getRectangle();
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth()/2)/MyGdxGame.PPM, (rect.getY() + rect.getHeight()/2)/MyGdxGame.PPM);
 
-            body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth()/2/MyGdxGame.PPM, rect.getHeight()/2/MyGdxGame.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
+        world.setContactListener(new WorldContactListener());
 
-        }
-
-        posX = players.get(0).b2body.getPosition().x;
-        posY = players.get(0).b2body.getPosition().y;
-        vX=0;
-        vY=0;
-        posX2 = players.get(0).b2body.getPosition().x;
-        posY2 = players.get(0).b2body.getPosition().y;
-        xis=0;
-        ypi=0;
         bul=false;
 
         hud = new Hud(game.batch);
@@ -119,41 +102,62 @@ public class PlayScreen implements Screen{
 
     }
 
+    public int getActivePlayer(){
+        return activePlayer;
+    }
+    public void setActivePlayer(int ap){
+        if(ap < 0 || ap > players.size() - 1) return;
+        activePlayer = ap;
+    }
 
     public void handleInput(){
+            if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
+                setActivePlayer(getActivePlayer()-1);
+                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
+                setActivePlayer(getActivePlayer()+1);
+                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
             if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-                players.get(0).comandoAtual = 0;
-                players.get(0).pode = false;
+                players.get(getActivePlayer()).comandoAtual = 0;
+                players.get(getActivePlayer()).pode = false;
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-                players.get(0).comandos.clear();
+                players.get(getActivePlayer()).comandos.clear();
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-                players.get(0).rodaComando();
+                players.get(getActivePlayer()).rodaComando();
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
-                players.get(0).pode = true;
+                players.get(getActivePlayer()).pode = true;
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.L)){
+                for (Heroi player: players) {
+                    player.comandoAtual = 0;
+                    player.pode = true;
+                }
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-                players.get(0).colocaComandos(Heroi.COMMAND_UP);
-                hud.atualizaComandosDoHeroi(players.get(0));
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
+                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-                players.get(0).colocaComandos(Heroi.COMMAND_DOWN);
-                hud.atualizaComandosDoHeroi(players.get(0));
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
+                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
 
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-                players.get(0).colocaComandos(Heroi.COMMAND_RIGHT);
-                hud.atualizaComandosDoHeroi(players.get(0));
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
+                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
 
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-                players.get(0).colocaComandos(Heroi.COMMAND_LEFT);
-                hud.atualizaComandosDoHeroi(players.get(0));
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
+                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
 
             }
     }
@@ -201,9 +205,9 @@ public class PlayScreen implements Screen{
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
-        for (Heroi player : players) {
+        /*for (Heroi player : players) {
             player.draw(game.batch);
-        }
+        }*/
         game.batch.end();
     }
 
@@ -229,6 +233,12 @@ public class PlayScreen implements Screen{
 
     @Override
     public void dispose() {
+
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        b2dr.dispose();
+        hud.dispose();
 
     }
 }

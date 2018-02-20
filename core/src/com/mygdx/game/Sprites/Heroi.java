@@ -5,9 +5,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -158,6 +160,30 @@ public class Heroi extends Sprite {
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
+        EdgeShape head = new EdgeShape();
+        EdgeShape barriga = new EdgeShape();
+        EdgeShape costas = new EdgeShape();
+        EdgeShape pe = new EdgeShape();
+
+        head.set(new Vector2(-2/ MyGdxGame.PPM,7/ MyGdxGame.PPM), new Vector2(2/ MyGdxGame.PPM,7/ MyGdxGame.PPM));
+        fdef.shape=head;
+       // fdef.isSensor=true;
+        b2body.createFixture(fdef).setUserData("head");
+
+        barriga.set(new Vector2(7/ MyGdxGame.PPM,-2/ MyGdxGame.PPM), new Vector2(7/ MyGdxGame.PPM,2/ MyGdxGame.PPM));
+        fdef.shape=barriga;
+        // fdef.isSensor=true;
+        b2body.createFixture(fdef).setUserData("barriga");
+
+        costas.set(new Vector2(-7/ MyGdxGame.PPM,2/ MyGdxGame.PPM), new Vector2(-7/ MyGdxGame.PPM,-2/ MyGdxGame.PPM));
+        fdef.shape=costas;
+        // fdef.isSensor=true;
+        b2body.createFixture(fdef).setUserData("costas");
+
+        pe.set(new Vector2(-2/ MyGdxGame.PPM,-7/ MyGdxGame.PPM), new Vector2(2/ MyGdxGame.PPM,-7/ MyGdxGame.PPM));
+        fdef.shape=pe;
+        // fdef.isSensor=true;
+        b2body.createFixture(fdef).setUserData("pe");
 
     }
 

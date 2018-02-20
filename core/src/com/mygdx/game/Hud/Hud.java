@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
@@ -21,7 +22,7 @@ import jdk.nashorn.internal.ir.Labels;
  * Created by Andre Luiz on 19/01/2018.
  */
 
-public class Hud {
+public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
 
@@ -29,8 +30,6 @@ public class Hud {
     public Table table;
 
     public Hud(SpriteBatch sb){
-
-
         viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT);
         stage = new Stage(viewport, sb);
 
@@ -50,12 +49,6 @@ public class Hud {
 
             atualizaComandosDoHeroi(personagem);
         }
-
-
-
-
-
-
     }
 
     public void atualizaComandosDoHeroi(Heroi personagem) {
@@ -67,4 +60,8 @@ public class Hud {
     }
 
 
+    @Override
+    public void dispose() {
+
+    }
 }
