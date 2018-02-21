@@ -26,6 +26,8 @@ public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
 
+    private int enumeraPersonagem;
+    private Label labelEnumeraPersonagem;
 
     public Table table;
 
@@ -36,6 +38,14 @@ public class Hud implements Disposable {
         table = new Table();
         table.top();
         table.setFillParent(true);
+
+        enumeraPersonagem = 1;
+
+
+        labelEnumeraPersonagem = new Label(String.format("%02d", enumeraPersonagem),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        table.add(labelEnumeraPersonagem).expandX().right();
+        table.row();
 
     }
 
@@ -53,11 +63,28 @@ public class Hud implements Disposable {
 
     public void atualizaComandosDoHeroi(Heroi personagem) {
         table.clear();
+        table.add(labelEnumeraPersonagem).expandX().right();
+        table.row();
         for (String comando: personagem.comandos) {
             table.add(new Label(comando, new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
             table.row();
         }
     }
+
+    public  void atualizaEnumeracaoPersonagem(boolean mais, boolean menos){
+        
+        if(mais){
+            enumeraPersonagem++;
+            labelEnumeraPersonagem.setText(String.format("%02d", enumeraPersonagem));
+        }else{
+            if(menos) {
+                enumeraPersonagem--;
+                labelEnumeraPersonagem.setText(String.format("%02d", enumeraPersonagem));
+            }
+        }
+
+    }
+
 
 
     @Override

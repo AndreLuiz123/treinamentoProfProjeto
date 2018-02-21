@@ -1,8 +1,14 @@
 package com.mygdx.game.Tools;
 
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.CircleMapObject;
+import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -36,6 +42,16 @@ public class B2WorldCreator {
             body.createFixture(fdef);
 
         }
+
+
+        for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
+
+
+
+        }
+
+
+
     }
 
 

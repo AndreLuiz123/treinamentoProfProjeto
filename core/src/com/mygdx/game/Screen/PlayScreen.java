@@ -3,26 +3,17 @@ package com.mygdx.game.Screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.MyGdxGame;
@@ -49,10 +40,12 @@ public class PlayScreen implements Screen{
     private World world;
     private Box2DDebugRenderer b2dr;
     private List<Heroi> players;
+
     private int activePlayer = 0;
     private TextureAtlas atlas;
     private Hud hud;
     private boolean bul;
+
 
     public PlayScreen(MyGdxGame game ) {
 
@@ -75,6 +68,8 @@ public class PlayScreen implements Screen{
         players.add(new Heroi(world, this));
         players.get(1).b2body.setTransform(100 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
         players.get(2).b2body.setTransform(200 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
+
+
         b2dr = new Box2DDebugRenderer();
 
         new B2WorldCreator(world, map);
@@ -112,10 +107,12 @@ public class PlayScreen implements Screen{
 
     public void handleInput(){
             if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
+                hud.atualizaEnumeracaoPersonagem(false, true);
                 setActivePlayer(getActivePlayer()-1);
                 hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
+                hud.atualizaEnumeracaoPersonagem(true, false);
                 setActivePlayer(getActivePlayer()+1);
                 hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
@@ -205,9 +202,9 @@ public class PlayScreen implements Screen{
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
-        /*for (Heroi player : players) {
+        for (Heroi player : players) {
             player.draw(game.batch);
-        }*/
+        }
         game.batch.end();
     }
 
