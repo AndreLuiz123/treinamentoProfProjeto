@@ -135,28 +135,34 @@ public class PlayScreen implements Screen{
                     player.pode = true;
                 }
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1101
+                && Gdx.input.getY()>108 && Gdx.input.getY()<162) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
                 hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
 
-            if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1101
+                && Gdx.input.getY()>162 && Gdx.input.getY()<216) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
                 hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
 
 
-            if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1101
+                && Gdx.input.getY()>54 && Gdx.input.getY()<108) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
                 hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
 
 
-            if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
-                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1101
+                && Gdx.input.getY()>0 && Gdx.input.getY()<54){
 
-            }
+            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+
+        }
+
     }
 
     public void update(float dt){

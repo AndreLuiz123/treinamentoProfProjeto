@@ -26,8 +26,10 @@ public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
 
-    private int enumeraPersonagem;
+    private int enumeraPersonagem, comandosTela=0;
     private Label labelEnumeraPersonagem;
+    private Label esq, dir, cim, bax;
+    private Label espBranco;
 
     public Table table;
 
@@ -43,9 +45,29 @@ public class Hud implements Disposable {
 
 
         labelEnumeraPersonagem = new Label(String.format("%02d", enumeraPersonagem),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        esq = new Label(String.format("left"),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        dir = new Label(String.format("right"),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        cim = new Label(String.format("up"),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        bax = new Label(String.format("down"),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        espBranco = new Label(String.format("    "),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(labelEnumeraPersonagem).expandX().right();
+
+
+      //  table.setDebug(true);
+
+        table.add(esq).expandX().right();
+        table.add(espBranco).right();
+        table.add(labelEnumeraPersonagem).right();
         table.row();
+        table.add(dir).right();
+        table.row();
+        table.add(cim).right();
+        table.row();
+        table.add(bax).right();
+        table.row();
+        table.add(espBranco).right();
+        table.row();
+
 
     }
 
@@ -53,42 +75,83 @@ public class Hud implements Disposable {
         stage.addActor(table);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-           table.clear();
+            table.clear();
+            table.add(esq).expandX().right();
+            table.add(espBranco).right();
+            table.add(labelEnumeraPersonagem).right();
+            table.row();
+            table.add(dir).right();
+            table.row();
+            table.add(cim).right();
+            table.row();
+            table.add(bax).right();
+            table.row();
+            table.add(espBranco).right();
+            table.row();
+
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
 
-            atualizaComandosDoHeroi(personagem);
+
         }
+
     }
 
     public void atualizaComandosDoHeroi(Heroi personagem) {
         table.clear();
-        table.add(labelEnumeraPersonagem).expandX().right();
+
+        table.add(esq).expandX().right();
+        table.add(espBranco).right();
+        table.add(labelEnumeraPersonagem).right();
         table.row();
+        table.add(dir).right();
+        table.row();
+        table.add(cim).right();
+        table.row();
+        table.add(bax).right();
+        table.row();
+        table.add(espBranco).right();
+        table.row();
+
+
         for (String comando: personagem.comandos) {
-            table.add(new Label(comando, new Label.LabelStyle(new BitmapFont(), Color.WHITE))).expandX().right();
+            table.add(new Label(comando, new Label.LabelStyle(new BitmapFont(), Color.GOLD))).expandX().right();
             table.row();
+
         }
     }
 
     public  void atualizaEnumeracaoPersonagem(boolean mais, boolean menos){
-        
+
         if(mais){
-            enumeraPersonagem++;
-            labelEnumeraPersonagem.setText(String.format("%02d", enumeraPersonagem));
+            if(enumeraPersonagem!=3) {
+                enumeraPersonagem++;
+                labelEnumeraPersonagem.setText(String.format("%02d", enumeraPersonagem));
+            }
         }else{
             if(menos) {
-                enumeraPersonagem--;
-                labelEnumeraPersonagem.setText(String.format("%02d", enumeraPersonagem));
+                if(enumeraPersonagem!=1) {
+                    enumeraPersonagem--;
+                    labelEnumeraPersonagem.setText(String.format("%02d", enumeraPersonagem));
+                }
             }
         }
 
     }
 
+    public void indicaMovimentoAtual(){
+
+
+
+    }
+
+
+
 
 
     @Override
     public void dispose() {
+
 
     }
 }
