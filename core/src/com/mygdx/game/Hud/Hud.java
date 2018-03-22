@@ -152,14 +152,14 @@ public class Hud implements Disposable {
         table.row();*/
 
 
-        for (String comando: personagem.comandos) {
+
 
             if(controlaComandoModificado<5) {
-                comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(0)));
+                comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(controlaComandoModificado)));
                 controlaComandoModificado++;
-                System.out.println(personagem.comandos.size());
+                System.out.println(controlaComandoModificado);
             }
-        }
+
     }
 
     public  void atualizaEnumeracaoPersonagem(boolean mais, boolean menos){
