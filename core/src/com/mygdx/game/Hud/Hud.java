@@ -28,10 +28,12 @@ public class Hud implements Disposable {
 
 
     private int enumeraPersonagem;
-    private String comando1,comando2,comando3,comando4,comando5;
+    private ArrayList<String> comando  = new ArrayList<String>();
     private Label labelEnumeraPersonagem;
     private Label esq, dir, cim, bax;
-    private Label espBranco, comandosTela1, comandosTela2, comandosTela3, comandosTela4, comandosTela5;
+    private Label espBranco;
+    private ArrayList<Label> comandosEmTela  = new ArrayList<Label>();
+    private int controlaComandoModificado=0;
 
     public Table table;
 
@@ -46,11 +48,13 @@ public class Hud implements Disposable {
         enumeraPersonagem = 1;
 
 
-        comando1 = "teste";
-        comando2 = "teste";
-        comando3 = "teste";
-        comando4 = "teste";
-        comando5 = "teste";
+        comando.add("teste");
+        comando.add("teste");
+        comando.add("teste");
+        comando.add("teste");
+        comando.add("teste");
+
+
 
         labelEnumeraPersonagem = new Label(String.format("%02d", enumeraPersonagem),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         esq = new Label(String.format("left"),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -59,11 +63,11 @@ public class Hud implements Disposable {
         bax = new Label(String.format("down"),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         espBranco = new Label(String.format("    "),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        comandosTela1 =  new Label(String.format("%s",comando1),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        comandosTela2 =  new Label(String.format("%s",comando2),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        comandosTela3 =  new Label(String.format("%s",comando3),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        comandosTela4 =  new Label(String.format("%s",comando4),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        comandosTela5 =  new Label(String.format("%s",comando5),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+
+       for(int j=0; j<5; j++){
+           comandosEmTela.add( new Label(String.format("%s",comando.get(j)),new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
+       }
 
       //  table.setDebug(true);
 
@@ -79,15 +83,10 @@ public class Hud implements Disposable {
         table.row();
         table.add(espBranco).right();
         table.row();
-        table.add(comandosTela1).right();
-        table.row();
-        table.add(comandosTela2).right();
-        table.row();
-        table.add(comandosTela3).right();
-        table.row();
-        table.add(comandosTela4).right();
-        table.row();
-        table.add(comandosTela5).right();
+        for(int n=0; n<5; n++){
+            table.add(comandosEmTela.get(n)).right();
+            table.row();
+        }
 
     }
 
@@ -95,11 +94,12 @@ public class Hud implements Disposable {
         stage.addActor(table);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            comando1="  ";
-            comando2= "  ";
-            comando3="  ";
-            comando4= "   ";
-            comando5= "   ";
+
+            for(int i=0; i<5; i++){
+            comando.add(i,"   ");;
+            }
+
+
             table.clear();
             table.add(esq).expandX().right();
             table.add(espBranco).right();
@@ -113,32 +113,30 @@ public class Hud implements Disposable {
             table.row();
             table.add(espBranco).right();
             table.row();
-            table.add(comandosTela1).right();
-            table.row();
-            table.add(comandosTela2).right();
-            table.row();
-            table.add(comandosTela3).right();
-            table.row();
-            table.add(comandosTela4).right();
-            table.row();
-            table.add(comandosTela5).right();
+            for(int n=0; n<5; n++){
+                table.add(comandosEmTela.get(n)).right();
+                table.row();
+            }
 
 
-            comandosTela5.setText(String.format("%s", comando1));
-            comandosTela4.setText(String.format("%s", comando1));
-            comandosTela3.setText(String.format("%s", comando1));
-            comandosTela2.setText(String.format("%s", comando1));
-            comandosTela1.setText(String.format("%s", comando1));
+            for(int n=0; n<5; n++){
+                comandosEmTela.get(n).setText(String.format("%s", comando.get(n)));
+            }
+
+            controlaComandoModificado=0;
+
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
 
-
+            System.out.println(comando.size());
+            System.out.println(comandosEmTela.size());
+            System.out.print(controlaComandoModificado);
         }
 
     }
 
     public void atualizaComandosDoHeroi(Heroi personagem) {
-        table.clear();
+       /* table.clear();
 
         table.add(esq).expandX().right();
         table.add(espBranco).right();
@@ -151,16 +149,16 @@ public class Hud implements Disposable {
         table.add(bax).right();
         table.row();
         table.add(espBranco).right();
-        table.row();
-
-
-
+        table.row();*/
 
 
         for (String comando: personagem.comandos) {
-            table.add(new Label(comando, new Label.LabelStyle(new BitmapFont(), Color.GOLD))).expandX().right();
-            table.row();
 
+            if(controlaComandoModificado<5) {
+                comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(0)));
+                controlaComandoModificado++;
+                System.out.println(personagem.comandos.size());
+            }
         }
     }
 
