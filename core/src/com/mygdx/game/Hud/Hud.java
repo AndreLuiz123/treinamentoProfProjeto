@@ -33,7 +33,7 @@ public class Hud implements Disposable {
     private Label esq, dir, cim, bax;
     private Label espBranco;
     private ArrayList<Label> comandosEmTela  = new ArrayList<Label>();
-    private int controlaComandoModificado=0;
+    private int controlaComandoModificado=0, controlaComandoEmTelaSegundoBarraDeRolamento=0;
 
     public Table table;
 
@@ -128,9 +128,8 @@ public class Hud implements Disposable {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
 
-            System.out.println(comando.size());
-            System.out.println(comandosEmTela.size());
-            System.out.print(controlaComandoModificado);
+
+
         }
 
     }
@@ -155,12 +154,25 @@ public class Hud implements Disposable {
 
 
             if(controlaComandoModificado<5) {
-                comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(controlaComandoModificado)));
+                comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(controlaComandoModificado+controlaComandoEmTelaSegundoBarraDeRolamento)));
                 controlaComandoModificado++;
                 System.out.println(controlaComandoModificado);
             }
 
     }
+
+    public void barraDeRolamento(int sentido, Heroi personagem){
+
+            controlaComandoEmTelaSegundoBarraDeRolamento+=sentido;
+        System.out.println(controlaComandoModificado+controlaComandoEmTelaSegundoBarraDeRolamento);
+
+        for(int i=0; i<5; i++)
+        comandosEmTela.get(i).setText(String.format("%s", personagem.comandos.get(i+controlaComandoEmTelaSegundoBarraDeRolamento)));
+
+    }
+
+
+
 
     public  void atualizaEnumeracaoPersonagem(boolean mais, boolean menos){
 

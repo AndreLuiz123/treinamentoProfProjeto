@@ -135,6 +135,18 @@ public class PlayScreen implements Screen{
                     player.pode = true;
                 }
             }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.G)){
+            hud.barraDeRolamento(1,players.get(getActivePlayer()));
+
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)){
+            hud.barraDeRolamento(-1,players.get(getActivePlayer()));
+
+        }
+
+
+
         if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1101
                 && Gdx.input.getY()>108 && Gdx.input.getY()<162) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
