@@ -170,8 +170,11 @@ public class Hud implements Disposable {
 
             if(personagem.comandos.size()>0){
                 for(controlaComandoModificado=0; controlaComandoModificado<personagem.comandos.size(); controlaComandoModificado++) {
-                    comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(controlaComandoModificado+controlaComandoEmTelaSegundoBarraDeRolamento)));
-                    System.out.println(controlaComandoModificado);
+                    if (controlaComandoModificado < 5) {
+                        comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(controlaComandoModificado + controlaComandoEmTelaSegundoBarraDeRolamento)));
+                        System.out.println(controlaComandoModificado);
+                    }
+
                 }
             }
 
@@ -180,11 +183,16 @@ public class Hud implements Disposable {
 
     public void barraDeRolamento(int sentido, Heroi personagem){
 
-            controlaComandoEmTelaSegundoBarraDeRolamento+=sentido;
-        System.out.println(controlaComandoModificado+controlaComandoEmTelaSegundoBarraDeRolamento);
 
-        for(int i=0; i<5; i++)
-        comandosEmTela.get(i).setText(String.format("%s", personagem.comandos.get(i+controlaComandoEmTelaSegundoBarraDeRolamento)));
+        controlaComandoEmTelaSegundoBarraDeRolamento+=sentido;
+
+        System.out.println(controlaComandoEmTelaSegundoBarraDeRolamento);
+
+
+        for (int i = 0; i < 5; i++)
+            comandosEmTela.get(i).setText(String.format("%s", personagem.comandos.get(i + controlaComandoEmTelaSegundoBarraDeRolamento)));
+
+
 
     }
 
