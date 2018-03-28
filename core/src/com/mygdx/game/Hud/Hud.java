@@ -135,7 +135,13 @@ public class Hud implements Disposable {
     }
 
     public void atualizaComandosDoHeroi(Heroi personagem) {
-       /* table.clear();
+
+
+        for(int i=0; i<5; i++){
+            comando.add(i,"   ");;
+        }
+
+        table.clear();
 
         table.add(esq).expandX().right();
         table.add(espBranco).right();
@@ -148,16 +154,27 @@ public class Hud implements Disposable {
         table.add(bax).right();
         table.row();
         table.add(espBranco).right();
-        table.row();*/
+        table.row();
+
+        for(int n=0; n<5; n++){
+            table.add(comandosEmTela.get(n)).right();
+            table.row();
+        }
+
+
+        for(int n=0; n<5; n++){
+            comandosEmTela.get(n).setText(String.format("%s", comando.get(n)));
+        }
 
 
 
-
-            if(controlaComandoModificado<5) {
-                comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(controlaComandoModificado+controlaComandoEmTelaSegundoBarraDeRolamento)));
-                controlaComandoModificado++;
-                System.out.println(controlaComandoModificado);
+            if(personagem.comandos.size()>0){
+                for(controlaComandoModificado=0; controlaComandoModificado<personagem.comandos.size(); controlaComandoModificado++) {
+                    comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(controlaComandoModificado+controlaComandoEmTelaSegundoBarraDeRolamento)));
+                    System.out.println(controlaComandoModificado);
+                }
             }
+
 
     }
 
