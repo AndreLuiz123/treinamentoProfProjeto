@@ -3,10 +3,14 @@ package com.mygdx.game.Hud;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -32,6 +36,7 @@ public class Hud implements Disposable {
     private Label labelEnumeraPersonagem;
     private Label esq, dir, cim, bax;
     private Label espBranco;
+    private Image baixoIMG, cimaIMG, direitaIMG, esquerdaIMG;
     private ArrayList<Label> comandosEmTela  = new ArrayList<Label>();
     private int controlaComandoModificado=0, controlaComandoEmTelaSegundoBarraDeRolamento=0;
 
@@ -62,6 +67,14 @@ public class Hud implements Disposable {
         cim = new Label(String.format("up"),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         bax = new Label(String.format("down"),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         espBranco = new Label(String.format("    "),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        baixoIMG = new Image(new Texture(Gdx.files.absolute("setinea.png")));
+        direitaIMG = new Image(new Texture(Gdx.files.absolute("setinea.png")));
+        cimaIMG = new Image(new Texture(Gdx.files.absolute("setinea.png")));
+        esquerdaIMG = new Image(new Texture(Gdx.files.absolute("setinea.png")));
+
+
+
+
 
 
 
@@ -71,17 +84,20 @@ public class Hud implements Disposable {
 
       //  table.setDebug(true);
 
-        table.add(esq).expandX().right();
+        table.add(esquerdaIMG).expandX().right();
         table.add(espBranco).right();
         table.add(labelEnumeraPersonagem).right();
         table.row();
-        table.add(dir).right();
+        table.add(direitaIMG).right();
         table.row();
-        table.add(cim).right();
+        table.add(cimaIMG).right();
         table.row();
-        table.add(bax).right();
+        table.add(baixoIMG).right();
         table.row();
-        table.add(espBranco).right();
+        //table.add(espBranco).right();
+        //table.add(baixoIMG).right();
+
+
         table.row();
         for(int n=0; n<5; n++){
             table.add(comandosEmTela.get(n)).right();
@@ -93,14 +109,42 @@ public class Hud implements Disposable {
     public void update(Heroi personagem){
         stage.addActor(table);
 
+        baixoIMG.setSize(20,20);
+        baixoIMG.setRotation(180);
+        baixoIMG.setPosition(370, 150);
+        cimaIMG.setSize(20,20);
+        cimaIMG.setPosition(350, 150);
+        direitaIMG.setSize(20,20);
+        direitaIMG.setRotation(270);
+        direitaIMG.setPosition(350,190);
+        esquerdaIMG.setSize(20,20);
+        esquerdaIMG.setRotation(90);
+        esquerdaIMG.setPosition(370, 190);
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
 
             for(int i=0; i<5; i++){
             comando.add(i,"   ");;
             }
 
+            baixoIMG.setSize(20,20);
+            baixoIMG.setRotation(180);
+            baixoIMG.setPosition(370, 150);
+            cimaIMG.setSize(20,20);
+            cimaIMG.setPosition(350, 150);
+            direitaIMG.setSize(20,20);
+            direitaIMG.setRotation(270);
+            direitaIMG.setPosition(350,190);
+            esquerdaIMG.setSize(20,20);
+            esquerdaIMG.setRotation(90);
+            esquerdaIMG.setPosition(370, 190);
+
 
             table.clear();
+
+
+
+
             table.add(esq).expandX().right();
             table.add(espBranco).right();
             table.add(labelEnumeraPersonagem).right();
@@ -128,6 +172,7 @@ public class Hud implements Disposable {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
 
+            System.out.println(baixoIMG.getY());
 
 
         }
@@ -141,17 +186,31 @@ public class Hud implements Disposable {
             comando.add(i,"   ");;
         }
 
+
+
+        baixoIMG.setSize(20,20);
+        baixoIMG.setRotation(180);
+        baixoIMG.setPosition(370, 150);
+        cimaIMG.setSize(20,20);
+        cimaIMG.setPosition(350, 150);
+        direitaIMG.setSize(20,20);
+        direitaIMG.setRotation(270);
+        direitaIMG.setPosition(350,190);
+        esquerdaIMG.setSize(20,20);
+        esquerdaIMG.setRotation(90);
+        esquerdaIMG.setPosition(370, 190);
+
         table.clear();
 
-        table.add(esq).expandX().right();
+        table.add(esquerdaIMG).expandX().right();
         table.add(espBranco).right();
         table.add(labelEnumeraPersonagem).right();
         table.row();
-        table.add(dir).right();
+        table.add(direitaIMG).right();
         table.row();
-        table.add(cim).right();
+        table.add(cimaIMG).right();
         table.row();
-        table.add(bax).right();
+        table.add(baixoIMG).right();
         table.row();
         table.add(espBranco).right();
         table.row();
@@ -223,6 +282,13 @@ public class Hud implements Disposable {
 
     }
 
+    public void orientaSeta(Image setaIMG, int rotacao, int posicaoY){
+
+        setaIMG.setSize(20,20);
+        setaIMG.setRotation(rotacao);
+        setaIMG.setPosition(370,posicaoY);
+
+    }
 
 
 
