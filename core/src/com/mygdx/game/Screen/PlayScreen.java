@@ -186,9 +186,8 @@ public class PlayScreen implements Screen{
 
         if(Gdx.input.justTouched()){
 
-            System.out.println(Gdx.input.getX());
-            System.out.println(Gdx.input.getY());
-            alavanca.t+=10;
+
+          alavanca.alavancaChangeState();
 
         }
 
