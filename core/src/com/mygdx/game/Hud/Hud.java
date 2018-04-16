@@ -53,11 +53,11 @@ public class Hud implements Disposable {
         enumeraPersonagem = 1;
 
 
-        comando.add("teste");
-        comando.add("teste");
-        comando.add("teste");
-        comando.add("teste");
-        comando.add("teste");
+        comando.add(" ");
+        comando.add(" ");
+        comando.add(" ");
+        comando.add(" ");
+        comando.add(" ");
 
 
 

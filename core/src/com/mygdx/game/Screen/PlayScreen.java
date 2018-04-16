@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.MyGdxGame;
+
+import com.mygdx.game.Sprites.Alavanca;
 import com.mygdx.game.Sprites.Heroi;
 import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
@@ -40,6 +42,8 @@ public class PlayScreen implements Screen{
     private World world;
     private Box2DDebugRenderer b2dr;
     private List<Heroi> players;
+
+    private Alavanca alavanca;
 
     private int activePlayer = 0;
     private TextureAtlas atlas;
@@ -68,6 +72,11 @@ public class PlayScreen implements Screen{
         players.add(new Heroi(world, this));
         players.get(1).b2body.setTransform(100 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
         players.get(2).b2body.setTransform(200 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
+
+        alavanca = new Alavanca(world, this);
+
+
+
 
 
         b2dr = new Box2DDebugRenderer();
@@ -175,6 +184,15 @@ public class PlayScreen implements Screen{
 
         }
 
+        if(Gdx.input.justTouched()){
+
+            System.out.println(Gdx.input.getX());
+            System.out.println(Gdx.input.getY());
+            alavanca.t+=10;
+
+        }
+
+
     }
 
     public void update(float dt){
@@ -194,6 +212,9 @@ public class PlayScreen implements Screen{
         for (Heroi player : players) {
             player.update(dt);
         }
+
+        alavanca.update(dt);
+
     }
 
 
@@ -223,6 +244,8 @@ public class PlayScreen implements Screen{
         for (Heroi player : players) {
             player.draw(game.batch);
         }
+        alavanca.draw(game.batch);
+
         game.batch.end();
     }
 
@@ -255,5 +278,9 @@ public class PlayScreen implements Screen{
         b2dr.dispose();
         hud.dispose();
 
+    }
+
+    public World getWorld() {
+        return world;
     }
 }
