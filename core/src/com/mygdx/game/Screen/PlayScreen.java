@@ -184,12 +184,15 @@ public class PlayScreen implements Screen{
 
         }
 
-        if(Gdx.input.justTouched()){
 
+        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1111
+                && Gdx.input.getY()>236 && Gdx.input.getY()<277){
 
-          alavanca.alavancaChangeState();
+            alavanca.alavancaChangeState();
 
         }
+
+
 
 
     }

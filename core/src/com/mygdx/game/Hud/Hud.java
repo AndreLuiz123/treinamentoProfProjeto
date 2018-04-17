@@ -36,7 +36,7 @@ public class Hud implements Disposable {
     private Label labelEnumeraPersonagem;
     private Label esq, dir, cim, bax;
     private Label espBranco;
-    private Image baixoIMG, cimaIMG, direitaIMG, esquerdaIMG;
+    private Image baixoIMG, cimaIMG, direitaIMG, esquerdaIMG, alavancaIMG;
     private ArrayList<Label> comandosEmTela  = new ArrayList<Label>();
     private int controlaComandoModificado=0, controlaComandoEmTelaSegundoBarraDeRolamento=0;
 
@@ -71,7 +71,7 @@ public class Hud implements Disposable {
         direitaIMG = new Image(new Texture(Gdx.files.absolute("setinea.png")));
         cimaIMG = new Image(new Texture(Gdx.files.absolute("setinea.png")));
         esquerdaIMG = new Image(new Texture(Gdx.files.absolute("setinea.png")));
-
+        alavancaIMG = new Image(new Texture(Gdx.files.absolute("alavancas.png")));
 
 
 
@@ -94,6 +94,7 @@ public class Hud implements Disposable {
         table.row();
         table.add(baixoIMG).right();
         table.row();
+        table.add(alavancaIMG).right();
         //table.add(espBranco).right();
         //table.add(baixoIMG).right();
 
@@ -120,6 +121,7 @@ public class Hud implements Disposable {
         esquerdaIMG.setSize(20,20);
         esquerdaIMG.setRotation(90);
         esquerdaIMG.setPosition(370, 190);
+        orientaAlavancaOption(alavancaIMG,110);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
 
@@ -138,6 +140,8 @@ public class Hud implements Disposable {
             esquerdaIMG.setSize(20,20);
             esquerdaIMG.setRotation(90);
             esquerdaIMG.setPosition(370, 190);
+            table.row();
+            table.add(alavancaIMG).right();
 
 
             table.clear();
@@ -145,18 +149,20 @@ public class Hud implements Disposable {
 
 
 
-            table.add(esq).expandX().right();
+            table.add(esquerdaIMG).expandX().right();
             table.add(espBranco).right();
             table.add(labelEnumeraPersonagem).right();
             table.row();
-            table.add(dir).right();
+            table.add(direitaIMG).right();
             table.row();
-            table.add(cim).right();
+            table.add(cimaIMG).right();
             table.row();
-            table.add(bax).right();
+            table.add(baixoIMG).right();
             table.row();
             table.add(espBranco).right();
             table.row();
+            table.row();
+            table.add(alavancaIMG).right();
             for(int n=0; n<5; n++){
                 table.add(comandosEmTela.get(n)).right();
                 table.row();
@@ -199,6 +205,8 @@ public class Hud implements Disposable {
         esquerdaIMG.setSize(20,20);
         esquerdaIMG.setRotation(90);
         esquerdaIMG.setPosition(370, 190);
+        orientaAlavancaOption(alavancaIMG,110);
+
 
         table.clear();
 
@@ -214,6 +222,8 @@ public class Hud implements Disposable {
         table.row();
         table.add(espBranco).right();
         table.row();
+        table.row();
+        table.add(alavancaIMG).right();
 
         for(int n=0; n<5; n++){
             table.add(comandosEmTela.get(n)).right();
@@ -287,6 +297,13 @@ public class Hud implements Disposable {
         setaIMG.setSize(20,20);
         setaIMG.setRotation(rotacao);
         setaIMG.setPosition(370,posicaoY);
+
+    }
+
+    public void orientaAlavancaOption(Image setaIMG, int posicaoY){
+
+        setaIMG.setSize(50,20);
+        setaIMG.setPosition(350,posicaoY);
 
     }
 

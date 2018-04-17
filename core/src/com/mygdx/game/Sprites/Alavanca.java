@@ -39,7 +39,7 @@ public class Alavanca extends Sprite {
 
         estadoAlavanca();
         alavanca = new TextureRegion(getTexture(), t, 64*9, 64, 64);
-        setBounds(0,0,24/ MyGdxGame.PPM,24/MyGdxGame.PPM);
+        setBounds(80/ MyGdxGame.PPM,60/ MyGdxGame.PPM,24/ MyGdxGame.PPM,24/MyGdxGame.PPM);
         setRegion(alavanca);
 
     }
@@ -49,7 +49,7 @@ public class Alavanca extends Sprite {
         if(!ligada){
            t=640;
         }else{
-           t=570;
+           t=580;
         }
 
     }
