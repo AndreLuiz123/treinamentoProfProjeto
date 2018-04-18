@@ -7,11 +7,17 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -20,6 +26,7 @@ import com.mygdx.game.MyGdxGame;
 
 import com.mygdx.game.Sprites.Alavanca;
 import com.mygdx.game.Sprites.Heroi;
+import com.mygdx.game.Sprites.Porta;
 import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
 
@@ -42,6 +49,7 @@ public class PlayScreen implements Screen{
     private World world;
     private Box2DDebugRenderer b2dr;
     private List<Heroi> players;
+    private Rectangle rect;
 
     private Alavanca alavanca;
 
@@ -49,6 +57,7 @@ public class PlayScreen implements Screen{
     private TextureAtlas atlas;
     private Hud hud;
     private boolean bul;
+    private Porta porta;
 
 
     public PlayScreen(MyGdxGame game ) {
@@ -74,9 +83,6 @@ public class PlayScreen implements Screen{
         players.get(2).b2body.setTransform(200 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
 
         alavanca = new Alavanca(world, this);
-
-
-
 
 
         b2dr = new Box2DDebugRenderer();
@@ -129,11 +135,9 @@ public class PlayScreen implements Screen{
                 players.get(getActivePlayer()).comandoAtual = 0;
                 players.get(getActivePlayer()).pode = false;
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-                players.get(getActivePlayer()).comandos.clear();
-            }
+
             if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-                players.get(getActivePlayer()).rodaComando();
+                players.get(getActivePlayer()).rodaComando(alavanca);
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
                 players.get(getActivePlayer()).pode = true;
@@ -187,10 +191,17 @@ public class PlayScreen implements Screen{
 
         if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1111
                 && Gdx.input.getY()>236 && Gdx.input.getY()<277){
-
-            alavanca.alavancaChangeState();
+            players.get(getActivePlayer()).colocaComandos("alavanca");
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
 
         }
+
+        if(Gdx.input.justTouched()&& Gdx.input.getX()>960 && Gdx.input.getX()<1019
+                && Gdx.input.getY()>0 && Gdx.input.getY()<53 ){
+            players.get(getActivePlayer()).comandos.clear();
+        }
+
+
 
 
 
@@ -212,7 +223,7 @@ public class PlayScreen implements Screen{
         renderer.setView(gameCam);
 
         for (Heroi player : players) {
-            player.update(dt);
+            player.update(dt, alavanca);
         }
 
         alavanca.update(dt);
@@ -243,10 +254,11 @@ public class PlayScreen implements Screen{
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
+        alavanca.draw(game.batch);
         for (Heroi player : players) {
             player.draw(game.batch);
         }
-        alavanca.draw(game.batch);
+
 
         game.batch.end();
     }

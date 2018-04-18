@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sprites.Porta;
 
 /**
  * Created by Andre Luiz on 20/02/2018.
@@ -42,15 +43,6 @@ public class B2WorldCreator {
             body.createFixture(fdef);
 
         }
-
-
-        for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
-
-
-
-        }
-
-
 
     }
 

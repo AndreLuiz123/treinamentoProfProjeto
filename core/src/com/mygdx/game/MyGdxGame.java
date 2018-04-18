@@ -15,6 +15,7 @@ public class MyGdxGame extends Game {
 	public static final float PPM = 100;
 	public SpriteBatch batch;
 
+	public static final short DESTROYED_BIT = 16;
 	
 	@Override
 	public void create () {
