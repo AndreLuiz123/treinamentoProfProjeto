@@ -33,6 +33,7 @@ public class Heroi extends Sprite {
     public static final String COMMAND_RIGHT = "right";
     public static final String COMMAND_LEFT = "left";
     public static final String COMMAND_DOWN = "down";
+    private final String tipo;
     public World world;
     public Body b2body;
     public BodyDef bdef;
@@ -57,8 +58,10 @@ public class Heroi extends Sprite {
 
 
 
-    public Heroi(World world, PlayScreen screen) {
+    public Heroi(World world, PlayScreen screen, String tipo) {
+        
         super(screen.getAtlas().findRegion("lpc-2"));
+        this.tipo = tipo;
         int S = 64;
         this.world = world;
 
@@ -97,7 +100,7 @@ public class Heroi extends Sprite {
         frames.clear();
 
 
-        defineHeroi();
+        defineHeroi(tipo);
         linkParadoFrente = new TextureRegion(getTexture(), 0, S*10, S, S);
         paradoCostas = new TextureRegion(getTexture(), 0, S*8, S, S);
         paradoLado = new TextureRegion(getTexture(), 0, S*9, S, S);
@@ -153,7 +156,7 @@ public class Heroi extends Sprite {
 
     }
 
-    public void defineHeroi() {
+    public void defineHeroi(String tipo) {
 
         bdef = new BodyDef();
         bdef.position.set(35 / MyGdxGame.PPM, 31 / MyGdxGame.PPM);
@@ -168,7 +171,7 @@ public class Heroi extends Sprite {
 
         Fixture fixture = b2body.createFixture(fdef);
 
-        fixture.setUserData("Heroi");
+        fixture.setUserData(this);
 
     }
 

@@ -71,9 +71,9 @@ public class PlayScreen implements Screen{
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
         world = new World(new Vector2(0,0), true);
         players = new ArrayList<Heroi>();
-        players.add(new Heroi(world, this));
-        players.add(new Heroi(world, this));
-        players.add(new Heroi(world, this));
+        players.add(new Heroi(world, this, "heroi1"));
+        players.add(new Heroi(world, this, "heroi2"));
+        players.add(new Heroi(world, this, "heroi3"));
         players.get(1).b2body.setTransform(100 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
         players.get(2).b2body.setTransform(200 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
 
@@ -88,7 +88,7 @@ public class PlayScreen implements Screen{
 
 
 
-        world.setContactListener(new WorldContactListener());
+        world.setContactListener(new WorldContactListener(players, alavanca));
 
         bul=false;
 

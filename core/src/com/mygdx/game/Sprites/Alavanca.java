@@ -100,7 +100,7 @@ public class Alavanca extends Sprite{
 
         Fixture fixture = b2body.createFixture(fdef);
 
-        fixture.setUserData("Alavanca");
+        fixture.setUserData(this);
 
     }
 
@@ -110,7 +110,9 @@ public class Alavanca extends Sprite{
 
     }
 
-
+    public Heroi getHeroi(){
+        return personagem;
+    }
 
 
 }
