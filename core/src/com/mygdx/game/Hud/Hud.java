@@ -252,7 +252,7 @@ public class Hud implements Disposable {
                 for(controlaComandoModificado=0; controlaComandoModificado<personagem.comandos.size(); controlaComandoModificado++) {
                     if (controlaComandoModificado < 5) {
                         comandosEmTela.get(controlaComandoModificado).setText(String.format("%s", personagem.comandos.get(controlaComandoModificado + controlaComandoEmTelaSegundoBarraDeRolamento)));
-                        System.out.println(controlaComandoModificado);
+
                     }
 
                 }
@@ -266,7 +266,7 @@ public class Hud implements Disposable {
 
         controlaComandoEmTelaSegundoBarraDeRolamento+=sentido;
 
-        System.out.println(controlaComandoEmTelaSegundoBarraDeRolamento);
+
 
 
         for (int i = 0; i < 5; i++)

@@ -7,17 +7,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -26,7 +21,6 @@ import com.mygdx.game.MyGdxGame;
 
 import com.mygdx.game.Sprites.Alavanca;
 import com.mygdx.game.Sprites.Heroi;
-import com.mygdx.game.Sprites.Porta;
 import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
 
@@ -57,7 +51,7 @@ public class PlayScreen implements Screen{
     private TextureAtlas atlas;
     private Hud hud;
     private boolean bul;
-    private Porta porta;
+
 
 
     public PlayScreen(MyGdxGame game ) {
@@ -67,6 +61,7 @@ public class PlayScreen implements Screen{
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(MyGdxGame.V_WIDTH/MyGdxGame.PPM,MyGdxGame.V_HEIGHT/MyGdxGame.PPM,gameCam);
+
 
 
 
@@ -82,7 +77,9 @@ public class PlayScreen implements Screen{
         players.get(1).b2body.setTransform(100 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
         players.get(2).b2body.setTransform(200 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
 
-        alavanca = new Alavanca(world, this);
+        alavanca = new Alavanca(world, this, players.get(1));
+
+
 
 
         b2dr = new Box2DDebugRenderer();
@@ -201,9 +198,10 @@ public class PlayScreen implements Screen{
             players.get(getActivePlayer()).comandos.clear();
         }
 
+        if(Gdx.input.justTouched()){
 
 
-
+        }
 
 
     }
