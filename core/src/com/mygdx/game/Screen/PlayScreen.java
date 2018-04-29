@@ -45,7 +45,7 @@ public class PlayScreen implements Screen{
     private List<Heroi> players;
     private Rectangle rect;
 
-    private Alavanca alavanca;
+    private List<Alavanca> alavancas;
 
     private int activePlayer = 0;
     private TextureAtlas atlas;
@@ -77,10 +77,13 @@ public class PlayScreen implements Screen{
         players.get(1).b2body.setTransform(100 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
         players.get(2).b2body.setTransform(200 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
 
-        alavanca = new Alavanca(world, this, players.get(1));
+        alavancas = new ArrayList<Alavanca>();
 
-
-
+        alavancas.add(new Alavanca(world, this, players.get(0)));
+        alavancas.add(new Alavanca(world, this, players.get(1)));
+        alavancas.add(new Alavanca(world, this, players.get(2)));
+        alavancas.get(1).b2body.setTransform(150 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
+        alavancas.get(2).b2body.setTransform(250 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
 
         b2dr = new Box2DDebugRenderer();
 
@@ -88,7 +91,7 @@ public class PlayScreen implements Screen{
 
 
 
-        world.setContactListener(new WorldContactListener(players, alavanca));
+        world.setContactListener(new WorldContactListener(players, alavancas));
 
         bul=false;
 
@@ -134,7 +137,7 @@ public class PlayScreen implements Screen{
             }
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-                players.get(getActivePlayer()).rodaComando(alavanca);
+                players.get(getActivePlayer()).rodaComando();
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
                 players.get(getActivePlayer()).pode = true;
@@ -221,10 +224,12 @@ public class PlayScreen implements Screen{
         renderer.setView(gameCam);
 
         for (Heroi player : players) {
-            player.update(dt, alavanca);
+            player.update(dt);
         }
 
-        alavanca.update(dt);
+        for (Alavanca alavanca : alavancas) {
+            alavanca.update(dt);
+        }
 
     }
 
@@ -251,8 +256,11 @@ public class PlayScreen implements Screen{
         hud.stage.draw();
 
         game.batch.setProjectionMatrix(gameCam.combined);
+
         game.batch.begin();
-        alavanca.draw(game.batch);
+        for (Alavanca alavanca : alavancas) {
+            alavanca.draw(game.batch);
+        }
         for (Heroi player : players) {
             player.draw(game.batch);
         }

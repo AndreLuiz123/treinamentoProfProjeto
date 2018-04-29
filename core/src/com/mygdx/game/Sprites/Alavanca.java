@@ -26,7 +26,7 @@ public class Alavanca extends Sprite{
     private State estadoAtual;
     private boolean ligada;
     protected Heroi personagem;
-    protected Body b2body;
+    public Body b2body;
 
 
 
@@ -56,7 +56,7 @@ public class Alavanca extends Sprite{
 
         estadoAlavanca();
         alavanca = new TextureRegion(getTexture(), t, 64*9, 64, 64);
-        setBounds(80/ MyGdxGame.PPM,60/ MyGdxGame.PPM,24/ MyGdxGame.PPM,24/MyGdxGame.PPM);
+        setBounds(this.b2body.getPosition().x - 15/ MyGdxGame.PPM, this.b2body.getPosition().y - 5/ MyGdxGame.PPM,24/ MyGdxGame.PPM,24/MyGdxGame.PPM);
         setRegion(alavanca);
 
 

@@ -119,7 +119,7 @@ public class Heroi extends Sprite {
 
     }
 
-    public void rodaComando(Alavanca alavanca){
+    public void rodaComando(){
         if(cooldown > 0 || comandoAtual<0 || comandoAtual > comandos.size()-1) return;
         if(comandos.get(comandoAtual).equals(COMMAND_RIGHT)){
             vY=0;
@@ -133,8 +133,6 @@ public class Heroi extends Sprite {
         } else if(comandos.get(comandoAtual).equals(COMMAND_DOWN)){
             vX=0;
             andaParaBaixo();
-        } else if(comandos.get(comandoAtual).equals("alavanca")){
-            alavanca.alavancaChangeState();
         }
 
 
@@ -176,12 +174,12 @@ public class Heroi extends Sprite {
     }
 
 
-    public void update(float dt, Alavanca alavanca) {
+    public void update(float dt) {
 
          setRegion(getFrame(dt));
 
         if(pode)
-        rodaComando(alavanca);
+        rodaComando();
 
 
         movimentos(dt);

@@ -21,11 +21,11 @@ public class WorldContactListener implements ContactListener {
 
 
     private final List<Heroi> players;
-    private final Alavanca alavanca;
+    private final List<Alavanca> alavancas;
 
-    public WorldContactListener(List<Heroi> players, Alavanca alavanca) {
+    public WorldContactListener(List<Heroi> players, List<Alavanca> alavancas) {
         this.players = players;
-        this.alavanca = alavanca;
+        this.alavancas = alavancas;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class WorldContactListener implements ContactListener {
         if(fixA.getUserData()== null || fixB.getUserData() == null) return;
 
         System.out.println("A: "+ fixA.getUserData());
-        System.out.println("B: "+fixB.getUserData());
+        System.out.println("B: "+ fixB.getUserData());
 
         if(fixA.getUserData().getClass().equals(Heroi.class) && fixB.getUserData().getClass().equals(Alavanca.class)){
             Heroi heroi = (Heroi) fixA.getUserData();
