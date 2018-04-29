@@ -36,7 +36,7 @@ public class Hud implements Disposable {
     private Label labelEnumeraPersonagem;
     private Label esq, dir, cim, bax;
     private Label espBranco;
-    private Image baixoIMG, cimaIMG, direitaIMG, esquerdaIMG, alavancaIMG, lixoIMG;
+    private Image baixoIMG, cimaIMG, direitaIMG, esquerdaIMG, alavancaIMG, lixoIMG, nextLevelIMG;
     private ArrayList<Label> comandosEmTela  = new ArrayList<Label>();
     private int controlaComandoModificado=0, controlaComandoEmTelaSegundoBarraDeRolamento=0;
 
@@ -73,6 +73,7 @@ public class Hud implements Disposable {
         esquerdaIMG = new Image(new Texture(Gdx.files.absolute("setinea.png")));
         alavancaIMG = new Image(new Texture(Gdx.files.absolute("alavancas.png")));
         lixoIMG = new Image(new Texture(Gdx.files.absolute("lixo.png")));
+        nextLevelIMG = new Image(new Texture(Gdx.files.absolute("acionar.png")));
 
 
 
@@ -316,6 +317,14 @@ public class Hud implements Disposable {
         setaIMG.setSize(50,20);
         setaIMG.setPosition(350,posicaoY);
 
+    }
+
+    public void proximoNivel(){
+
+        table.add(nextLevelIMG);
+        nextLevelIMG.setSize(90,90);
+        nextLevelIMG.setPosition(100,300);
+        
     }
 
 

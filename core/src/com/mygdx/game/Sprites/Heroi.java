@@ -135,10 +135,7 @@ public class Heroi extends Sprite {
             andaParaBaixo();
         }
 
-
-
             comandoAtual++;
-
 
         if(comandoAtual>=comandos.size()){
             comandoAtual = -1;

@@ -87,7 +87,7 @@ public class Alavanca extends Sprite{
 
     public void defineAlavanca() {
        BodyDef bdef = new BodyDef();
-        bdef.position.set(95 / MyGdxGame.PPM, 65 / MyGdxGame.PPM);
+        bdef.position.set(35 / MyGdxGame.PPM, 100 / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
         b2body = world.createBody(bdef);
 
@@ -114,5 +114,10 @@ public class Alavanca extends Sprite{
         return personagem;
     }
 
-
+    public boolean isLigada() {
+        return ligada;
+    }
 }
+
+
+

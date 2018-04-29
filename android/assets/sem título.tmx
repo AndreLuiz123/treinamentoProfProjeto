@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="13" tilewidth="16" tileheight="16" nextobjectid="57">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="8" height="13" tilewidth="16" tileheight="16" nextobjectid="59">
  <tileset firstgid="1" source="vamoLaAgoraVai.tsx"/>
- <layer name="chao" width="20" height="13">
+ <layer name="chao" width="8" height="13">
   <data encoding="base64" compression="zlib">
-   eJy7yMDAMJlK+CIUb6YShpl3DYinU4GGmbcNiLdTgR5136j7BoP7PlMJg8wCAKjTvY8=
+   eJy7yMDAMBkHBoGLQLwZB4bJXwPi6VhomPw2IN6OhR7VD5H/jAODAACfN0K6
   </data>
  </layer>
- <layer name="parede" width="20" height="13">
+ <layer name="parede" width="8" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjAIIAAAEEAAB
+   eJxjYMANLuKRG5WnjzwAIkwKng==
   </data>
  </layer>
  <objectgroup name="objParede">
-  <object id="46" x="-2.14707" y="29.5223" width="18.7869" height="163.178"/>
-  <object id="48" x="-2.14707" y="193.237" width="322.061" height="15.5663"/>
-  <object id="49" x="303.811" y="-0.536769" width="15.5663" height="194.31"/>
-  <object id="51" x="-2.68384" y="-1.07354" width="19.3237" height="32.2061"/>
-  <object id="55" x="16.1031" y="-1.07354" width="288.782" height="26.3017"/>
+  <object id="46" x="-3.14707" y="25.7649" width="18.7869" height="166.935"/>
+  <object id="48" x="-2.14707" y="193.237" width="129.898" height="15.5663"/>
+  <object id="55" x="4.04187e-5" y="-1.07354" width="127.751" height="26.3017"/>
+  <object id="58" x="112.313" y="24.9598" width="18.7869" height="166.935"/>
  </objectgroup>
 </map>

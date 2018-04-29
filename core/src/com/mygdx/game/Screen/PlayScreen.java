@@ -74,16 +74,16 @@ public class PlayScreen implements Screen{
         players.add(new Heroi(world, this, "heroi1"));
         players.add(new Heroi(world, this, "heroi2"));
         players.add(new Heroi(world, this, "heroi3"));
-        players.get(1).b2body.setTransform(100 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
-        players.get(2).b2body.setTransform(200 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
+        players.get(1).b2body.setTransform(65 / MyGdxGame.PPM, 31 / MyGdxGame.PPM, 0);
+        players.get(2).b2body.setTransform(95 / MyGdxGame.PPM, 31 / MyGdxGame.PPM, 0);
 
         alavancas = new ArrayList<Alavanca>();
 
         alavancas.add(new Alavanca(world, this, players.get(0)));
         alavancas.add(new Alavanca(world, this, players.get(1)));
         alavancas.add(new Alavanca(world, this, players.get(2)));
-        alavancas.get(1).b2body.setTransform(150 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
-        alavancas.get(2).b2body.setTransform(250 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
+        alavancas.get(1).b2body.setTransform(95 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
+        alavancas.get(2).b2body.setTransform(65 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
 
         b2dr = new Box2DDebugRenderer();
 
@@ -130,8 +130,12 @@ public class PlayScreen implements Screen{
                 hud.atualizaEnumeracaoPersonagem(true, false);
                 setActivePlayer(getActivePlayer()+1);
                 hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+                hud.proximoNivel();
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+
+
+
+         /*   if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
                 players.get(getActivePlayer()).comandoAtual = 0;
                 players.get(getActivePlayer()).pode = false;
             }
@@ -141,12 +145,15 @@ public class PlayScreen implements Screen{
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
                 players.get(getActivePlayer()).pode = true;
-            }
+            }*/
             if (Gdx.input.isKeyJustPressed(Input.Keys.L)){
                 for (Heroi player: players) {
-                    player.comandoAtual = 0;
-                    player.pode = true;
+                    if(!player.comandos.isEmpty()){
+                        player.comandoAtual = 0;
+                        player.pode = true;
+                    }
                 }
+
             }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.G)){
@@ -230,6 +237,13 @@ public class PlayScreen implements Screen{
         for (Alavanca alavanca : alavancas) {
             alavanca.update(dt);
         }
+
+            if(alavancas.get(0).isLigada() && alavancas.get(1).isLigada() && alavancas.get(2).isLigada()){
+                System.out.println("Deu certo!");
+            }
+
+
+
 
     }
 
