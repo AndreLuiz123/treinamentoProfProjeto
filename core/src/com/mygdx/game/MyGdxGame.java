@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.Screen.PlayScreen;
+import com.mygdx.game.Screen.PlayScreen2;
 
 public class MyGdxGame extends Game {
 	public static final int V_WIDTH = 400;
@@ -19,7 +20,7 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		setScreen(new PlayScreen(this));
+		setScreen(new PlayScreen2(this));
 	}
 
 	@Override

@@ -324,7 +324,7 @@ public class Hud implements Disposable {
         table.add(nextLevelIMG);
         nextLevelIMG.setSize(90,90);
         nextLevelIMG.setPosition(100,300);
-        
+
     }
 
 
