@@ -1,4 +1,4 @@
-package com.mygdx.game.Sprites;
+package br.ufjf.dcc.progbotics.Sprites;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.MyGdxGame;
+import br.ufjf.dcc.progbotics.MyGdxGame;
 
 /**
  * Created by Andre Luiz on 20/02/2018.

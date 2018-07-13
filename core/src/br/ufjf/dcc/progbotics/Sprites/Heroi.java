@@ -1,28 +1,20 @@
-package com.mygdx.game.Sprites;
+package br.ufjf.dcc.progbotics.Sprites;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Hud.Hud;
-import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.Screen.PlayScreen;
-import com.mygdx.game.Screen.PlayScreen2;
+import br.ufjf.dcc.progbotics.MyGdxGame;
+import br.ufjf.dcc.progbotics.Screen.PlayScreen;
+import br.ufjf.dcc.progbotics.Screen.PlayScreen2;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static com.badlogic.gdx.scenes.scene2d.InputEvent.Type.mouseMoved;
 
 /**
  * Created by Andre Luiz on 16/11/2017.

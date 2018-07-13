@@ -1,16 +1,13 @@
-package com.mygdx.game.Tools;
+package br.ufjf.dcc.progbotics.Tools;
 
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.mygdx.game.Sprites.Alavanca;
-import com.mygdx.game.Sprites.Heroi;
-import com.mygdx.game.Sprites.InteractiveTiledObject;
+import br.ufjf.dcc.progbotics.Sprites.Alavanca;
+import br.ufjf.dcc.progbotics.Sprites.Heroi;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

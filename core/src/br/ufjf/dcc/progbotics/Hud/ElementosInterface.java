@@ -1,4 +1,4 @@
-package com.mygdx.game.Hud;
+package br.ufjf.dcc.progbotics.Hud;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;

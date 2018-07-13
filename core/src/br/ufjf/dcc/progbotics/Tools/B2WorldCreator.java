@@ -1,4 +1,4 @@
-package com.mygdx.game.Tools;
+package br.ufjf.dcc.progbotics.Tools;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.MyGdxGame;
+import br.ufjf.dcc.progbotics.MyGdxGame;
 
 /**
  * Created by Andre Luiz on 20/02/2018.
