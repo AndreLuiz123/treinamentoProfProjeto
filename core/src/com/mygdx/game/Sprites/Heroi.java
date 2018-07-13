@@ -164,8 +164,8 @@ public class Heroi extends Sprite {
 
         defineHeroi(tipo);
         linkParadoFrente = new TextureRegion(getTexture(), 0, S*10, S, S);
-        paradoCostas = new TextureRegion(getTexture(), 0, S*8, S, S);
-        paradoLado = new TextureRegion(getTexture(), 0, S*9, S, S);
+        paradoCostas = new TextureRegion(getTexture(), 0, S, S, S);
+        paradoLado = new TextureRegion(getTexture(), 0, S, S, S);
         setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 24 / MyGdxGame.PPM, 24 / MyGdxGame.PPM);
         setRegion(linkParadoFrente);
 
@@ -229,7 +229,6 @@ public class Heroi extends Sprite {
         Fixture fixture = b2body.createFixture(fdef);
 
         fixture.setUserData(this);
-
     }
 
 

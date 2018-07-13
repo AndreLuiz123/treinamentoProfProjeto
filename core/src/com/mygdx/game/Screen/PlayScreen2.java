@@ -132,7 +132,7 @@ public class PlayScreen2 implements Screen{
             hud.atualizaEnumeracaoPersonagem(true, false);
             setActivePlayer(getActivePlayer()+1);
             hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-            hud.proximoNivel();
+
         }
 
 

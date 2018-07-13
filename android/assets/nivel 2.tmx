@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="vamoLaAgoraVai.tsx"/>
  <layer name="chao" width="13" height="8">
   <data encoding="base64" compression="zlib">
-   eJy7yMDAMBkHxgUuAvFmHBifnmtAPB0LDQLToOxpSGIgPduAeDsWmgGH2GCwZwcV7QEA1Po4Kw==
+   eJy7yMDAMBkHxgUuAvFmHBifnmtAPB0LDQLToOxpSGIgPduAeDsWmgGH2GCwZwcOez7iCR9cAAARDjEq
   </data>
  </layer>
  <layer name="parede" width="13" height="8">
