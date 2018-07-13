@@ -10,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import br.ufjf.dcc.progbotics.ProgBoticsGame;
 import br.ufjf.dcc.progbotics.Screen.PlayScreen;
-import br.ufjf.dcc.progbotics.Screen.PlayScreen2;
 
 /**
  * Created by Andre Luiz on 15/04/2018.
@@ -50,25 +49,6 @@ public class Alavanca extends Sprite{
 
     }
 
-    public Alavanca (World world, PlayScreen2 screen, Heroi personagem){
-
-        super(screen.getAtlas().findRegion("lpc-2"));
-        int S=64;
-        t=640;
-
-        ligada = false;
-        this.world = world;
-        alavanca = new TextureRegion(getTexture(), 640, S*8, S, S);
-
-        setBounds(0,0,24/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM);
-
-        setRegion(alavanca);
-
-        this.personagem = personagem;
-
-        defineAlavanca();
-
-    }
 
 
     public void update(float dt){

@@ -12,7 +12,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import br.ufjf.dcc.progbotics.ProgBoticsGame;
 import br.ufjf.dcc.progbotics.Screen.PlayScreen;
-import br.ufjf.dcc.progbotics.Screen.PlayScreen2;
 
 import java.util.ArrayList;
 
@@ -112,66 +111,6 @@ public class Heroi extends Sprite {
 
     }
 
-    public Heroi(World world, PlayScreen2 screen, String tipo) {
-
-        super(screen.getAtlas().findRegion("lpc-2"));
-        this.tipo = tipo;
-        int S = 64;
-        this.world = world;
-
-        comandos = new ArrayList<String>();
-
-        estadoAtual = State.ParadoFrente;
-        stateTimer = 0;
-        andandoDireita = true;
-
-
-
-
-
-
-        Array<TextureRegion> frames = new Array<TextureRegion>();
-
-        for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), S * i, S*10, S, S));
-
-        }
-        andandoFrente = new Animation(0.1f, frames);
-        frames.clear();
-
-        for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), S * i, S*8, S, S));
-        }
-
-        andandoCostas = new Animation(0.1f, frames);
-        frames.clear();
-
-        for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), S * i, S*9, S, S));
-        }
-
-        andandoLados = new Animation(0.1f, frames);
-        frames.clear();
-
-
-        defineHeroi(tipo);
-        linkParadoFrente = new TextureRegion(getTexture(), 0, S*10, S, S);
-        paradoCostas = new TextureRegion(getTexture(), 0, S, S, S);
-        paradoLado = new TextureRegion(getTexture(), 0, S, S, S);
-        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 24 / ProgBoticsGame.PPM, 24 / ProgBoticsGame.PPM);
-        setRegion(linkParadoFrente);
-
-
-        posX = b2body.getPosition().x;
-        posY = b2body.getPosition().y;
-        vX = 0;
-        vY = 0;
-        posX2 = b2body.getPosition().x;
-        posY2 = b2body.getPosition().y;
-        xis = 0;
-        ypi = 0;
-
-    }
 
     public void rodaComando(){
         if(cooldown > 0 || comandoAtual<0 || comandoAtual > comandos.size()-1) return;
