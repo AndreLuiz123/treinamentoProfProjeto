@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import br.ufjf.dcc.progbotics.MyGdxGame;
+import br.ufjf.dcc.progbotics.ProgBoticsGame;
 import br.ufjf.dcc.progbotics.Sprites.Heroi;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class Hud implements Disposable {
     public Table table;
 
     public Hud(SpriteBatch sb){
-        viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT);
+        viewport = new FitViewport(ProgBoticsGame.V_WIDTH, ProgBoticsGame.V_HEIGHT);
         stage = new Stage(viewport, sb);
 
         table = new Table();

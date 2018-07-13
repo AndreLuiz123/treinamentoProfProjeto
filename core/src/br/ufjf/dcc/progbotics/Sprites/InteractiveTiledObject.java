@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import br.ufjf.dcc.progbotics.MyGdxGame;
+import br.ufjf.dcc.progbotics.ProgBoticsGame;
 
 /**
  * Created by Andre Luiz on 20/02/2018.
@@ -36,10 +36,10 @@ public abstract class InteractiveTiledObject {
         PolygonShape shape = new PolygonShape();
 
         bdef.type = BodyDef.BodyType.StaticBody;
-        bdef.position.set((bounds.getX() + bounds.getWidth()/2)/ MyGdxGame.PPM, (bounds.getY() + bounds.getHeight()/2)/MyGdxGame.PPM);
+        bdef.position.set((bounds.getX() + bounds.getWidth()/2)/ ProgBoticsGame.PPM, (bounds.getY() + bounds.getHeight()/2)/ ProgBoticsGame.PPM);
 
         body=world.createBody(bdef);
-        shape.setAsBox((bounds.getWidth()/2)/ MyGdxGame.PPM, (bounds.getHeight()/2)/MyGdxGame.PPM);
+        shape.setAsBox((bounds.getWidth()/2)/ ProgBoticsGame.PPM, (bounds.getHeight()/2)/ ProgBoticsGame.PPM);
         fdef.shape=shape;
 
         fixture = body.createFixture(fdef);

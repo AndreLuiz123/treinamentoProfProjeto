@@ -17,7 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import br.ufjf.dcc.progbotics.Hud.Hud;
-import br.ufjf.dcc.progbotics.MyGdxGame;
+import br.ufjf.dcc.progbotics.ProgBoticsGame;
 
 import br.ufjf.dcc.progbotics.Sprites.Alavanca;
 import br.ufjf.dcc.progbotics.Sprites.Heroi;
@@ -33,7 +33,7 @@ import java.util.List;
 
 public class PlayScreen2 implements Screen{
 
-    private MyGdxGame game;
+    private ProgBoticsGame game;
     private Texture texture;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
@@ -54,38 +54,38 @@ public class PlayScreen2 implements Screen{
 
 
 
-    public PlayScreen2(MyGdxGame game ) {
+    public PlayScreen2(ProgBoticsGame game ) {
 
         atlas = new TextureAtlas("teste.pack");
 
         this.game = game;
         gameCam = new OrthographicCamera();
-        gamePort = new FitViewport(MyGdxGame.V_WIDTH/MyGdxGame.PPM,MyGdxGame.V_HEIGHT/MyGdxGame.PPM,gameCam);
+        gamePort = new FitViewport(ProgBoticsGame.V_WIDTH/ ProgBoticsGame.PPM, ProgBoticsGame.V_HEIGHT/ ProgBoticsGame.PPM,gameCam);
 
 
 
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("nivel 2.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map,1/MyGdxGame.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map,1/ ProgBoticsGame.PPM);
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
         world = new World(new Vector2(0,0), true);
         players = new ArrayList<Heroi>();
         players.add(new Heroi(world, this, "heroi1"));
         players.add(new Heroi(world, this, "heroi2"));
         players.add(new Heroi(world, this, "heroi3"));
-        players.get(0).b2body.setTransform(130 / MyGdxGame.PPM, 90 / MyGdxGame.PPM, 0);
-        players.get(1).b2body.setTransform(160 / MyGdxGame.PPM, 90 / MyGdxGame.PPM, 0);
-        players.get(2).b2body.setTransform(180 / MyGdxGame.PPM, 90 / MyGdxGame.PPM, 0);
+        players.get(0).b2body.setTransform(130 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+        players.get(1).b2body.setTransform(160 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+        players.get(2).b2body.setTransform(180 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
 
         alavancas = new ArrayList<Alavanca>();
 
         alavancas.add(new Alavanca(world, this, players.get(0)));
         alavancas.add(new Alavanca(world, this, players.get(1)));
         alavancas.add(new Alavanca(world, this, players.get(2)));
-        alavancas.get(0).b2body.setTransform(35 / MyGdxGame.PPM, 90 / MyGdxGame.PPM, 0);
-        alavancas.get(1).b2body.setTransform(95 / MyGdxGame.PPM, 90 / MyGdxGame.PPM, 0);
-        alavancas.get(2).b2body.setTransform(65 / MyGdxGame.PPM, 90 / MyGdxGame.PPM, 0);
+        alavancas.get(0).b2body.setTransform(35 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+        alavancas.get(1).b2body.setTransform(95 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+        alavancas.get(2).b2body.setTransform(65 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
 
         b2dr = new Box2DDebugRenderer();
 
@@ -105,7 +105,7 @@ public class PlayScreen2 implements Screen{
         return  atlas;
     }
 
-    public MyGdxGame getGame(){ return game;}
+    public ProgBoticsGame getGame(){ return game;}
 
 
 

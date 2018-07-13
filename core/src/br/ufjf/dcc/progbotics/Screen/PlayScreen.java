@@ -16,8 +16,10 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+//import com.sun.org.apache.xpath.internal.operations.String;
+
 import br.ufjf.dcc.progbotics.Hud.Hud;
-import br.ufjf.dcc.progbotics.MyGdxGame;
+import br.ufjf.dcc.progbotics.ProgBoticsGame;
 
 import br.ufjf.dcc.progbotics.Sprites.Alavanca;
 import br.ufjf.dcc.progbotics.Sprites.Heroi;
@@ -31,9 +33,10 @@ import java.util.List;
  * Created by Andre Luiz on 15/11/2017.
  */
 
-public class PlayScreen implements Screen{
+public class PlayScreen implements Screen {
 
-    private MyGdxGame game;
+    public static String[] LEVEL_NAMES = {"sem título.tmx", "nivel 2.tmx"};
+    private ProgBoticsGame game;
     private Texture texture;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
@@ -44,67 +47,97 @@ public class PlayScreen implements Screen{
     private Box2DDebugRenderer b2dr;
     private List<Heroi> players;
     private Rectangle rect;
-
     private List<Alavanca> alavancas;
-
+    private Integer level = 0;
     private int activePlayer = 0;
     private TextureAtlas atlas;
     private Hud hud;
     private boolean bul;
 
 
-
-    public PlayScreen(MyGdxGame game ) {
+    public PlayScreen(ProgBoticsGame game) {
 
         atlas = new TextureAtlas("teste.pack");
 
         this.game = game;
         gameCam = new OrthographicCamera();
-        gamePort = new FitViewport(MyGdxGame.V_WIDTH/MyGdxGame.PPM,MyGdxGame.V_HEIGHT/MyGdxGame.PPM,gameCam);
+        gamePort = new FitViewport(ProgBoticsGame.V_WIDTH / ProgBoticsGame.PPM, ProgBoticsGame.V_HEIGHT / ProgBoticsGame.PPM, gameCam);
 
 
+        this.setLevel(this.level);
+    }
 
+    public void setLevel(Integer level) {
+        this.level = level;
+        switch (this.level) {
+            case 0:
+                mapLoader = new TmxMapLoader();
+                map = mapLoader.load(LEVEL_NAMES[this.level]);
+                world = new World(new Vector2(0, 0), true);
+                players = new ArrayList<Heroi>();
+                players.add(new Heroi(world, this, "heroi1"));
+                players.add(new Heroi(world, this, "heroi2"));
+                players.add(new Heroi(world, this, "heroi3"));
+                players.get(1).b2body.setTransform(65 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(2).b2body.setTransform(95 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
 
-        mapLoader = new TmxMapLoader();
-        map = mapLoader.load("sem título.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map,1/MyGdxGame.PPM);
-        gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
-        world = new World(new Vector2(0,0), true);
-        players = new ArrayList<Heroi>();
-        players.add(new Heroi(world, this, "heroi1"));
-        players.add(new Heroi(world, this, "heroi2"));
-        players.add(new Heroi(world, this, "heroi3"));
-        players.get(1).b2body.setTransform(65 / MyGdxGame.PPM, 31 / MyGdxGame.PPM, 0);
-        players.get(2).b2body.setTransform(95 / MyGdxGame.PPM, 31 / MyGdxGame.PPM, 0);
+                alavancas = new ArrayList<Alavanca>();
 
-        alavancas = new ArrayList<Alavanca>();
+                alavancas.add(new Alavanca(world, this, players.get(0)));
+                alavancas.add(new Alavanca(world, this, players.get(1)));
+                alavancas.add(new Alavanca(world, this, players.get(2)));
+                alavancas.get(1).b2body.setTransform(95 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
+                alavancas.get(2).b2body.setTransform(65 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
+                new B2WorldCreator(world, map);
+                world.setContactListener(new WorldContactListener(players, alavancas));
 
-        alavancas.add(new Alavanca(world, this, players.get(0)));
-        alavancas.add(new Alavanca(world, this, players.get(1)));
-        alavancas.add(new Alavanca(world, this, players.get(2)));
-        alavancas.get(1).b2body.setTransform(95 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
-        alavancas.get(2).b2body.setTransform(65 / MyGdxGame.PPM, 100 / MyGdxGame.PPM, 0);
+                break;
+            case 1:
+                mapLoader = new TmxMapLoader();
+                map = mapLoader.load(LEVEL_NAMES[this.level]);
+                world = new World(new Vector2(0, 0), true);
+                players = new ArrayList<Heroi>();
+                players.add(new Heroi(world, this, "heroi1"));
+                players.add(new Heroi(world, this, "heroi2"));
+                players.add(new Heroi(world, this, "heroi3"));
+                players.get(0).b2body.setTransform(130 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+                players.get(1).b2body.setTransform(160 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+                players.get(2).b2body.setTransform(180 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+
+                alavancas = new ArrayList<Alavanca>();
+
+                alavancas.add(new Alavanca(world, this, players.get(0)));
+                alavancas.add(new Alavanca(world, this, players.get(1)));
+                alavancas.add(new Alavanca(world, this, players.get(2)));
+                alavancas.get(0).b2body.setTransform(35 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+                alavancas.get(1).b2body.setTransform(95 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+                alavancas.get(2).b2body.setTransform(65 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+                new B2WorldCreator(world, map);
+                world.setContactListener(new WorldContactListener(players, alavancas));
+                break;
+            default:
+
+        }
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
+        gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
         b2dr = new Box2DDebugRenderer();
 
-        new B2WorldCreator(world, map);
 
-
-
-        world.setContactListener(new WorldContactListener(players, alavancas));
-
-        bul=false;
+        bul = false;
 
         hud = new Hud(game.batch);
 
+
     }
 
-    public TextureAtlas getAtlas(){
-        return  atlas;
+    public TextureAtlas getAtlas() {
+        return atlas;
     }
 
-    public MyGdxGame getGame(){ return game;}
-
+    public ProgBoticsGame getGame() {
+        return game;
+    }
 
 
     @Override
@@ -112,26 +145,27 @@ public class PlayScreen implements Screen{
 
     }
 
-    public int getActivePlayer(){
+    public int getActivePlayer() {
         return activePlayer;
     }
-    public void setActivePlayer(int ap){
-        if(ap < 0 || ap > players.size() - 1) return;
+
+    public void setActivePlayer(int ap) {
+        if (ap < 0 || ap > players.size() - 1) return;
         activePlayer = ap;
     }
 
-    public void handleInput(){
-            if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
-                hud.atualizaEnumeracaoPersonagem(false, true);
-                setActivePlayer(getActivePlayer()-1);
-                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-            }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
-                hud.atualizaEnumeracaoPersonagem(true, false);
-                setActivePlayer(getActivePlayer()+1);
-                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+    public void handleInput() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
+            hud.atualizaEnumeracaoPersonagem(false, true);
+            setActivePlayer(getActivePlayer() - 1);
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
+            hud.atualizaEnumeracaoPersonagem(true, false);
+            setActivePlayer(getActivePlayer() + 1);
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
 
-            }
+        }
 
 
 
@@ -146,49 +180,48 @@ public class PlayScreen implements Screen{
             if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
                 players.get(getActivePlayer()).pode = true;
             }*/
-            if (Gdx.input.isKeyJustPressed(Input.Keys.L)){
-                for (Heroi player: players) {
-                    if(!player.comandos.isEmpty()){
-                        player.comandoAtual = 0;
-                        player.pode = true;
-                    }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+            for (Heroi player : players) {
+                if (!player.comandos.isEmpty()) {
+                    player.comandoAtual = 0;
+                    player.pode = true;
                 }
-
             }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.G)){
-            hud.barraDeRolamento(1,players.get(getActivePlayer()));
-
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F)){
-            hud.barraDeRolamento(-1,players.get(getActivePlayer()));
 
         }
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+            hud.barraDeRolamento(1, players.get(getActivePlayer()));
+
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+            hud.barraDeRolamento(-1, players.get(getActivePlayer()));
+
+        }
 
 
-        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1101
-                && Gdx.input.getY()>108 && Gdx.input.getY()<162) {
-                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
-                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-            }
+        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
+                && Gdx.input.getY() > 108 && Gdx.input.getY() < 162) {
+            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+        }
 
-        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1101
-                && Gdx.input.getY()>162 && Gdx.input.getY()<216) {
-                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
-                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-            }
-
-
-        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1101
-                && Gdx.input.getY()>54 && Gdx.input.getY()<108) {
-                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
-                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-            }
+        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
+                && Gdx.input.getY() > 162 && Gdx.input.getY() < 216) {
+            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+        }
 
 
-        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1101
-                && Gdx.input.getY()>0 && Gdx.input.getY()<54){
+        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
+                && Gdx.input.getY() > 54 && Gdx.input.getY() < 108) {
+            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+        }
+
+
+        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
+                && Gdx.input.getY() > 0 && Gdx.input.getY() < 54) {
 
             players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
             hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
@@ -196,19 +229,19 @@ public class PlayScreen implements Screen{
         }
 
 
-        if(Gdx.input.justTouched() && Gdx.input.getX()>1050 && Gdx.input.getX()<1111
-                && Gdx.input.getY()>236 && Gdx.input.getY()<277){
+        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1111
+                && Gdx.input.getY() > 236 && Gdx.input.getY() < 277) {
             players.get(getActivePlayer()).colocaComandos("alavanca");
             hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
 
         }
 
-        if(Gdx.input.justTouched()&& Gdx.input.getX()>960 && Gdx.input.getX()<1019
-                && Gdx.input.getY()>0 && Gdx.input.getY()<53 ){
+        if (Gdx.input.justTouched() && Gdx.input.getX() > 960 && Gdx.input.getX() < 1019
+                && Gdx.input.getY() > 0 && Gdx.input.getY() < 53) {
             players.get(getActivePlayer()).comandos.clear();
         }
 
-        if(Gdx.input.justTouched()){
+        if (Gdx.input.justTouched()) {
 
 
         }
@@ -216,7 +249,7 @@ public class PlayScreen implements Screen{
 
     }
 
-    public void update(float dt){
+    public void update(float dt) {
 
 
         handleInput();
@@ -224,7 +257,7 @@ public class PlayScreen implements Screen{
 
         hud.update(players.get(0));
 
-        world.step(dt,6,2);
+        world.step(dt, 6, 2);
 
         gameCam.update();
 
@@ -237,17 +270,14 @@ public class PlayScreen implements Screen{
         for (Alavanca alavanca : alavancas) {
             alavanca.update(dt);
         }
-            if(alavancas.get(0).isLigada() && alavancas.get(1).isLigada() && alavancas.get(2).isLigada()){
-               game.setScreen(new PlayScreen2(game));
-            }
-
-
+        if (alavancas.get(0).isLigada() && alavancas.get(1).isLigada() && alavancas.get(2).isLigada()) {
+            //game.setScreen(new PlayScreen2(game));
+            System.out.println("Passou para fase :"+this.level+1);
+            this.setLevel(this.level+1);
+        }
 
 
     }
-
-
-
 
 
 
@@ -256,7 +286,7 @@ public class PlayScreen implements Screen{
 
         update(delta);
 
-        Gdx.gl.glClearColor(0,0,0,1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();

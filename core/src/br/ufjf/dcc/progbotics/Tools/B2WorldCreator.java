@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import br.ufjf.dcc.progbotics.MyGdxGame;
+import br.ufjf.dcc.progbotics.ProgBoticsGame;
 
 /**
  * Created by Andre Luiz on 20/02/2018.
@@ -27,11 +27,11 @@ public class B2WorldCreator {
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth()/2)/ MyGdxGame.PPM, (rect.getY() + rect.getHeight()/2)/MyGdxGame.PPM);
+            bdef.position.set((rect.getX() + rect.getWidth()/2)/ ProgBoticsGame.PPM, (rect.getY() + rect.getHeight()/2)/ ProgBoticsGame.PPM);
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth()/2/MyGdxGame.PPM, rect.getHeight()/2/MyGdxGame.PPM);
+            shape.setAsBox(rect.getWidth()/2/ ProgBoticsGame.PPM, rect.getHeight()/2/ ProgBoticsGame.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
 

@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import br.ufjf.dcc.progbotics.MyGdxGame;
+import br.ufjf.dcc.progbotics.ProgBoticsGame;
 import br.ufjf.dcc.progbotics.Screen.PlayScreen;
 import br.ufjf.dcc.progbotics.Screen.PlayScreen2;
 
@@ -40,7 +40,7 @@ public class Alavanca extends Sprite{
         this.world = world;
         alavanca = new TextureRegion(getTexture(), 640, S*8, S, S);
 
-        setBounds(0,0,24/ MyGdxGame.PPM,24/MyGdxGame.PPM);
+        setBounds(0,0,24/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM);
 
         setRegion(alavanca);
 
@@ -60,7 +60,7 @@ public class Alavanca extends Sprite{
         this.world = world;
         alavanca = new TextureRegion(getTexture(), 640, S*8, S, S);
 
-        setBounds(0,0,24/ MyGdxGame.PPM,24/MyGdxGame.PPM);
+        setBounds(0,0,24/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM);
 
         setRegion(alavanca);
 
@@ -75,7 +75,7 @@ public class Alavanca extends Sprite{
 
         estadoAlavanca();
         alavanca = new TextureRegion(getTexture(), t, 64*9, 64, 64);
-        setBounds(this.b2body.getPosition().x - 15/ MyGdxGame.PPM, this.b2body.getPosition().y - 5/ MyGdxGame.PPM,24/ MyGdxGame.PPM,24/MyGdxGame.PPM);
+        setBounds(this.b2body.getPosition().x - 15/ ProgBoticsGame.PPM, this.b2body.getPosition().y - 5/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM);
         setRegion(alavanca);
 
 
@@ -103,13 +103,13 @@ public class Alavanca extends Sprite{
 
     public void defineAlavanca() {
        BodyDef bdef = new BodyDef();
-        bdef.position.set(35 / MyGdxGame.PPM, 100 / MyGdxGame.PPM);
+        bdef.position.set(35 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / MyGdxGame.PPM);
+        shape.setRadius(5 / ProgBoticsGame.PPM);
 
         fdef.shape = shape;
         b2body.createFixture(fdef);

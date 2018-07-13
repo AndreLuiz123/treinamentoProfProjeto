@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import br.ufjf.dcc.progbotics.MyGdxGame;
+import br.ufjf.dcc.progbotics.ProgBoticsGame;
 import br.ufjf.dcc.progbotics.Screen.PlayScreen;
 import br.ufjf.dcc.progbotics.Screen.PlayScreen2;
 
@@ -97,7 +97,7 @@ public class Heroi extends Sprite {
         linkParadoFrente = new TextureRegion(getTexture(), 0, S*10, S, S);
         paradoCostas = new TextureRegion(getTexture(), 0, S*8, S, S);
         paradoLado = new TextureRegion(getTexture(), 0, S*9, S, S);
-        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 24 / MyGdxGame.PPM, 24 / MyGdxGame.PPM);
+        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 24 / ProgBoticsGame.PPM, 24 / ProgBoticsGame.PPM);
         setRegion(linkParadoFrente);
 
 
@@ -158,7 +158,7 @@ public class Heroi extends Sprite {
         linkParadoFrente = new TextureRegion(getTexture(), 0, S*10, S, S);
         paradoCostas = new TextureRegion(getTexture(), 0, S, S, S);
         paradoLado = new TextureRegion(getTexture(), 0, S, S, S);
-        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 24 / MyGdxGame.PPM, 24 / MyGdxGame.PPM);
+        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 24 / ProgBoticsGame.PPM, 24 / ProgBoticsGame.PPM);
         setRegion(linkParadoFrente);
 
 
@@ -208,13 +208,13 @@ public class Heroi extends Sprite {
     public void defineHeroi(String tipo) {
 
         bdef = new BodyDef();
-        bdef.position.set(35 / MyGdxGame.PPM, 31 / MyGdxGame.PPM);
+        bdef.position.set(35 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / MyGdxGame.PPM);
+        shape.setRadius(5 / ProgBoticsGame.PPM);
 
         fdef.shape = shape;
 
