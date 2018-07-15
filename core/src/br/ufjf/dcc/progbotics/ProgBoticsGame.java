@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import br.ufjf.dcc.progbotics.Screen.PlayScreen;
+import br.ufjf.dcc.progbotics.Screen.ScreenTestes;
 
 public class ProgBoticsGame extends Game {
 	public static final int V_WIDTH = 400;
@@ -18,7 +19,7 @@ public class ProgBoticsGame extends Game {
 		batch = new SpriteBatch();
 		PlayScreen playscreen = new PlayScreen(this);
 		playscreen.setLevel(0);
-		setScreen(playscreen);
+		setScreen(new ScreenTestes(this));
 	}
 
 	@Override

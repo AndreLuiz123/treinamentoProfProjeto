@@ -37,7 +37,7 @@ public class PlayScreen implements Screen {
 
     public static String[] LEVEL_NAMES = {"sem título.tmx", "nivel 2.tmx"};
     private ProgBoticsGame game;
-    private Texture texture;
+    private Texture texture, constantBackground;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
     private TmxMapLoader mapLoader;
@@ -62,6 +62,8 @@ public class PlayScreen implements Screen {
         this.game = game;
         gameCam = new OrthographicCamera(0,0);
         gamePort = new FitViewport(ProgBoticsGame.V_WIDTH / ProgBoticsGame.PPM, ProgBoticsGame.V_HEIGHT / ProgBoticsGame.PPM, gameCam);
+
+        constantBackground = new Texture("backgroundProgBotics.png");
 
 
         this.setLevel(this.level);
@@ -157,14 +159,14 @@ public class PlayScreen implements Screen {
 
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
-            hud.atualizaEnumeracaoPersonagem(false, true);
+          /*  hud.atualizaEnumeracaoPersonagem(false, true);
             setActivePlayer(getActivePlayer() - 1);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));*/
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
-            hud.atualizaEnumeracaoPersonagem(true, false);
+          /*  hud.atualizaEnumeracaoPersonagem(true, false);
             setActivePlayer(getActivePlayer() + 1);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));*/
 
         }
 
@@ -240,7 +242,7 @@ public class PlayScreen implements Screen {
             System.out.println("gameCam position:"+gameCam.position);
         }
 
-
+        /*
         if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
                 && Gdx.input.getY() > 108 && Gdx.input.getY() < 162) {
             players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
@@ -281,7 +283,7 @@ public class PlayScreen implements Screen {
                 && Gdx.input.getY() > 0 && Gdx.input.getY() < 53) {
             players.get(getActivePlayer()).comandos.clear();
         }
-
+            */
         if (Gdx.input.justTouched()) {
 
 
@@ -342,6 +344,7 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
 
         game.batch.begin();
+      //  game.batch.draw(constantBackground,0,0);
         for (Alavanca alavanca : alavancas) {
             alavanca.draw(game.batch);
         }
