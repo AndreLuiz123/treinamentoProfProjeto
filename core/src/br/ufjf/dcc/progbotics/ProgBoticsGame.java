@@ -7,7 +7,8 @@ import br.ufjf.dcc.progbotics.Screen.PlayScreen;
 
 public class ProgBoticsGame extends Game {
 	public static final int V_WIDTH = 400;
-	public static final int V_HEIGHT = 208;
+	public static final int V_HEIGHT = 600;
+	public static final String TITLE = "ProgBotics";
 	public static final float PPM = 100;
 	public SpriteBatch batch;
 
