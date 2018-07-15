@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -48,6 +50,9 @@ public class Hud implements Disposable {
     TextureRegionDrawable imagemEsquerdaUp;
 
     Button moveListaPersonagemEsquerda, moveListaPersonagemDireita;
+    Label numeroPersonagem;
+
+
     Skin mySkin;
 
     public Table table;
@@ -60,14 +65,7 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        enumeraPersonagem = 1;
-
-
-        comando.add(" ");
-        comando.add(" ");
-        comando.add(" ");
-        comando.add(" ");
-        comando.add(" ");
+        enumeraPersonagem = 0;
 
 
         mySkin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
@@ -76,23 +74,52 @@ public class Hud implements Disposable {
         imagemEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left.png"))));
         imagemEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left-down.png"))));
         moveListaPersonagemEsquerda = new ImageButton(imagemEsquerdaUp,imagemEsquerdaDown);
+        moveListaPersonagemEsquerda.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+               enumeraPersonagem--;
+               numeroPersonagem.setText(String.format("%3d",enumeraPersonagem));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
+                return true;
+            }
+        });
 
 
         imagemDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-right.png"))));
         imagemDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-right-down.png"))));
         moveListaPersonagemDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
         moveListaPersonagemDireita.setPosition(moveListaPersonagemEsquerda.getX() + 2*moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
+        moveListaPersonagemDireita.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                enumeraPersonagem++;
+                numeroPersonagem.setText(String.format("%3d",enumeraPersonagem));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        numeroPersonagem = new Label(String.format("%3d",enumeraPersonagem),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        numeroPersonagem.setPosition(moveListaPersonagemEsquerda.getX() + moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
         //  moveListaPersonagemDireita.setStyle();
 
 
         stage.addActor(moveListaPersonagemEsquerda);
         stage.addActor(moveListaPersonagemDireita);
-
+        stage.addActor(numeroPersonagem);
     }
 
     public void update(){
+
+
+
 
     }
 
