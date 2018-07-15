@@ -60,7 +60,7 @@ public class PlayScreen implements Screen {
         atlas = new TextureAtlas("teste.pack");
 
         this.game = game;
-        gameCam = new OrthographicCamera();
+        gameCam = new OrthographicCamera(0,0);
         gamePort = new FitViewport(ProgBoticsGame.V_WIDTH / ProgBoticsGame.PPM, ProgBoticsGame.V_HEIGHT / ProgBoticsGame.PPM, gameCam);
 
 
@@ -116,10 +116,11 @@ public class PlayScreen implements Screen {
                 world.setContactListener(new WorldContactListener(players, alavancas));
                 break;
             default:
-
         }
+
         renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
-        gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+        gameCam.position.set(0.65000004f,1.0500004f,0);
+        gameCam.zoom = 0.3499998f;
 
         b2dr = new Box2DDebugRenderer();
 
@@ -180,23 +181,63 @@ public class PlayScreen implements Screen {
             if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
                 players.get(getActivePlayer()).pode = true;
             }*/
-        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
-            for (Heroi player : players) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+            /*for (Heroi player : players) {
                 if (!player.comandos.isEmpty()) {
                     player.comandoAtual = 0;
                     player.pode = true;
                 }
-            }
+            }*/
+            gameCam.translate(0.05f, 0, 0);
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+            /*for (Heroi player : players) {
+                if (!player.comandos.isEmpty()) {
+                    player.comandoAtual = 0;
+                    player.pode = true;
+                }
+            }*/
+            gameCam.translate(-0.05f, 0, 0);
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
+        }
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            /*for (Heroi player : players) {
+                if (!player.comandos.isEmpty()) {
+                    player.comandoAtual = 0;
+                    player.pode = true;
+                }
+            }*/
+            gameCam.translate(0, -0.05f, 0);
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+            /*for (Heroi player : players) {
+                if (!player.comandos.isEmpty()) {
+                    player.comandoAtual = 0;
+                    player.pode = true;
+                }
+            }*/
+            gameCam.translate(0, 0.05f, 0);
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-            hud.barraDeRolamento(1, players.get(getActivePlayer()));
-
+          //  hud.barraDeRolamento(1, players.get(getActivePlayer()));
+            gameCam.zoom+=0.05;
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-            hud.barraDeRolamento(-1, players.get(getActivePlayer()));
-
+            //hud.barraDeRolamento(-1, players.get(getActivePlayer()));
+            gameCam.zoom-=0.05;
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
         }
 
 
