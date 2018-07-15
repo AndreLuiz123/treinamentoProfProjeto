@@ -298,7 +298,7 @@ public class PlayScreen implements Screen {
         handleInput();
 
 
-        hud.update(players.get(0));
+      //  hud.update(players.get(0));
 
         world.step(dt, 6, 2);
 

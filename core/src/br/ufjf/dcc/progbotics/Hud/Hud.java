@@ -42,7 +42,12 @@ public class Hud implements Disposable {
     private ArrayList<Label> comandosEmTela  = new ArrayList<Label>();
     private int controlaComandoModificado=0, controlaComandoEmTelaSegundoBarraDeRolamento=0;
 
-    Button moveListaPersonagemEsquerda;
+    TextureRegionDrawable imagemDireitaDown;
+    TextureRegionDrawable imagemDireitaUp;
+    TextureRegionDrawable imagemEsquerdaDown;
+    TextureRegionDrawable imagemEsquerdaUp;
+
+    Button moveListaPersonagemEsquerda, moveListaPersonagemDireita;
     Skin mySkin;
 
     public Table table;
@@ -67,20 +72,27 @@ public class Hud implements Disposable {
 
         mySkin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
 
-        moveListaPersonagemEsquerda = new ImageButton(mySkin);
-        moveListaPersonagemEsquerda.getStyle().up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left.png"))));
+
+        imagemEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left.png"))));
+        imagemEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left-down.png"))));
+        moveListaPersonagemEsquerda = new ImageButton(imagemEsquerdaUp,imagemEsquerdaDown);
 
 
 
+        imagemDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-right.png"))));
+        imagemDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-right-down.png"))));
+        moveListaPersonagemDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
+        moveListaPersonagemDireita.setPosition(moveListaPersonagemEsquerda.getX() + 2*moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
+
+        //  moveListaPersonagemDireita.setStyle();
 
 
         stage.addActor(moveListaPersonagemEsquerda);
-
+        stage.addActor(moveListaPersonagemDireita);
 
     }
 
-    public void update(Heroi personagem){
-
+    public void update(){
 
     }
 

@@ -33,6 +33,7 @@ public class ScreenTestes implements Screen {
     public void render(float delta) {
 
         hud.stage.draw();
+        hud.update();
 
 
     }
