@@ -177,7 +177,7 @@ public class PlayScreen implements Screen {
 
 
 
-         /*   if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
                 players.get(getActivePlayer()).comandoAtual = 0;
                 players.get(getActivePlayer()).pode = false;
             }
@@ -187,7 +187,7 @@ public class PlayScreen implements Screen {
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
                 players.get(getActivePlayer()).pode = true;
-            }*/
+            }
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
             /*for (Heroi player : players) {
                 if (!player.comandos.isEmpty()) {
@@ -321,53 +321,57 @@ public class PlayScreen implements Screen {
             }
         });
 
+        hud.getComandoAndar().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
+                // hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
-        /*
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
-                && Gdx.input.getY() > 108 && Gdx.input.getY() < 162) {
-            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-        }
+                return true;
+            }
+        });
 
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
-                && Gdx.input.getY() > 162 && Gdx.input.getY() < 216) {
-            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-        }
+        hud.getComandoGirarDireita().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
+                // hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
+                return true;
+            }
+        });
 
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
-                && Gdx.input.getY() > 54 && Gdx.input.getY() < 108) {
-            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-        }
+        hud.getComandoGirarEsquerda().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
+                // hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
+                return true;
+            }
+        });
 
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
-                && Gdx.input.getY() > 0 && Gdx.input.getY() < 54) {
+        hud.getComandoGirarEsquerda().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
+                // hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
-            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-
-        }
-
-
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1111
-                && Gdx.input.getY() > 236 && Gdx.input.getY() < 277) {
-            players.get(getActivePlayer()).colocaComandos("alavanca");
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-
-        }
-
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 960 && Gdx.input.getX() < 1019
-                && Gdx.input.getY() > 0 && Gdx.input.getY() < 53) {
-            players.get(getActivePlayer()).comandos.clear();
-        }
-            */
-        if (Gdx.input.justTouched()) {
-
-
-        }
+                return true;
+            }
+        });
 
 
     }

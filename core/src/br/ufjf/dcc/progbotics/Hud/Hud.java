@@ -209,6 +209,13 @@ public class Hud implements Disposable {
 
     public Button getMoveCameraEsquerda() {return moveCameraEsquerda;}
 
+    public void atualizaComandosDoHeroi(Heroi player){
+
+    //    for(int i = 0; player.comandos.size()
+
+    }
+
+
     public void update(){
 
     }
