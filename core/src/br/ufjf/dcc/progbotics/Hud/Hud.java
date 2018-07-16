@@ -71,6 +71,8 @@ public class Hud implements Disposable {
         mySkin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
 
 
+
+
         imagemEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left.png"))));
         imagemEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left-down.png"))));
         moveListaPersonagemEsquerda = new ImageButton(imagemEsquerdaUp,imagemEsquerdaDown);
@@ -78,7 +80,7 @@ public class Hud implements Disposable {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                enumeraPersonagem--;
-               numeroPersonagem.setText(String.format("%3d",enumeraPersonagem));
+             numeroPersonagem.setText(String.format("%3d",enumeraPersonagem));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -108,6 +110,7 @@ public class Hud implements Disposable {
         numeroPersonagem = new Label(String.format("%3d",enumeraPersonagem),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         numeroPersonagem.setPosition(moveListaPersonagemEsquerda.getX() + moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
+
         //  moveListaPersonagemDireita.setStyle();
 
 
@@ -118,9 +121,13 @@ public class Hud implements Disposable {
 
     public void update(){
 
+    }
 
-
-
+    public void removeDepoisAddStage(){
+        stage.clear();
+        stage.addActor(moveListaPersonagemEsquerda);
+        stage.addActor(moveListaPersonagemDireita);
+        stage.addActor(numeroPersonagem);
     }
 
 
