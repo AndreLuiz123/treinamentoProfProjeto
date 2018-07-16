@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -14,6 +15,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 //import com.sun.org.apache.xpath.internal.operations.String;
@@ -131,6 +134,8 @@ public class PlayScreen implements Screen {
 
         hud = new Hud(game.batch);
 
+        handleInput();
+
 
     }
 
@@ -145,7 +150,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(hud.stage);
     }
 
     public int getActivePlayer() {
@@ -229,18 +234,93 @@ public class PlayScreen implements Screen {
             System.out.println("gameCam position:"+gameCam.position);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-          //  hud.barraDeRolamento(1, players.get(getActivePlayer()));
-            gameCam.zoom+=0.05;
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-            //hud.barraDeRolamento(-1, players.get(getActivePlayer()));
-            gameCam.zoom-=0.05;
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
+
+        hud.getMoveCameraCima().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.translate(0, +0.05f, 0);
+                System.out.println("zoom:"+gameCam.zoom);
+                System.out.println("gameCam position:"+gameCam.position);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.getMoveCameraBaixo().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.translate(0, -0.05f, 0);
+                System.out.println("zoom:"+gameCam.zoom);
+                System.out.println("gameCam position:"+gameCam.position);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.getMoveCameraDireita().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.translate(+0.05f,0, 0);
+                System.out.println("zoom:"+gameCam.zoom);
+                System.out.println("gameCam position:"+gameCam.position);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.getMoveCameraEsquerda().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.translate(-0.05f,0, 0);
+                System.out.println("zoom:"+gameCam.zoom);
+                System.out.println("gameCam position:"+gameCam.position);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.getLupaPlus().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.zoom-=0.05;
+                System.out.println("zoom:"+gameCam.zoom);
+                System.out.println("gameCam position:"+gameCam.position);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+
+
+        hud.getLupaLess().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.zoom+=0.05;
+                System.out.println("zoom:"+gameCam.zoom);
+                System.out.println("gameCam position:"+gameCam.position);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
 
         /*
         if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
@@ -295,7 +375,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
 
 
-        handleInput();
+      //  handleInput();
 
 
       //  hud.update(players.get(0));

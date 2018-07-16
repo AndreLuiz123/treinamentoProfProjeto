@@ -50,11 +50,16 @@ public class Hud implements Disposable {
     TextureRegionDrawable imagemEsquerdaUp;
     TextureRegionDrawable imagemComandoAndarUp, imagemComandoGirarDireitaUp, imagemComandoGirarEsquerdaUp, imagemComandoEsperarUp;
     TextureRegionDrawable imagemComandoAndarDown, imagemComandoGirarDireitaDown, imagemComandoGirarEsquerdaDown, imagemComandoEsperarDown;
+    TextureRegionDrawable imagemAddComando;
+    TextureRegionDrawable imagemLupaPlusUp, imagemLupaPlusDown, imagemLupaLessUp, imagemLupaLessDown;
+    TextureRegionDrawable imagemMoveCameraCimaUp, imagemMoveCameraCimaDown, imagemMoveCameraEsquerdaUp, imagemMoveCameraEsquerdaDown, imagemMoveCameraBaixoUp, imagemMoveCameraBaixoDown, imagemMoveCameraDireitaUp, imagemMoveCameraDireitaDown;
 
     Button moveListaPersonagemEsquerda, moveListaPersonagemDireita;
     Button moveListaComandosEsquerda, moveListaComandosDireita;
     Button comandoAndar, comandoGirarDireita, comandoGirarEsquerda, comandoEsperar;
-
+    Button lupaPlus, lupaLess;
+    Button moveCameraCima, moveCameraBaixo, moveCameraDireita, moveCameraEsquerda;
+    Image addComando;
 
     Label numeroPersonagem;
 
@@ -75,8 +80,6 @@ public class Hud implements Disposable {
 
 
         mySkin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
-
-
 
 
         imagemEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left.png"))));
@@ -104,6 +107,7 @@ public class Hud implements Disposable {
         comandoGirarDireita = new ImageButton(imagemComandoGirarDireitaUp, imagemComandoGirarDireitaDown);
         comandoGirarDireita.setPosition(moveListaComandosEsquerda.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
 
+
         imagemComandoGirarEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarEsquerdaUp.png"))));
         imagemComandoGirarEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarEsquerdaDown.png"))));
         comandoGirarEsquerda = new ImageButton(imagemComandoGirarEsquerdaUp, imagemComandoGirarEsquerdaDown);
@@ -119,6 +123,39 @@ public class Hud implements Disposable {
         comandoEsperar = new ImageButton(imagemComandoEsperarUp, imagemComandoEsperarDown);
         comandoEsperar.setPosition(comandoAndar.getX() + 2*comandoAndar.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
 
+        imagemAddComando = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-plus-down.png"))));
+        addComando = new Image(imagemAddComando);
+        addComando.setPosition(moveListaComandosEsquerda.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
+
+        imagemLupaPlusUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaPlusUp.png"))));
+        imagemLupaPlusDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaPlusDown.png"))));
+        lupaPlus = new ImageButton(imagemLupaPlusUp, imagemLupaPlusDown);
+        lupaPlus.setPosition(getMoveListaPersonagemEsquerda().getX() + 2*lupaPlus.getWidth(),Gdx.graphics.getHeight() - 2*lupaPlus.getHeight());
+
+        imagemLupaLessUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaLessUp.png"))));
+        imagemLupaLessDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaLessDown.png"))));
+        lupaLess = new ImageButton(imagemLupaLessUp, imagemLupaLessDown);
+        lupaLess.setPosition(getMoveListaPersonagemEsquerda().getX() + 0.8f*lupaLess.getWidth(),Gdx.graphics.getHeight() - 2*lupaLess.getHeight());
+
+        imagemMoveCameraCimaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraCimaUp.png"))));
+        imagemMoveCameraCimaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraCimaDown.png"))));
+        moveCameraCima = new ImageButton(imagemMoveCameraCimaUp, imagemMoveCameraCimaDown);
+        moveCameraCima.setPosition(Gdx.graphics.getWidth() - 2*moveCameraCima.getWidth(), lupaPlus.getY());
+
+        imagemMoveCameraBaixoUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraBaixoUp.png"))));
+        imagemMoveCameraBaixoDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraBaixoDown.png"))));
+        moveCameraBaixo = new ImageButton(imagemMoveCameraBaixoUp, imagemMoveCameraBaixoDown);
+        moveCameraBaixo.setPosition(Gdx.graphics.getWidth() - 2*moveCameraCima.getWidth(), moveCameraCima.getY() - 2*moveCameraCima.getHeight());
+
+        imagemMoveCameraEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraEsquerdaUp.png"))));
+        imagemMoveCameraEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraEsquerdaDown.png"))));
+        moveCameraEsquerda = new ImageButton(imagemMoveCameraEsquerdaUp, imagemMoveCameraEsquerdaDown);
+        moveCameraEsquerda.setPosition(Gdx.graphics.getWidth() - 3*moveCameraCima.getWidth(), moveCameraCima.getY() - moveCameraCima.getHeight());
+
+        imagemMoveCameraDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraDireitaUp.png"))));
+        imagemMoveCameraDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraDireitaDown.png"))));
+        moveCameraDireita = new ImageButton(imagemMoveCameraDireitaUp, imagemMoveCameraDireitaDown);
+        moveCameraDireita.setPosition(Gdx.graphics.getWidth() - moveCameraCima.getWidth(), moveCameraCima.getY() - moveCameraCima.getHeight());
 
 
 
@@ -134,6 +171,13 @@ public class Hud implements Disposable {
         stage.addActor(comandoGirarEsquerda);
         stage.addActor(comandoAndar);
         stage.addActor(comandoEsperar);
+        stage.addActor(addComando);
+        stage.addActor(lupaPlus);
+        stage.addActor(lupaLess);
+        stage.addActor(moveCameraCima);
+        stage.addActor(moveCameraBaixo);
+        stage.addActor(moveCameraDireita);
+        stage.addActor(moveCameraEsquerda);
     }
 
 
@@ -145,6 +189,25 @@ public class Hud implements Disposable {
         return moveListaPersonagemDireita;
     }
 
+    public Button getComandoAndar() {return comandoAndar;}
+
+    public Button getComandoGirarDireita() {return comandoGirarDireita;}
+
+    public Button getComandoGirarEsquerda() {return comandoGirarEsquerda;}
+
+    public Button getComandoEsperar() {return comandoEsperar;}
+
+    public Button getLupaPlus() {return lupaPlus;}
+
+    public Button getLupaLess() {return lupaLess;}
+
+    public Button getMoveCameraCima() {return moveCameraCima;}
+
+    public Button getMoveCameraBaixo() {return moveCameraBaixo;}
+
+    public Button getMoveCameraDireita() {return moveCameraDireita;}
+
+    public Button getMoveCameraEsquerda() {return moveCameraEsquerda;}
 
     public void update(){
 

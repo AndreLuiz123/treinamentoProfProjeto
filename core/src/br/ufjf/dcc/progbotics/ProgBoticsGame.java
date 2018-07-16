@@ -19,7 +19,7 @@ public class ProgBoticsGame extends Game {
 		batch = new SpriteBatch();
 		PlayScreen playscreen = new PlayScreen(this);
 		playscreen.setLevel(0);
-		setScreen(new ScreenTestes(this));
+		setScreen(playscreen);
 	}
 
 	@Override
