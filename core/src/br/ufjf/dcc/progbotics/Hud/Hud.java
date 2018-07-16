@@ -48,9 +48,12 @@ public class Hud implements Disposable {
     TextureRegionDrawable imagemDireitaUp;
     TextureRegionDrawable imagemEsquerdaDown;
     TextureRegionDrawable imagemEsquerdaUp;
+    TextureRegionDrawable imagemComandoAndarUp, imagemComandoGirarDireitaUp, imagemComandoGirarEsquerdaUp, imagemComandoEsperarUp;
+    TextureRegionDrawable imagemComandoAndarDown, imagemComandoGirarDireitaDown, imagemComandoGirarEsquerdaDown, imagemComandoEsperarDown;
 
     Button moveListaPersonagemEsquerda, moveListaPersonagemDireita;
     Button moveListaComandosEsquerda, moveListaComandosDireita;
+    Button comandoAndar, comandoGirarDireita, comandoGirarEsquerda, comandoEsperar;
 
 
     Label numeroPersonagem;
@@ -96,6 +99,27 @@ public class Hud implements Disposable {
         moveListaComandosDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
         moveListaComandosDireita.setPosition(Gdx.graphics.getWidth()/1.1f, moveListaPersonagemEsquerda.getY());
 
+        imagemComandoGirarDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaUp.png"))));
+        imagemComandoGirarDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaDown.png"))));
+        comandoGirarDireita = new ImageButton(imagemComandoGirarDireitaUp, imagemComandoGirarDireitaDown);
+        comandoGirarDireita.setPosition(moveListaComandosEsquerda.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
+
+        imagemComandoGirarEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarEsquerdaUp.png"))));
+        imagemComandoGirarEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarEsquerdaDown.png"))));
+        comandoGirarEsquerda = new ImageButton(imagemComandoGirarEsquerdaUp, imagemComandoGirarEsquerdaDown);
+        comandoGirarEsquerda.setPosition(comandoGirarDireita.getX() + 2*comandoGirarDireita.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
+
+        imagemComandoAndarUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEmFrenteUp.png"))));
+        imagemComandoAndarDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEmFrenteDown.png"))));
+        comandoAndar = new ImageButton(imagemComandoAndarUp, imagemComandoAndarDown);
+        comandoAndar.setPosition(comandoGirarEsquerda.getX() + 2*comandoGirarEsquerda.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
+
+        imagemComandoEsperarUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/esperarUp.png"))));
+        imagemComandoEsperarDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/esperarDown.png"))));
+        comandoEsperar = new ImageButton(imagemComandoEsperarUp, imagemComandoEsperarDown);
+        comandoEsperar.setPosition(comandoAndar.getX() + 2*comandoAndar.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
+
+
 
 
         //  moveListaPersonagemDireita.setStyle();
@@ -106,6 +130,10 @@ public class Hud implements Disposable {
         stage.addActor(numeroPersonagem);
         stage.addActor(moveListaComandosDireita);
         stage.addActor(moveListaComandosEsquerda);
+        stage.addActor(comandoGirarDireita);
+        stage.addActor(comandoGirarEsquerda);
+        stage.addActor(comandoAndar);
+        stage.addActor(comandoEsperar);
     }
 
 
