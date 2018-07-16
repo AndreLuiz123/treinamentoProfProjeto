@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
@@ -27,24 +29,65 @@ public class ScreenTestes implements Screen {
     public ScreenTestes(ProgBoticsGame game){
 
 
-        /*personagens.add("ProgBot1");
+        personagens = new ArrayList<String>();
+
+        personagens.add("ProgBot1");
         personagens.add("ProgBot2");
         personagens.add("ProgBot3");
-        personagens.add("ProgBot4");*/
+        personagens.add("ProgBot4");
 
         this.hud = new Hud(game.batch);
         this.game = game;
 
-    }
+        hud.getMoveListaPersonagemDireita().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                //enumeraPersonagem++;
+               // numeroPersonagem.setText(String.format("%3d",enumeraPersonagem));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
+                return true;
+            }
+        });
+
+        hud.getMoveListaPersonagemEsquerda().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                //enumeraPersonagem--;
+                //numeroPersonagem.setText(String.format("%3d",enumeraPersonagem));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+
+
+    }
 
     @Override
     public void show() {
         Gdx.input.setInputProcessor(hud.stage);
     }
 
+    public void handleInput(){
+
+
+    }
+
+    public void update(float dt){
+        handleInput();
+    }
+
     @Override
     public void render(float delta) {
+
+        update(delta);
+
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

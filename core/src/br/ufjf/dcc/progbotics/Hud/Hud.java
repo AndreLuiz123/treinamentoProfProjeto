@@ -50,6 +50,9 @@ public class Hud implements Disposable {
     TextureRegionDrawable imagemEsquerdaUp;
 
     Button moveListaPersonagemEsquerda, moveListaPersonagemDireita;
+    Button moveListaComandosEsquerda, moveListaComandosDireita;
+
+
     Label numeroPersonagem;
 
 
@@ -76,39 +79,23 @@ public class Hud implements Disposable {
         imagemEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left.png"))));
         imagemEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left-down.png"))));
         moveListaPersonagemEsquerda = new ImageButton(imagemEsquerdaUp,imagemEsquerdaDown);
-        moveListaPersonagemEsquerda.addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-               enumeraPersonagem--;
-             numeroPersonagem.setText(String.format("%3d",enumeraPersonagem));
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
-                return true;
-            }
-        });
 
 
         imagemDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-right.png"))));
         imagemDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-right-down.png"))));
         moveListaPersonagemDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
         moveListaPersonagemDireita.setPosition(moveListaPersonagemEsquerda.getX() + 2*moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
-        moveListaPersonagemDireita.addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                enumeraPersonagem++;
-                numeroPersonagem.setText(String.format("%3d",enumeraPersonagem));
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
-                return true;
-            }
-        });
 
         numeroPersonagem = new Label(String.format("%3d",enumeraPersonagem),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         numeroPersonagem.setPosition(moveListaPersonagemEsquerda.getX() + moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
+
+        moveListaComandosEsquerda = new ImageButton(imagemEsquerdaUp,imagemEsquerdaDown);
+        moveListaComandosEsquerda.setPosition(moveListaPersonagemDireita.getX() + moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
+
+        moveListaComandosDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
+        moveListaComandosDireita.setPosition(Gdx.graphics.getWidth()/1.1f, moveListaPersonagemEsquerda.getY());
+
 
 
         //  moveListaPersonagemDireita.setStyle();
@@ -117,21 +104,23 @@ public class Hud implements Disposable {
         stage.addActor(moveListaPersonagemEsquerda);
         stage.addActor(moveListaPersonagemDireita);
         stage.addActor(numeroPersonagem);
+        stage.addActor(moveListaComandosDireita);
+        stage.addActor(moveListaComandosEsquerda);
     }
+
+
+    public Button getMoveListaPersonagemEsquerda() {
+        return moveListaPersonagemEsquerda;
+    }
+
+    public Button getMoveListaPersonagemDireita() {
+        return moveListaPersonagemDireita;
+    }
+
 
     public void update(){
 
     }
-
-    public void removeDepoisAddStage(){
-        stage.clear();
-        stage.addActor(moveListaPersonagemEsquerda);
-        stage.addActor(moveListaPersonagemDireita);
-        stage.addActor(numeroPersonagem);
-    }
-
-
-
 
     @Override
     public void dispose() {
