@@ -1,6 +1,7 @@
 package br.ufjf.dcc.progbotics;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import br.ufjf.dcc.progbotics.Screen.PlayScreen;
@@ -18,6 +19,7 @@ public class ProgBoticsGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		PlayScreen playscreen = new PlayScreen(this);
+		//Screen playscreen = new ScreenTestes(this);
 		playscreen.setLevel(0);
 		setScreen(playscreen);
 	}
