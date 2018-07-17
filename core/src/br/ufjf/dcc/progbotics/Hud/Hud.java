@@ -63,6 +63,7 @@ public class Hud implements Disposable {
 
     Label numeroPersonagem;
 
+   // ArrayList<Image>
 
     Skin mySkin;
 
@@ -84,11 +85,12 @@ public class Hud implements Disposable {
 
         imagemEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left.png"))));
         imagemEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-left-down.png"))));
+        sizeCorretoImagem(imagemEsquerdaUp, imagemEsquerdaDown, 40);
         moveListaPersonagemEsquerda = new ImageButton(imagemEsquerdaUp,imagemEsquerdaDown);
-
 
         imagemDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-right.png"))));
         imagemDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/image-right-down.png"))));
+        sizeCorretoImagem(imagemDireitaUp, imagemDireitaDown, 40);
         moveListaPersonagemDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
         moveListaPersonagemDireita.setPosition(moveListaPersonagemEsquerda.getX() + 2*moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
@@ -104,22 +106,26 @@ public class Hud implements Disposable {
 
         imagemComandoGirarDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaUp.png"))));
         imagemComandoGirarDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaDown.png"))));
+        sizeCorretoImagem(imagemComandoGirarDireitaUp, imagemComandoGirarDireitaDown, 30);
         comandoGirarDireita = new ImageButton(imagemComandoGirarDireitaUp, imagemComandoGirarDireitaDown);
         comandoGirarDireita.setPosition(moveListaComandosEsquerda.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
 
 
         imagemComandoGirarEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarEsquerdaUp.png"))));
         imagemComandoGirarEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarEsquerdaDown.png"))));
+        sizeCorretoImagem(imagemComandoGirarEsquerdaUp, imagemComandoGirarEsquerdaDown, 30);
         comandoGirarEsquerda = new ImageButton(imagemComandoGirarEsquerdaUp, imagemComandoGirarEsquerdaDown);
         comandoGirarEsquerda.setPosition(comandoGirarDireita.getX() + 2*comandoGirarDireita.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
 
         imagemComandoAndarUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEmFrenteUp.png"))));
         imagemComandoAndarDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEmFrenteDown.png"))));
+        sizeCorretoImagem(imagemComandoAndarUp, imagemComandoAndarDown, 30);
         comandoAndar = new ImageButton(imagemComandoAndarUp, imagemComandoAndarDown);
         comandoAndar.setPosition(comandoGirarEsquerda.getX() + 2*comandoGirarEsquerda.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
 
         imagemComandoEsperarUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/esperarUp.png"))));
         imagemComandoEsperarDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/esperarDown.png"))));
+        sizeCorretoImagem(imagemComandoEsperarUp, imagemComandoEsperarDown, 30);
         comandoEsperar = new ImageButton(imagemComandoEsperarUp, imagemComandoEsperarDown);
         comandoEsperar.setPosition(comandoAndar.getX() + 2*comandoAndar.getWidth(), moveListaPersonagemEsquerda.getY() + 2*moveListaComandosEsquerda.getHeight());
 
@@ -129,13 +135,16 @@ public class Hud implements Disposable {
 
         imagemLupaPlusUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaPlusUp.png"))));
         imagemLupaPlusDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaPlusDown.png"))));
+        sizeCorretoImagem(imagemLupaPlusUp,imagemLupaPlusDown,50);
         lupaPlus = new ImageButton(imagemLupaPlusUp, imagemLupaPlusDown);
-        lupaPlus.setPosition(getMoveListaPersonagemEsquerda().getX() + 2*lupaPlus.getWidth(),Gdx.graphics.getHeight() - 2*lupaPlus.getHeight());
+        lupaPlus.setPosition(getMoveListaPersonagemEsquerda().getX() + 2*lupaPlus.getWidth(),Gdx.graphics.getHeight()/2 - lupaPlus.getHeight());
+        //lupaPlus.setSize(500,500);
 
         imagemLupaLessUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaLessUp.png"))));
         imagemLupaLessDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaLessDown.png"))));
+        sizeCorretoImagem(imagemLupaLessUp,imagemLupaLessDown,50);
         lupaLess = new ImageButton(imagemLupaLessUp, imagemLupaLessDown);
-        lupaLess.setPosition(getMoveListaPersonagemEsquerda().getX() + 0.8f*lupaLess.getWidth(),Gdx.graphics.getHeight() - 2*lupaLess.getHeight());
+        lupaLess.setPosition(getMoveListaPersonagemEsquerda().getX() + 0.8f*lupaLess.getWidth(),Gdx.graphics.getHeight()/2 - lupaPlus.getHeight());
 
         imagemMoveCameraCimaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraCimaUp.png"))));
         imagemMoveCameraCimaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraCimaDown.png"))));
@@ -211,8 +220,17 @@ public class Hud implements Disposable {
 
     public void atualizaComandosDoHeroi(Heroi player){
 
-    //    for(int i = 0; player.comandos.size()
+        for(int i = 0; i<player.comandos.size(); i++) {
+            player.comandos.get(i);
+        }
 
+    }
+
+    public void sizeCorretoImagem( TextureRegionDrawable imagem, TextureRegionDrawable imagem2, float size){
+        imagem.setMinHeight(size);
+        imagem.setMinWidth(size);
+        imagem2.setMinHeight(size);
+        imagem2.setMinWidth(size);
     }
 
 

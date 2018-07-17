@@ -120,6 +120,9 @@ public class PlayScreen implements Screen {
                 new B2WorldCreator(world, map);
                 world.setContactListener(new WorldContactListener(players, alavancas));
                 break;
+            case 2:
+
+
             default:
         }
 
@@ -423,7 +426,6 @@ public class PlayScreen implements Screen {
 
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
 
         game.batch.setProjectionMatrix(gameCam.combined);
 
@@ -436,8 +438,9 @@ public class PlayScreen implements Screen {
             player.draw(game.batch);
         }
 
-
         game.batch.end();
+
+        hud.stage.draw();
     }
 
     @Override
