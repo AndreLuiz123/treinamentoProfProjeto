@@ -102,7 +102,7 @@ public class Hud implements Disposable {
         moveListaComandosEsquerda.setPosition(moveListaPersonagemDireita.getX() + moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
         moveListaComandosDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
-        moveListaComandosDireita.setPosition(Gdx.graphics.getWidth()/1.1f, moveListaPersonagemEsquerda.getY());
+        moveListaComandosDireita.setPosition(Gdx.graphics.getWidth()/2 - moveListaPersonagemDireita.getWidth(), moveListaPersonagemEsquerda.getY());
 
         imagemComandoGirarDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaUp.png"))));
         imagemComandoGirarDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaDown.png"))));
@@ -138,7 +138,6 @@ public class Hud implements Disposable {
         sizeCorretoImagem(imagemLupaPlusUp,imagemLupaPlusDown,50);
         lupaPlus = new ImageButton(imagemLupaPlusUp, imagemLupaPlusDown);
         lupaPlus.setPosition(getMoveListaPersonagemEsquerda().getX() + 2*lupaPlus.getWidth(),Gdx.graphics.getHeight()/2 - lupaPlus.getHeight());
-        //lupaPlus.setSize(500,500);
 
         imagemLupaLessUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaLessUp.png"))));
         imagemLupaLessDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaLessDown.png"))));
