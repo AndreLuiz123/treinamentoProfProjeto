@@ -381,6 +381,17 @@ public class PlayScreen implements Screen {
 
     public void update(float dt) {
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+            /*for (Heroi player : players) {
+                if (!player.comandos.isEmpty()) {
+                    player.comandoAtual = 0;
+                    player.pode = true;
+                }
+            }*/
+            gameCam.translate(0, 0.05f, 0);
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
+        }
 
       //  handleInput();
 
