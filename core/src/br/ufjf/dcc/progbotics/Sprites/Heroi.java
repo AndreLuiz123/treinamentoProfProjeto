@@ -342,4 +342,8 @@ public class Heroi extends Sprite {
         return State.ParadoFrente;
     }
 
+
+    public String getTipo() {
+        return tipo;
+    }
 }

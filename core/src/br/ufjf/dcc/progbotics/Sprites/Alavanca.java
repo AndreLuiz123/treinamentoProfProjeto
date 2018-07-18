@@ -27,17 +27,28 @@ public class Alavanca extends Sprite{
 
 
 
-    public  int t, s;
+    public  int t, S;
 
     public Alavanca (World world, PlayScreen screen, Heroi personagem){
 
         super(screen.getAtlas().findRegion("lpc-2"));
-        int S=64;
+          S=64;
          t=640;
 
         ligada = false;
         this.world = world;
-        alavanca = new TextureRegion(getTexture(), 640, S*8, S, S);
+
+        if(personagem.getTipo().equals("heroi1") ){
+            alavanca = new  TextureRegion(getTexture(), S*9, S*4+5, S, S);
+        }else{
+            if(personagem.getTipo().equals("heroi2") ){
+                alavanca = new  TextureRegion(getTexture(), S*9, S*6+5, S, S);
+            }else{
+                if(personagem.getTipo().equals("heroi3") ){
+                    alavanca = new TextureRegion(getTexture(), S*9, S*7+15, S, S);
+                }
+            }
+        }
 
         setBounds(0,0,24/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM);
 
@@ -53,20 +64,26 @@ public class Alavanca extends Sprite{
 
     public void update(float dt){
 
+        //vermelho: TextureRegion(getTexture(), S*9, S*4+5, S, S);
+        //azul:  TextureRegion(getTexture(), S*9, S*6+5, S, S);
+        //amarelo:  TextureRegion(getTexture(), S*9, S*7+15, S, S);
+        //apagado: new TextureRegion(getTexture(), S*10 - 19, S*7+15, S, S);
+
         estadoAlavanca();
-        alavanca = new TextureRegion(getTexture(), t, 64*9, 64, 64);
+       // alavanca = new TextureRegion(getTexture(), S*9, S*7+15, S, S);
         setBounds(this.b2body.getPosition().x - 15/ ProgBoticsGame.PPM, this.b2body.getPosition().y - 5/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM);
         setRegion(alavanca);
-
 
     }
 
     public void estadoAlavanca(){
 
         if(!ligada){
-           t=640;
+            alavanca = getAlavanca();
+        //   t=640;
         }else{
-           t=580;
+           // t=S*10 - 19;
+            alavanca =  new TextureRegion(getTexture(), S*10 - 19, S*7+15, S, S);
         }
 
     }
@@ -112,6 +129,10 @@ public class Alavanca extends Sprite{
 
     public boolean isLigada() {
         return ligada;
+    }
+
+    public TextureRegion getAlavanca() {
+        return alavanca;
     }
 }
 
