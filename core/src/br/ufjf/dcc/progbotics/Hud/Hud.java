@@ -191,13 +191,9 @@ public class Hud implements Disposable {
     }
 
 
-    public Button getMoveListaPersonagemEsquerda() {
-        return moveListaPersonagemEsquerda;
-    }
+    public Button getMoveListaPersonagemEsquerda() {return moveListaPersonagemEsquerda;}
 
-    public Button getMoveListaPersonagemDireita() {
-        return moveListaPersonagemDireita;
-    }
+    public Button getMoveListaPersonagemDireita() {return moveListaPersonagemDireita;}
 
     public Button getComandoAndar() {return comandoAndar;}
 

@@ -238,6 +238,32 @@ public class PlayScreen implements Screen {
         }
 
 
+        hud.getMoveListaPersonagemEsquerda().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                setActivePlayer(getActivePlayer() - 1);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.getMoveListaPersonagemDireita().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                setActivePlayer(getActivePlayer() + 1);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+
+
         hud.getMoveCameraCima().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -269,9 +295,13 @@ public class PlayScreen implements Screen {
         hud.getMoveCameraDireita().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                gameCam.translate(+0.05f,0, 0);
-                System.out.println("zoom:"+gameCam.zoom);
-                System.out.println("gameCam position:"+gameCam.position);
+                for (Heroi player : players) {
+                    if (!player.comandos.isEmpty()) {
+                        player.comandoAtual = 0;
+                        player.pode = true;
+                    }
+                }
+
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -363,7 +393,7 @@ public class PlayScreen implements Screen {
             }
         });
 
-        hud.getComandoGirarEsquerda().addListener(new InputListener(){
+        hud.getComandoEsperar().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);

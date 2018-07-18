@@ -67,44 +67,43 @@ public class Heroi extends Sprite {
 
 
 
+        if(tipo.equals("heroi3")){
+            corRobo=13;
+        }else{
+            if(tipo.equals("heroi2")){
+                corRobo=9;
+            }else{
+                if(tipo.equals("heroi1")){
+                    corRobo=5;
+                }
+            }
+        }
 
 
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
         for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), S * i, S*10, S, S));
+            frames.add(new TextureRegion(getTexture(), S * i, S*(corRobo+1), S, S));
 
         }
         andandoFrente = new Animation(0.1f, frames);
         frames.clear();
 
         for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), S * i, S*8, S, S));
+            frames.add(new TextureRegion(getTexture(), S * i, S*(corRobo-1), S, S));
         }
 
         andandoCostas = new Animation(0.1f, frames);
         frames.clear();
 
         for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), S * i, S*9, S, S));
+            frames.add(new TextureRegion(getTexture(), S * i, S*(corRobo), S, S));
         }
 
         andandoLados = new Animation(0.1f, frames);
         frames.clear();
 
-
-        if(tipo.equals("heroi3")){
-            corRobo=13;
-        }else{
-        if(tipo.equals("heroi2")){
-            corRobo=9;
-        }else{
-            if(tipo.equals("heroi1")){
-                corRobo=5;
-            }
-        }
-        }
 
         defineHeroi(tipo);
         linkParadoFrente = new TextureRegion(getTexture(), 0, S*corRobo+1, S, S);
