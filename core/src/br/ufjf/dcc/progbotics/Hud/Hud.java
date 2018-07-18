@@ -162,8 +162,10 @@ public class Hud implements Disposable {
 
         imagemMoveCameraDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraDireitaUp.png"))));
         imagemMoveCameraDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraDireitaDown.png"))));
+        sizeCorretoImagem(imagemMoveCameraDireitaUp,imagemMoveCameraDireitaDown,50);
         moveCameraDireita = new ImageButton(imagemMoveCameraDireitaUp, imagemMoveCameraDireitaDown);
-        moveCameraDireita.setPosition(Gdx.graphics.getWidth() - moveCameraCima.getWidth(), moveCameraCima.getY() - moveCameraCima.getHeight());
+        moveCameraDireita.setPosition(Gdx.graphics.getWidth()/2 - moveCameraCima.getWidth(), lupaPlus.getY());
+
 
 
 
