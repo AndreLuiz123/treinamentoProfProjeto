@@ -264,34 +264,6 @@ public class PlayScreen implements Screen {
 
 
 
-        hud.getMoveCameraCima().addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                gameCam.translate(0, +0.05f, 0);
-                System.out.println("zoom:"+gameCam.zoom);
-                System.out.println("gameCam position:"+gameCam.position);
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
-                return true;
-            }
-        });
-
-        hud.getMoveCameraBaixo().addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                gameCam.translate(0, -0.05f, 0);
-                System.out.println("zoom:"+gameCam.zoom);
-                System.out.println("gameCam position:"+gameCam.position);
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
-                return true;
-            }
-        });
-
         hud.getMoveCameraDireita().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -302,20 +274,6 @@ public class PlayScreen implements Screen {
                     }
                 }
 
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
-                return true;
-            }
-        });
-
-        hud.getMoveCameraEsquerda().addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                gameCam.translate(-0.05f,0, 0);
-                System.out.println("zoom:"+gameCam.zoom);
-                System.out.println("gameCam position:"+gameCam.position);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -358,7 +316,7 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
-                // hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+                 hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -371,7 +329,7 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
-                // hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+                 hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -384,7 +342,7 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
-                // hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+                hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -397,7 +355,7 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
-                // hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+                 hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
