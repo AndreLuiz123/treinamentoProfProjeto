@@ -299,6 +299,7 @@ public class Hud implements Disposable {
     public void atualizaComandosDoHeroi(Heroi player){
 
         if(player.comandos.size()<=5 && player.comandos.size()>0){
+
             for(int i = 0; i<player.comandos.size(); i++) {
                 if(player.comandos.get(i) == Heroi.COMMAND_DOWN){
                     this.comandos.get(i).setDrawable(getImagemComandoEsperarDown());
@@ -315,17 +316,17 @@ public class Hud implements Disposable {
                             if(player.comandos.get(i) == Heroi.COMMAND_UP){
                                 this.comandos.get(i).setDrawable(getImagemComandoAndarUp());
                                 System.out.println(player.comandos.get(i));
-                            }else{
-
-                                    this.comandos.get(i).setDrawable(imagemAddComando);
-                                    System.out.println("VAO VE");
-
                             }
                         }
                     }
                 }
             }
-            System.out.println(player.comandos.get(0));
+
+            for(int i=player.comandos.size(); i<5; i++){
+                this.comandos.get(i).setDrawable(getImagemAddComando());
+            }
+
+
         }
 
     }
