@@ -53,6 +53,9 @@ public class Hud implements Disposable {
     TextureRegionDrawable imagemAddComando;
     TextureRegionDrawable imagemLupaPlusUp, imagemLupaPlusDown, imagemLupaLessUp, imagemLupaLessDown;
     TextureRegionDrawable imagemMoveCameraCimaUp, imagemMoveCameraCimaDown, imagemMoveCameraEsquerdaUp, imagemMoveCameraEsquerdaDown, imagemMoveCameraBaixoUp, imagemMoveCameraBaixoDown, imagemMoveCameraDireitaUp, imagemMoveCameraDireitaDown;
+    TextureRegionDrawable pbBlue, pbRed, pbYellow;
+    Image progBotBlue, progBotRed, progBotYellow;
+
 
     Button moveListaPersonagemEsquerda, moveListaPersonagemDireita;
     Button moveListaComandosEsquerda, moveListaComandosDireita;
@@ -108,15 +111,15 @@ public class Hud implements Disposable {
         moveListaComandosDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
         moveListaComandosDireita.setPosition(Gdx.graphics.getWidth()/2 - moveListaPersonagemDireita.getWidth(), 0);
 
-        imagemComandoGirarDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaUp.png"))));
-        imagemComandoGirarDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaDown.png"))));
+        imagemComandoGirarDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirDireitaUp.png"))));
+        imagemComandoGirarDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirDireitaDown.png"))));
         sizeCorretoImagem(imagemComandoGirarDireitaUp, imagemComandoGirarDireitaDown, 50);
         comandoGirarDireita = new ImageButton(imagemComandoGirarDireitaUp, imagemComandoGirarDireitaDown);
         comandoGirarDireita.setPosition(moveListaPersonagemDireita.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
 
-        imagemComandoGirarEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarEsquerdaUp.png"))));
-        imagemComandoGirarEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarEsquerdaDown.png"))));
+        imagemComandoGirarEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEsquerdaUp.png"))));
+        imagemComandoGirarEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEsquerdaDown.png"))));
         sizeCorretoImagem(imagemComandoGirarEsquerdaUp, imagemComandoGirarEsquerdaDown, 50);
         comandoGirarEsquerda = new ImageButton(imagemComandoGirarEsquerdaUp, imagemComandoGirarEsquerdaDown);
         comandoGirarEsquerda.setPosition(comandoGirarDireita.getX() + comandoGirarDireita.getWidth(), moveListaPersonagemEsquerda.getY());
@@ -127,14 +130,18 @@ public class Hud implements Disposable {
         comandoAndar = new ImageButton(imagemComandoAndarUp, imagemComandoAndarDown);
         comandoAndar.setPosition(comandoGirarEsquerda.getX() + comandoGirarEsquerda.getWidth(),  moveListaPersonagemEsquerda.getY());
 
-        imagemComandoEsperarUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/esperarUp.png"))));
-        imagemComandoEsperarDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/esperarDown.png"))));
+        imagemComandoEsperarUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirBaixoUp.png"))));
+        imagemComandoEsperarDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirBaixoDown.png"))));
         sizeCorretoImagem(imagemComandoEsperarUp, imagemComandoEsperarDown, 50);
         comandoEsperar = new ImageButton(imagemComandoEsperarUp, imagemComandoEsperarDown);
         comandoEsperar.setPosition(comandoAndar.getX() + comandoAndar.getWidth(),  moveListaPersonagemEsquerda.getY());
 
         imagemAddComando = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/espVazioComando.png"))));
-        personagem = new Image(imagemAddComando);
+        pbBlue = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/BlueProgBot.png"))));
+        pbRed = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/RedProgBot.png"))));
+        pbYellow = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/YellowProgBot.png"))));
+        progBotBlue = new Image(pbRed);
+        personagem = new Image(pbRed);
         personagem.setSize(50,50);
         personagem.setPosition(moveListaComandosEsquerda.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
@@ -281,26 +288,44 @@ public class Hud implements Disposable {
 
     public TextureRegionDrawable getImagemMoveCameraDireitaDown() {return imagemMoveCameraDireitaDown;}
 
+    public TextureRegionDrawable getPbBlue() {return pbBlue;}
+
+    public TextureRegionDrawable getPbRed() {return pbRed;}
+
+    public TextureRegionDrawable getPbYellow() {return pbYellow;}
+
+    public Image getPersonagem() {return personagem;}
+
     public void atualizaComandosDoHeroi(Heroi player){
 
-        if(player.comandos.size()<=5){
+        if(player.comandos.size()<=5 && player.comandos.size()>0){
             for(int i = 0; i<player.comandos.size(); i++) {
                 if(player.comandos.get(i) == Heroi.COMMAND_DOWN){
-                    this.comandos.get(i).setDrawable(getImagemComandoEsperarUp());
+                    this.comandos.get(i).setDrawable(getImagemComandoAndarDown());
+                    System.out.println("TESTE");
                 }else{
                     if(player.comandos.get(i) == Heroi.COMMAND_LEFT){
                         this.comandos.get(i).setDrawable(getImagemComandoGirarEsquerdaUp());
+                        System.out.println(this.comandos.get(i));
                     }else{
                         if(player.comandos.get(i) == Heroi.COMMAND_RIGHT){
                             this.comandos.get(i).setDrawable(getImagemComandoGirarDireitaUp());
+                            System.out.println(player.comandos.get(i));
                         }else{
                             if(player.comandos.get(i) == Heroi.COMMAND_UP){
                                 this.comandos.get(i).setDrawable(getImagemComandoAndarUp());
+                                System.out.println(player.comandos.get(i));
+                            }else{
+
+                                    this.comandos.get(i).setDrawable(imagemAddComando);
+                                    System.out.println("VAO VE");
+
                             }
                         }
                     }
                 }
             }
+            System.out.println(player.comandos.get(0));
         }
 
     }
