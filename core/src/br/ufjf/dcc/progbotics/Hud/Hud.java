@@ -298,35 +298,41 @@ public class Hud implements Disposable {
 
     public void atualizaComandosDoHeroi(Heroi player){
 
+        int i;
+
         if(player.comandos.size()<=5 && player.comandos.size()>0){
 
-            for(int i = 0; i<player.comandos.size(); i++) {
+            for( i = 0; i<player.comandos.size(); i++) {
                 if(player.comandos.get(i) == Heroi.COMMAND_DOWN){
-                    this.comandos.get(i).setDrawable(getImagemComandoEsperarDown());
-                    System.out.println("TESTE");
+                    this.comandos.get(i).setDrawable(getImagemComandoEsperarUp());
+
                 }else{
                     if(player.comandos.get(i) == Heroi.COMMAND_LEFT){
                         this.comandos.get(i).setDrawable(getImagemComandoGirarEsquerdaUp());
-                        System.out.println(this.comandos.get(i));
+
                     }else{
                         if(player.comandos.get(i) == Heroi.COMMAND_RIGHT){
                             this.comandos.get(i).setDrawable(getImagemComandoGirarDireitaUp());
-                            System.out.println(player.comandos.get(i));
+
                         }else{
                             if(player.comandos.get(i) == Heroi.COMMAND_UP){
                                 this.comandos.get(i).setDrawable(getImagemComandoAndarUp());
-                                System.out.println(player.comandos.get(i));
+
                             }
                         }
                     }
                 }
             }
 
-            for(int i=player.comandos.size(); i<5; i++){
+            for(i=player.comandos.size(); i<5; i++){
                 this.comandos.get(i).setDrawable(getImagemAddComando());
             }
 
 
+        }else{
+            for(i=0; i<5; i++){
+                this.comandos.get(i).setDrawable(getImagemAddComando());
+            }
         }
 
     }

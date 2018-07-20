@@ -400,57 +400,8 @@ public class PlayScreen implements Screen {
 
     public void update(float dt) {
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-            /*for (Heroi player : players) {
-                if (!player.comandos.isEmpty()) {
-                    player.comandoAtual = 0;
-                    player.pode = true;
-                }
-            }*/
-            gameCam.translate(0, 0.05f, 0);
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-            /*for (Heroi player : players) {
-                if (!player.comandos.isEmpty()) {
-                    player.comandoAtual = 0;
-                    player.pode = true;
-                }
-            }*/
-            gameCam.translate(0.05f, 0, 0);
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-            /*for (Heroi player : players) {
-                if (!player.comandos.isEmpty()) {
-                    player.comandoAtual = 0;
-                    player.pode = true;
-                }
-            }*/
-            gameCam.translate(-0.05f, 0, 0);
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            /*for (Heroi player : players) {
-                if (!player.comandos.isEmpty()) {
-                    player.comandoAtual = 0;
-                    player.pode = true;
-                }
-            }*/
-            gameCam.translate(0, -0.05f, 0);
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
 
         hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-      //  handleInput();
-
-
-      //  hud.update(players.get(0));
 
         world.step(dt, 6, 2);
 
