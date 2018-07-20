@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="16" tileheight="16" nextobjectid="6">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="6">
  <tileset firstgid="1" source="progBotsFinalTileset.tsx"/>
  <layer name="Camada de Tiles 1" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJzzZmRg8B7Fo3gQYwCoSTIt
+   eJzbyMDAsHEUj+JBjAE77XTa
   </data>
  </layer>
  <layer name="paredesLaser" width="13" height="13">

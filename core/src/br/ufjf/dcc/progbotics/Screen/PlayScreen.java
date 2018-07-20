@@ -70,6 +70,20 @@ public class PlayScreen implements Screen {
 
 
         this.setLevel(this.level);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
+        gameCam.position.set(1.0500001f,0.55000037f,0.0f);
+        gameCam.zoom = 0.54999983f;
+
+        b2dr = new Box2DDebugRenderer();
+
+
+        bul = false;
+
+
+        hud = new Hud(game.batch);
+
+        handleInput();
+
     }
 
     public void setLevel(Integer level) {
@@ -129,20 +143,6 @@ public class PlayScreen implements Screen {
 
             default:
         }
-
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
-        gameCam.position.set(1.0500001f,0.55000037f,0.0f);
-        gameCam.zoom = 0.54999983f;
-
-        b2dr = new Box2DDebugRenderer();
-
-
-        bul = false;
-
-
-        hud = new Hud(game.batch);
-
-        handleInput();
 
 
     }
