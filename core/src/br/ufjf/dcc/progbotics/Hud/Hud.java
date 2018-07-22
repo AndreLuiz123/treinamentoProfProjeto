@@ -80,6 +80,7 @@ public class Hud implements Disposable {
         table = new Table();
         table.top();
         table.setFillParent(true);
+        table.setDebug(true);
 
         enumeraPersonagem = 0;
 
@@ -95,50 +96,50 @@ public class Hud implements Disposable {
         sizeCorretoImagem(imagemDireitaUp, imagemDireitaDown, 50);
 
         moveListaPersonagemEsquerda = new ImageButton(imagemEsquerdaUp,imagemEsquerdaDown);
-        moveListaPersonagemEsquerda.setPosition(0, 2*moveListaPersonagemEsquerda.getHeight());
+      //  moveListaPersonagemEsquerda.setPosition(0, 2*moveListaPersonagemEsquerda.getHeight());
 
         moveListaPersonagemDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
-        moveListaPersonagemDireita.setPosition(moveListaPersonagemEsquerda.getX() + 2*moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
+      //  moveListaPersonagemDireita.setPosition(moveListaPersonagemEsquerda.getX() + 2*moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
 
         numeroPersonagem = new Label(String.format("%3d",enumeraPersonagem),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        numeroPersonagem.setPosition(moveListaPersonagemEsquerda.getX() + moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
+    //    numeroPersonagem.setPosition(moveListaPersonagemEsquerda.getX() + moveListaPersonagemEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
 
         moveListaComandosEsquerda = new ImageButton(imagemEsquerdaUp,imagemEsquerdaDown);
-        moveListaComandosEsquerda.setPosition(0, 0);
+     //   moveListaComandosEsquerda.setPosition(0, 0);
 
 
         table.setDebug(true);
 
         moveListaComandosDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
-        moveListaComandosDireita.setPosition(Gdx.graphics.getWidth()/2 - moveListaPersonagemDireita.getWidth(), 0);
+      //  moveListaComandosDireita.setPosition(Gdx.graphics.getWidth()/2 - moveListaPersonagemDireita.getWidth(), 0);
 
 
         imagemComandoGirarDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirDireitaUp.png"))));
         imagemComandoGirarDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirDireitaDown.png"))));
         sizeCorretoImagem(imagemComandoGirarDireitaUp, imagemComandoGirarDireitaDown, 50);
         comandoGirarDireita = new ImageButton(imagemComandoGirarDireitaUp, imagemComandoGirarDireitaDown);
-        comandoGirarDireita.setPosition(moveListaPersonagemDireita.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
+     //   comandoGirarDireita.setPosition(moveListaPersonagemDireita.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
 
         imagemComandoGirarEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEsquerdaUp.png"))));
         imagemComandoGirarEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEsquerdaDown.png"))));
         sizeCorretoImagem(imagemComandoGirarEsquerdaUp, imagemComandoGirarEsquerdaDown, 50);
         comandoGirarEsquerda = new ImageButton(imagemComandoGirarEsquerdaUp, imagemComandoGirarEsquerdaDown);
-        comandoGirarEsquerda.setPosition(comandoGirarDireita.getX() + comandoGirarDireita.getWidth(), moveListaPersonagemEsquerda.getY());
+        //comandoGirarEsquerda.setPosition(comandoGirarDireita.getX() + comandoGirarDireita.getWidth(), moveListaPersonagemEsquerda.getY());
 
         imagemComandoAndarUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEmFrenteUp.png"))));
         imagemComandoAndarDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirEmFrenteDown.png"))));
         sizeCorretoImagem(imagemComandoAndarUp, imagemComandoAndarDown, 50);
         comandoAndar = new ImageButton(imagemComandoAndarUp, imagemComandoAndarDown);
-        comandoAndar.setPosition(comandoGirarEsquerda.getX() + comandoGirarEsquerda.getWidth(),  moveListaPersonagemEsquerda.getY());
+      //  comandoAndar.setPosition(comandoGirarEsquerda.getX() + comandoGirarEsquerda.getWidth(),  moveListaPersonagemEsquerda.getY());
 
         imagemComandoEsperarUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirBaixoUp.png"))));
         imagemComandoEsperarDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirBaixoDown.png"))));
         sizeCorretoImagem(imagemComandoEsperarUp, imagemComandoEsperarDown, 50);
         comandoEsperar = new ImageButton(imagemComandoEsperarUp, imagemComandoEsperarDown);
-        comandoEsperar.setPosition(comandoAndar.getX() + comandoAndar.getWidth(),  moveListaPersonagemEsquerda.getY());
+        //comandoEsperar.setPosition(comandoAndar.getX() + comandoAndar.getWidth(),  moveListaPersonagemEsquerda.getY());
 
         imagemAddComando = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/espVazioComando.png"))));
         pbBlue = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/BlueProgBot.png"))));
@@ -147,60 +148,79 @@ public class Hud implements Disposable {
         progBotBlue = new Image(pbRed);
         personagem = new Image(pbRed);
         personagem.setSize(50,50);
-        personagem.setPosition(moveListaComandosEsquerda.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
+      //  personagem.setPosition(moveListaComandosEsquerda.getX() + moveListaComandosEsquerda.getWidth(), moveListaPersonagemEsquerda.getY());
 
 
         imagemLupaPlusUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaPlusUp.png"))));
         imagemLupaPlusDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaPlusDown.png"))));
         sizeCorretoImagem(imagemLupaPlusUp,imagemLupaPlusDown,50);
         lupaPlus = new ImageButton(imagemLupaPlusUp, imagemLupaPlusDown);
-        lupaPlus.setPosition(getMoveListaPersonagemEsquerda().getX() + 2*lupaPlus.getWidth(),Gdx.graphics.getHeight()/2 - lupaPlus.getHeight());
+      //  lupaPlus.setPosition(getMoveListaPersonagemEsquerda().getX() + 2*lupaPlus.getWidth(),Gdx.graphics.getHeight()/2 - lupaPlus.getHeight());
 
         imagemLupaLessUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaLessUp.png"))));
         imagemLupaLessDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/lupaLessDown.png"))));
         sizeCorretoImagem(imagemLupaLessUp,imagemLupaLessDown,50);
         lupaLess = new ImageButton(imagemLupaLessUp, imagemLupaLessDown);
-        lupaLess.setPosition(getMoveListaPersonagemEsquerda().getX() + 0.8f*lupaLess.getWidth(),Gdx.graphics.getHeight()/2 - lupaPlus.getHeight());
+      //  lupaLess.setPosition(getMoveListaPersonagemEsquerda().getX() + 0.8f*lupaLess.getWidth(),Gdx.graphics.getHeight()/2 - lupaPlus.getHeight());
 
         imagemMoveCameraCimaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraCimaUp.png"))));
         imagemMoveCameraCimaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraCimaDown.png"))));
         moveCameraCima = new ImageButton(imagemMoveCameraCimaUp, imagemMoveCameraCimaDown);
-        moveCameraCima.setPosition(Gdx.graphics.getWidth() - moveCameraCima.getWidth(), lupaPlus.getY());
+      //  moveCameraCima.setPosition(Gdx.graphics.getWidth() - moveCameraCima.getWidth(), lupaPlus.getY());
 
         imagemMoveCameraBaixoUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraBaixoUp.png"))));
         imagemMoveCameraBaixoDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraBaixoDown.png"))));
         moveCameraBaixo = new ImageButton(imagemMoveCameraBaixoUp, imagemMoveCameraBaixoDown);
-        moveCameraBaixo.setPosition(Gdx.graphics.getWidth() - moveCameraCima.getWidth(), moveCameraCima.getY() - 2*moveCameraCima.getHeight());
+     //   moveCameraBaixo.setPosition(Gdx.graphics.getWidth() - moveCameraCima.getWidth(), moveCameraCima.getY() - 2*moveCameraCima.getHeight());
 
         imagemMoveCameraEsquerdaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraEsquerdaUp.png"))));
         imagemMoveCameraEsquerdaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraEsquerdaDown.png"))));
         moveCameraEsquerda = new ImageButton(imagemMoveCameraEsquerdaUp, imagemMoveCameraEsquerdaDown);
-        moveCameraEsquerda.setPosition(Gdx.graphics.getWidth() - 3*moveCameraCima.getWidth(), moveCameraCima.getY() - moveCameraCima.getHeight());
+     //   moveCameraEsquerda.setPosition(Gdx.graphics.getWidth() - 3*moveCameraCima.getWidth(), moveCameraCima.getY() - moveCameraCima.getHeight());
 
         imagemMoveCameraDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraDireitaUp.png"))));
         imagemMoveCameraDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/movimentaCameraDireitaDown.png"))));
         sizeCorretoImagem(imagemMoveCameraDireitaUp,imagemMoveCameraDireitaDown,50);
         moveCameraDireita = new ImageButton(imagemMoveCameraDireitaUp, imagemMoveCameraDireitaDown);
-        moveCameraDireita.setPosition(Gdx.graphics.getWidth()/2 - moveCameraCima.getWidth(), lupaPlus.getY());
+     //   moveCameraDireita.setPosition(Gdx.graphics.getWidth()/2 - moveCameraCima.getWidth(), lupaPlus.getY());
 
         comandos = new ArrayList<Image>();
-
-        for(int i=0; i<5; i++) {
-            comandos.add(new Image(imagemAddComando));
-            comandos.get(i).setSize(50,50);
-            comandos.get(i).setPosition(moveListaComandosEsquerda.getX() + (i+1)*comandos.get(i).getWidth(), moveListaComandosEsquerda.getY());
-            stage.addActor(comandos.get(i));
-        }
 
 
         //  moveListaPersonagemDireita.setStyle();
 
-
-        table.addActor(moveListaPersonagemEsquerda);
+        table.add(lupaLess).expandY().top();
+        table.add(lupaPlus).top();
+        table.row();
+        table.add(moveCameraDireita);
+        table.row();
         table.bottom();
-        table.addActor(moveListaPersonagemDireita);
-        table.top();
-     /*   table.addActor(numeroPersonagem);
+        table.add(moveListaPersonagemEsquerda).expandX();
+        table.add(personagem).expandX().fill(true);
+        table.add(moveListaPersonagemDireita).expandX();
+        table.add(comandoGirarDireita).expandX();
+        table.add(comandoGirarEsquerda).expandX();
+        table.add(comandoAndar).expandX();
+        table.add(comandoEsperar).expandX();
+        table.row();
+        table.add(moveListaComandosEsquerda).expandX();
+        for(int i=0; i<5; i++) {
+            comandos.add(new Image(imagemAddComando));
+          //  comandos.get(i).setSize(50,50);
+            table.add(comandos.get(i)).expandX().fill(true);
+            //   comandos.get(i).setPosition(moveListaComandosEsquerda.getX() + (i+1)*comandos.get(i).getWidth(), moveListaComandosEsquerda.getY());
+            //    stage.addActor(comandos.get(i));
+        }
+        table.add(moveListaComandosDireita).expandX();
+
+
+
+        // table.top();
+
+
+        stage.addActor(table);
+
+ /*      table.addActor(numeroPersonagem);
         table.addActor(moveListaComandosDireita);
         table.addActor(moveListaComandosEsquerda);
         table.addActor(comandoGirarDireita);

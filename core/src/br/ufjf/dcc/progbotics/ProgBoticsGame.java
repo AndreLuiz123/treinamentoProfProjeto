@@ -21,7 +21,7 @@ public class ProgBoticsGame extends Game {
 		PlayScreen playscreen = new PlayScreen(this);
 		//Screen playscreen = new ScreenTestes(this);
 		playscreen.setLevel(0);
-		setScreen( new ScreenTestes(this));
+		setScreen(playscreen);
 	}
 
 	@Override

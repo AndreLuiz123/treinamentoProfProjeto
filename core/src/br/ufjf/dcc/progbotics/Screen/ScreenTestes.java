@@ -81,6 +81,7 @@ public class ScreenTestes implements Screen {
 
     public void update(float dt){
         handleInput();
+
     }
 
     @Override
