@@ -46,6 +46,8 @@ public class Heroi extends Sprite {
     public boolean pode= false;
     public boolean click= false;
 
+    int corRobo;
+
 
 
 
@@ -65,27 +67,38 @@ public class Heroi extends Sprite {
 
 
 
+        if(tipo.equals("heroi3")){
+            corRobo=13;
+        }else{
+            if(tipo.equals("heroi2")){
+                corRobo=9;
+            }else{
+                if(tipo.equals("heroi1")){
+                    corRobo=5;
+                }
+            }
+        }
 
 
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
         for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), S * i, S*10, S, S));
+            frames.add(new TextureRegion(getTexture(), S * i, S*(corRobo+1), S, S));
 
         }
         andandoFrente = new Animation(0.1f, frames);
         frames.clear();
 
         for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), S * i, S*8, S, S));
+            frames.add(new TextureRegion(getTexture(), S * i, S*(corRobo-1), S, S));
         }
 
         andandoCostas = new Animation(0.1f, frames);
         frames.clear();
 
         for (int i = 0; i < 9; i++) {
-            frames.add(new TextureRegion(getTexture(), S * i, S*9, S, S));
+            frames.add(new TextureRegion(getTexture(), S * i, S*(corRobo), S, S));
         }
 
         andandoLados = new Animation(0.1f, frames);
@@ -93,9 +106,9 @@ public class Heroi extends Sprite {
 
 
         defineHeroi(tipo);
-        linkParadoFrente = new TextureRegion(getTexture(), 0, S*10, S, S);
-        paradoCostas = new TextureRegion(getTexture(), 0, S*8, S, S);
-        paradoLado = new TextureRegion(getTexture(), 0, S*9, S, S);
+        linkParadoFrente = new TextureRegion(getTexture(), 0, S*corRobo+1, S, S);
+        paradoCostas = new TextureRegion(getTexture(), 0, S*corRobo-1, S, S);
+        paradoLado = new TextureRegion(getTexture(), 0, S*corRobo, S, S);
         setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 24 / ProgBoticsGame.PPM, 24 / ProgBoticsGame.PPM);
         setRegion(linkParadoFrente);
 
@@ -328,4 +341,8 @@ public class Heroi extends Sprite {
         return State.ParadoFrente;
     }
 
+
+    public String getTipo() {
+        return tipo;
+    }
 }
