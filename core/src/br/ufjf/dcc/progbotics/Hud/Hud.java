@@ -79,7 +79,7 @@ public class Hud implements Disposable {
            comandosEmTela.add( new Label(String.format("%s",comando.get(j)),new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
        }
 
-      //  table.setDebug(true);
+        table.setDebug(true);
 
         table.add(esquerdaIMG).expandX().right();
         table.add(lixoIMG);
