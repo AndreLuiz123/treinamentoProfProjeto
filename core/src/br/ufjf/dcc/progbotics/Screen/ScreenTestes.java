@@ -93,6 +93,7 @@ public class ScreenTestes implements Screen {
 
         hud.stage.act();
         hud.stage.draw();
+        hud.table.setDebug(true);
         hud.update();
     }
 

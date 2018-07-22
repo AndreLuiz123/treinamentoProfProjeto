@@ -192,7 +192,28 @@ public class Hud implements Disposable {
         //  moveListaPersonagemDireita.setStyle();
 
 
-        stage.addActor(moveListaPersonagemEsquerda);
+        table.addActor(moveListaPersonagemEsquerda);
+        table.bottom();
+        table.addActor(moveListaPersonagemDireita);
+        table.top();
+     /*   table.addActor(numeroPersonagem);
+        table.addActor(moveListaComandosDireita);
+        table.addActor(moveListaComandosEsquerda);
+        table.addActor(comandoGirarDireita);
+        table.addActor(comandoGirarEsquerda);
+        table.addActor(comandoAndar);
+        table.addActor(comandoEsperar);
+        table.addActor(personagem);
+        table.addActor(lupaPlus);
+        table.addActor(lupaLess);
+        table.addActor(moveCameraCima);
+        table.addActor(moveCameraBaixo);
+        table.addActor(moveCameraDireita);
+        table.addActor(moveCameraEsquerda);
+*/
+
+
+      /*  stage.addActor(moveListaPersonagemEsquerda);
         stage.addActor(moveListaPersonagemDireita);
         stage.addActor(numeroPersonagem);
         stage.addActor(moveListaComandosDireita);
@@ -207,7 +228,13 @@ public class Hud implements Disposable {
         stage.addActor(moveCameraCima);
         stage.addActor(moveCameraBaixo);
         stage.addActor(moveCameraDireita);
-        stage.addActor(moveCameraEsquerda);
+        stage.addActor(moveCameraEsquerda);*/
+
+
+
+
+
+
 
     }
 
