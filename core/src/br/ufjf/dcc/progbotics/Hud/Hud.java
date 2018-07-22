@@ -108,12 +108,12 @@ public class Hud implements Disposable {
         moveListaComandosEsquerda = new ImageButton(imagemEsquerdaUp,imagemEsquerdaDown);
         moveListaComandosEsquerda.setPosition(0, 0);
 
-<<<<<<< HEAD
+
         table.setDebug(true);
-=======
+
         moveListaComandosDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
         moveListaComandosDireita.setPosition(Gdx.graphics.getWidth()/2 - moveListaPersonagemDireita.getWidth(), 0);
->>>>>>> JogoComCaraDeCelular
+
 
         imagemComandoGirarDireitaUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirDireitaUp.png"))));
         imagemComandoGirarDireitaDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/seguirDireitaDown.png"))));
