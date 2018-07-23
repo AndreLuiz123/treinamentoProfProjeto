@@ -71,10 +71,10 @@ public class Heroi extends Sprite {
             corRobo=13;
         }else{
             if(tipo.equals("heroi2")){
-                corRobo=9;
+                corRobo=5;
             }else{
                 if(tipo.equals("heroi1")){
-                    corRobo=5;
+                    corRobo=9;
                 }
             }
         }
