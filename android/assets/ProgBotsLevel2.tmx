@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="6">
+ <tileset firstgid="1" source="progBotsFinalTileset.tsx"/>
+ <layer name="Camada de Tiles 1" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzbyMDAsHEUj+JBjAE77XTa
+  </data>
+ </layer>
+ <layer name="paredesLaser" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOcphwSOABo3oYGLrI0LOCDD3HyNDzhAw9TMyk66E2AAAeQQV+
+  </data>
+ </layer>
+ <objectgroup name="limitesDoMapa">
+  <object id="1" x="-6" y="-1" width="5" height="211"/>
+  <object id="2" x="0" y="-5" width="207" height="4"/>
+  <object id="3" x="207" y="1" width="8" height="209"/>
+  <object id="4" x="0" y="207" width="205" height="7"/>
+  <object id="5" x="101" y="0" width="12" height="164"/>
+ </objectgroup>
+</map>

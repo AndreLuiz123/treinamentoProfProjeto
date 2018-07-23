@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -14,6 +15,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 //import com.sun.org.apache.xpath.internal.operations.String;
@@ -35,9 +38,9 @@ import java.util.List;
 
 public class PlayScreen implements Screen {
 
-    public static String[] LEVEL_NAMES = {"sem título.tmx", "nivel 2.tmx"};
+    public static String[] LEVEL_NAMES = {"ProgBotsLevel1.tmx", "ProgBotsLevel2.tmx"};
     private ProgBoticsGame game;
-    private Texture texture;
+    private Texture texture, constantBackground;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
     private TmxMapLoader mapLoader;
@@ -60,15 +63,33 @@ public class PlayScreen implements Screen {
         atlas = new TextureAtlas("teste.pack");
 
         this.game = game;
-        gameCam = new OrthographicCamera();
+        gameCam = new OrthographicCamera(0,0);
         gamePort = new FitViewport(ProgBoticsGame.V_WIDTH / ProgBoticsGame.PPM, ProgBoticsGame.V_HEIGHT / ProgBoticsGame.PPM, gameCam);
+
+        constantBackground = new Texture("backgroundProgBotics.png");
 
 
         this.setLevel(this.level);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
+        gameCam.position.set(1.0500001f,0.55000037f,0.0f);
+        gameCam.zoom = 0.54999983f;
+
+        b2dr = new Box2DDebugRenderer();
+
+
+        bul = false;
+
+
+        hud = new Hud(game.batch);
+
+        handleInput();
+
     }
 
     public void setLevel(Integer level) {
         this.level = level;
+       // setActivePlayer(1);
+        activePlayer = 0;
         switch (this.level) {
             case 0:
                 mapLoader = new TmxMapLoader();
@@ -78,16 +99,18 @@ public class PlayScreen implements Screen {
                 players.add(new Heroi(world, this, "heroi1"));
                 players.add(new Heroi(world, this, "heroi2"));
                 players.add(new Heroi(world, this, "heroi3"));
-                players.get(1).b2body.setTransform(65 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
-                players.get(2).b2body.setTransform(95 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(0).b2body.setTransform(85 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(1).b2body.setTransform(115 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(2).b2body.setTransform(145 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
 
                 alavancas = new ArrayList<Alavanca>();
 
                 alavancas.add(new Alavanca(world, this, players.get(0)));
                 alavancas.add(new Alavanca(world, this, players.get(1)));
                 alavancas.add(new Alavanca(world, this, players.get(2)));
-                alavancas.get(1).b2body.setTransform(95 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
-                alavancas.get(2).b2body.setTransform(65 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
+                alavancas.get(0).b2body.setTransform(85 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
+                alavancas.get(1).b2body.setTransform(145 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
+                alavancas.get(2).b2body.setTransform(115 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
                 new B2WorldCreator(world, map);
                 world.setContactListener(new WorldContactListener(players, alavancas));
 
@@ -115,18 +138,11 @@ public class PlayScreen implements Screen {
                 new B2WorldCreator(world, map);
                 world.setContactListener(new WorldContactListener(players, alavancas));
                 break;
+            case 2:
+
+
             default:
-
         }
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
-        gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
-
-        b2dr = new Box2DDebugRenderer();
-
-
-        bul = false;
-
-        hud = new Hud(game.batch);
 
 
     }
@@ -142,7 +158,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(hud.stage);
     }
 
     public int getActivePlayer() {
@@ -156,20 +172,20 @@ public class PlayScreen implements Screen {
 
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
-            hud.atualizaEnumeracaoPersonagem(false, true);
+          /*  hud.atualizaEnumeracaoPersonagem(false, true);
             setActivePlayer(getActivePlayer() - 1);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));*/
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
-            hud.atualizaEnumeracaoPersonagem(true, false);
+          /*  hud.atualizaEnumeracaoPersonagem(true, false);
             setActivePlayer(getActivePlayer() + 1);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));*/
 
         }
 
 
 
-         /*   if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
                 players.get(getActivePlayer()).comandoAtual = 0;
                 players.get(getActivePlayer()).pode = false;
             }
@@ -179,72 +195,205 @@ public class PlayScreen implements Screen {
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
                 players.get(getActivePlayer()).pode = true;
-            }*/
-        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
-            for (Heroi player : players) {
+            }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+            /*for (Heroi player : players) {
                 if (!player.comandos.isEmpty()) {
                     player.comandoAtual = 0;
                     player.pode = true;
                 }
+            }*/
+            gameCam.translate(0.05f, 0, 0);
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+            /*for (Heroi player : players) {
+                if (!player.comandos.isEmpty()) {
+                    player.comandoAtual = 0;
+                    player.pode = true;
+                }
+            }*/
+            gameCam.translate(-0.05f, 0, 0);
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            /*for (Heroi player : players) {
+                if (!player.comandos.isEmpty()) {
+                    player.comandoAtual = 0;
+                    player.pode = true;
+                }
+            }*/
+            gameCam.translate(0, -0.05f, 0);
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+            /*for (Heroi player : players) {
+                if (!player.comandos.isEmpty()) {
+                    player.comandoAtual = 0;
+                    player.pode = true;
+                }
+            }*/
+            gameCam.translate(0, 0.05f, 0);
+            System.out.println("zoom:"+gameCam.zoom);
+            System.out.println("gameCam position:"+gameCam.position);
+        }
+
+
+        hud.getMoveListaPersonagemEsquerda().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                setActivePlayer(getActivePlayer() - 1);
+                switch (getActivePlayer()){
+                    case 0:
+                        hud.getPersonagem().setDrawable(hud.getPbRed());
+                        break;
+                    case 1:
+                        hud.getPersonagem().setDrawable(hud.getPbBlue());
+                        break;
+                    case 2:
+                        hud.getPersonagem().setDrawable(hud.getPbYellow());
+                        break;
+                    default:
+                }
+             //   hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
-        }
+                return true;
+            }
+        });
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-            hud.barraDeRolamento(1, players.get(getActivePlayer()));
+        hud.getMoveListaPersonagemDireita().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                setActivePlayer(getActivePlayer() + 1);
+                switch (getActivePlayer()){
+                    case 0:
+                        hud.getPersonagem().setDrawable(hud.getPbRed());
+                        break;
+                    case 1:
+                        hud.getPersonagem().setDrawable(hud.getPbBlue());
+                        break;
+                    case 2:
+                        hud.getPersonagem().setDrawable(hud.getPbYellow());
+                        break;
+                    default:
+                }
+             //   hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-            hud.barraDeRolamento(-1, players.get(getActivePlayer()));
-
-        }
-
-
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
-                && Gdx.input.getY() > 108 && Gdx.input.getY() < 162) {
-            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-        }
-
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
-                && Gdx.input.getY() > 162 && Gdx.input.getY() < 216) {
-            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-        }
-
-
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
-                && Gdx.input.getY() > 54 && Gdx.input.getY() < 108) {
-            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-        }
-
-
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1101
-                && Gdx.input.getY() > 0 && Gdx.input.getY() < 54) {
-
-            players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-
-        }
+                return true;
+            }
+        });
 
 
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 1050 && Gdx.input.getX() < 1111
-                && Gdx.input.getY() > 236 && Gdx.input.getY() < 277) {
-            players.get(getActivePlayer()).colocaComandos("alavanca");
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
 
-        }
+        hud.getMoveCameraDireita().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                for (Heroi player : players) {
+                    if (!player.comandos.isEmpty()) {
+                        player.comandoAtual = 0;
+                        player.pode = true;
+                    }
+                }
 
-        if (Gdx.input.justTouched() && Gdx.input.getX() > 960 && Gdx.input.getX() < 1019
-                && Gdx.input.getY() > 0 && Gdx.input.getY() < 53) {
-            players.get(getActivePlayer()).comandos.clear();
-        }
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
-        if (Gdx.input.justTouched()) {
+                return true;
+            }
+        });
+
+        hud.getLupaPlus().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.zoom-=0.05;
+                System.out.println("zoom:"+gameCam.zoom);
+                System.out.println("gameCam position:"+gameCam.position);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
 
 
-        }
+
+        hud.getLupaLess().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.zoom+=0.05;
+                System.out.println("zoom:"+gameCam.zoom);
+                System.out.println("gameCam position:"+gameCam.position);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.getComandoAndar().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
+               //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.getComandoGirarDireita().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
+               //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.getComandoGirarEsquerda().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
+              //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.getComandoEsperar().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
+          //       hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
 
 
     }
@@ -252,10 +401,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
 
 
-        handleInput();
-
-
-        hud.update(players.get(0));
+        hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
 
         world.step(dt, 6, 2);
 
@@ -296,11 +442,11 @@ public class PlayScreen implements Screen {
 
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
 
         game.batch.setProjectionMatrix(gameCam.combined);
 
         game.batch.begin();
+      //  game.batch.draw(constantBackground,0,0);
         for (Alavanca alavanca : alavancas) {
             alavanca.draw(game.batch);
         }
@@ -308,8 +454,9 @@ public class PlayScreen implements Screen {
             player.draw(game.batch);
         }
 
-
         game.batch.end();
+
+        hud.stage.draw();
     }
 
     @Override

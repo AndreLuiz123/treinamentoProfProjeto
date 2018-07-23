@@ -9,7 +9,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new ProgBoticsGame(), config);
 
-		config.width = 1200;
-		config.height = 624;
+		config.width = ProgBoticsGame.V_WIDTH;
+		config.height = ProgBoticsGame.V_HEIGHT;
+		config.title = ProgBoticsGame.TITLE;
 	}
 }

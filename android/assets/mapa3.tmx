@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="4">
+ <tileset firstgid="1" source="progBotsFinalTileset.tsx"/>
+ <layer name="Camada de Tiles 1" width="13" height="13" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJy7x8DA0D2KR/EgxgDD8lwX
+  </data>
+ </layer>
+ <layer name="Camada de Tiles 2" width="13" height="13" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBguI8FM0ExuvgDIH4HxIxIavBhZiD+ANUjCMRCSLgHjQ/Dwjj0dEIxKXrw4VE9qHoUgViJCKyMpIcUANLzD4j/k4BBCQ0AgegyXg==
+  </data>
+ </layer>
+ <layer name="Camada de Tiles 3" width="13" height="13" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfmAHE06E0sWAFEC+njXNQADFumk5zVwwsWEGEGnrEBToAABALBZU=
+  </data>
+ </layer>
+ <layer name="Camada de Tiles 6" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BwAwACpAAB
+  </data>
+ </layer>
+ <layer name="Camada de Tiles 4" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAvOAjEh/Dgw1j0XATiS3jw5VE9VNPzEIgf4cGPseihNQAAXAVCcw==
+  </data>
+ </layer>
+ <layer name="Camada de Tiles 5" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi+wGygHTAKqAIAYtQANw==
+  </data>
+ </layer>
+ <layer name="Camada de Tiles 7" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhawBCKc4A4l0S9NUBcS6RaXiDmI9F8WSCWwyM/CUpPBOLJUH4TkWYvBOLFUHoRkXqWEKkOGWwB4q1k6KMlAACG2Qnp
+  </data>
+ </layer>
+ <objectgroup name="Camada de Objetos 1" visible="0">
+  <object id="1" x="96" y="128" width="32" height="32"/>
+  <object id="2" x="177" y="162" width="22" height="63"/>
+ </objectgroup>
+</map>
