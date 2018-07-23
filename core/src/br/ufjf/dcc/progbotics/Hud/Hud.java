@@ -58,7 +58,7 @@ public class Hud implements Disposable {
 
 
     Button moveListaPersonagemEsquerda, moveListaPersonagemDireita;
-    Button moveListaComandosEsquerda, moveListaComandosDireita;
+    public Button moveListaComandosEsquerda, moveListaComandosDireita;
     Button comandoAndar, comandoGirarDireita, comandoGirarEsquerda, comandoEsperar;
     Button lupaPlus, lupaLess;
     Button moveCameraCima, moveCameraBaixo, moveCameraDireita, moveCameraEsquerda;
@@ -70,6 +70,8 @@ public class Hud implements Disposable {
    // ArrayList<Image>
 
     Skin mySkin;
+
+    public int controlaComandoEmTela;
 
     public Table table;
 
@@ -83,6 +85,8 @@ public class Hud implements Disposable {
         table.setDebug(true);
 
         enumeraPersonagem = 0;
+        controlaComandoEmTela = 0;
+
 
 
         mySkin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
@@ -351,22 +355,25 @@ public class Hud implements Disposable {
 
         int i;
 
-        if(player.comandos.size()<=5 && player.comandos.size()>0){
+        if(player.comandos.size()>0) {
 
-            for( i = 0; i<player.comandos.size(); i++) {
-                if(player.comandos.get(i) == Heroi.COMMAND_DOWN){
+            if (player.comandos.size() <= 5) {
+
+
+            for (i = 0; i < player.comandos.size(); i++) {
+                if (player.comandos.get(i) == Heroi.COMMAND_DOWN) {
                     this.comandos.get(i).setDrawable(getImagemComandoEsperarUp());
 
-                }else{
-                    if(player.comandos.get(i) == Heroi.COMMAND_LEFT){
+                } else {
+                    if (player.comandos.get(i) == Heroi.COMMAND_LEFT) {
                         this.comandos.get(i).setDrawable(getImagemComandoGirarEsquerdaUp());
 
-                    }else{
-                        if(player.comandos.get(i) == Heroi.COMMAND_RIGHT){
+                    } else {
+                        if (player.comandos.get(i) == Heroi.COMMAND_RIGHT) {
                             this.comandos.get(i).setDrawable(getImagemComandoGirarDireitaUp());
 
-                        }else{
-                            if(player.comandos.get(i) == Heroi.COMMAND_UP){
+                        } else {
+                            if (player.comandos.get(i) == Heroi.COMMAND_UP) {
                                 this.comandos.get(i).setDrawable(getImagemComandoAndarUp());
 
                             }
@@ -375,10 +382,34 @@ public class Hud implements Disposable {
                 }
             }
 
-            for(i=player.comandos.size(); i<5; i++){
-                this.comandos.get(i).setDrawable(getImagemAddComando());
+            for (i = player.comandos.size(); i < 5; i++) {
+                this.comandos.get(i+controlaComandoEmTela).setDrawable(getImagemAddComando());
             }
+        }else{
 
+                for (i = 0; i < 5; i++) {
+                    if (player.comandos.get(i+controlaComandoEmTela) == Heroi.COMMAND_DOWN) {
+                        this.comandos.get(i).setDrawable(getImagemComandoEsperarUp());
+
+                    } else {
+                        if (player.comandos.get(i+controlaComandoEmTela) == Heroi.COMMAND_LEFT) {
+                            this.comandos.get(i).setDrawable(getImagemComandoGirarEsquerdaUp());
+
+                        } else {
+                            if (player.comandos.get(i+controlaComandoEmTela) == Heroi.COMMAND_RIGHT) {
+                                this.comandos.get(i).setDrawable(getImagemComandoGirarDireitaUp());
+
+                            } else {
+                                if (player.comandos.get(i+controlaComandoEmTela) == Heroi.COMMAND_UP) {
+                                    this.comandos.get(i).setDrawable(getImagemComandoAndarUp());
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
 
         }else{
             for(i=0; i<5; i++){

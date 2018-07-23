@@ -259,6 +259,7 @@ public class PlayScreen implements Screen {
                         break;
                     default:
                 }
+                hud.controlaComandoEmTela=0;
              //   hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
@@ -284,6 +285,7 @@ public class PlayScreen implements Screen {
                         break;
                     default:
                 }
+                hud.controlaComandoEmTela=0;
              //   hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
@@ -292,6 +294,42 @@ public class PlayScreen implements Screen {
                 return true;
             }
         });
+
+
+        hud.moveListaComandosDireita.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+
+               if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
+                   hud.controlaComandoEmTela++;
+               }
+                System.out.println(hud.controlaComandoEmTela);
+                System.out.println(players.get(activePlayer).comandos.size());
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.moveListaComandosEsquerda.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+
+                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela!=0){
+                    hud.controlaComandoEmTela--;
+                }
+                System.out.println(hud.controlaComandoEmTela);
+                System.out.println(players.get(activePlayer).comandos.size());
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
 
 
 

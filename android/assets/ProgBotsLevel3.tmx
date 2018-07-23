@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="11">
+ <tileset firstgid="1" source="progBotsFinalTileset.tsx"/>
+ <layer name="Camada de Tiles 1" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxzZWBgcCMBuwNxKBCHkYDDgTgViNNIwOlAbDGKRzEQAwCAmSmL
+  </data>
+ </layer>
+ <layer name="Paredes" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhagBGImYCYmQQ9gkAsBMTCNNajCMRKQKxMgp5RQBgAAEYDANk=
+  </data>
+ </layer>
+ <layer name="detalhesCenario" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgZQJxIdWI0dQV+gM+NxLqf1mAgwgcAhwQAcg==
+  </data>
+ </layer>
+ <objectgroup name="Limites">
+  <object id="6" x="0" y="0" width="419" height="419"/>
+  <object id="7" x="-143" y="242"/>
+  <object id="8" x="0" y="0" width="419" height="80"/>
+  <object id="9" x="-78" y="180"/>
+  <object id="10" x="172" y="103" width="70" height="101"/>
+ </objectgroup>
+</map>
