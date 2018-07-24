@@ -54,6 +54,7 @@ public class Hud implements Disposable {
     TextureRegionDrawable imagemLupaPlusUp, imagemLupaPlusDown, imagemLupaLessUp, imagemLupaLessDown;
     TextureRegionDrawable imagemMoveCameraCimaUp, imagemMoveCameraCimaDown, imagemMoveCameraEsquerdaUp, imagemMoveCameraEsquerdaDown, imagemMoveCameraBaixoUp, imagemMoveCameraBaixoDown, imagemMoveCameraDireitaUp, imagemMoveCameraDireitaDown;
     TextureRegionDrawable pbBlue, pbRed, pbYellow;
+    TextureRegionDrawable imagemRestartUp, imagemRestartDown;
     Image progBotBlue, progBotRed, progBotYellow;
 
 
@@ -62,6 +63,7 @@ public class Hud implements Disposable {
     Button comandoAndar, comandoGirarDireita, comandoGirarEsquerda, comandoEsperar;
     Button lupaPlus, lupaLess;
     Button moveCameraCima, moveCameraBaixo, moveCameraDireita, moveCameraEsquerda;
+    public Button restartLevel;
     Image personagem;
     ArrayList<Image> comandos;
 
@@ -188,6 +190,11 @@ public class Hud implements Disposable {
         moveCameraDireita = new ImageButton(imagemMoveCameraDireitaUp, imagemMoveCameraDireitaDown);
      //   moveCameraDireita.setPosition(Gdx.graphics.getWidth()/2 - moveCameraCima.getWidth(), lupaPlus.getY());
 
+        imagemRestartUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaUp.png"))));
+        imagemRestartDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/girarDireitaDown.png"))));
+        sizeCorretoImagem(imagemRestartUp,imagemRestartDown,50);
+        restartLevel = new ImageButton(imagemRestartUp, imagemRestartDown);
+
         comandos = new ArrayList<Image>();
 
 
@@ -195,6 +202,11 @@ public class Hud implements Disposable {
 
         table.add(lupaLess).expandY().top();
         table.add(lupaPlus).top();
+        table.add();
+        table.add();
+        table.add();
+        table.add();
+        table.add(restartLevel).top();
         table.row();
         table.add(moveCameraDireita);
         table.row();
