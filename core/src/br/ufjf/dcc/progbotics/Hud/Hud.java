@@ -374,7 +374,13 @@ public class Hud implements Disposable {
 
             for (i = 0; i < player.comandos.size(); i++) {
                 if (player.comandos.get(i) == Heroi.COMMAND_DOWN) {
+
+
                     this.comandos.get(i).setDrawable(getImagemComandoEsperarUp());
+                            //getImage()
+                            //setDrawable();
+
+
 
                 } else {
                     if (player.comandos.get(i) == Heroi.COMMAND_LEFT) {

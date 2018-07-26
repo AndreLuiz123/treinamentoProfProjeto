@@ -2,6 +2,7 @@ package br.ufjf.dcc.progbotics.Sprites;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -32,7 +33,7 @@ public class Alavanca extends Sprite{
     public Alavanca (World world, PlayScreen screen, Heroi personagem){
 
         super(screen.getAtlas().findRegion("lpc-2"));
-          S=64;
+         S=64;
          t=640;
 
         ligada = false;
@@ -55,6 +56,8 @@ public class Alavanca extends Sprite{
         setRegion(alavanca);
 
         this.personagem = personagem;
+
+
 
         defineAlavanca();
 
@@ -83,6 +86,7 @@ public class Alavanca extends Sprite{
         //   t=640;
         }else{
            // t=S*10 - 19;
+
             alavanca =  new TextureRegion(getTexture(), S*10 - 19, S*7+15, S, S);
         }
 
@@ -94,7 +98,7 @@ public class Alavanca extends Sprite{
             if(!ligada){
                 ligada=true;
             }
-
+        System.out.println("teste");
 
     }
 
@@ -106,7 +110,7 @@ public class Alavanca extends Sprite{
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / ProgBoticsGame.PPM);
+        shape.setRadius(64/6 / ProgBoticsGame.PPM);
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
@@ -119,7 +123,7 @@ public class Alavanca extends Sprite{
 
     public void colideComHeroi(){
 
-        System.out.println("teste");
+
 
     }
 
@@ -134,6 +138,10 @@ public class Alavanca extends Sprite{
     public TextureRegion getAlavanca() {
         return alavanca;
     }
+
+
+
+
 }
 
 

@@ -109,7 +109,7 @@ public class Heroi extends Sprite {
         linkParadoFrente = new TextureRegion(getTexture(), 0, S*corRobo+1, S, S);
         paradoCostas = new TextureRegion(getTexture(), 0, S*corRobo-1, S, S);
         paradoLado = new TextureRegion(getTexture(), 0, S*corRobo, S, S);
-        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, 24 / ProgBoticsGame.PPM, 24 / ProgBoticsGame.PPM);
+        setBounds(this.b2body.getPosition().x, this.b2body.getPosition().y, S / ProgBoticsGame.PPM, S / ProgBoticsGame.PPM);
         setRegion(linkParadoFrente);
 
 
@@ -166,7 +166,7 @@ public class Heroi extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / ProgBoticsGame.PPM);
+        shape.setRadius(64/6 / ProgBoticsGame.PPM);
 
         fdef.shape = shape;
 

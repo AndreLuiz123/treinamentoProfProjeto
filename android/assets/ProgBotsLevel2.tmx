@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="6">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="27">
  <tileset firstgid="1" source="progBotsFinalTileset.tsx"/>
  <layer name="Camada de Tiles 1" width="13" height="13">
   <data encoding="base64" compression="zlib">
@@ -11,9 +11,29 @@
    eJxjYKAPYARiJiBmBuIcPBhZnSAQCwGxMBDX4MHI6pDZ+MConoHRowjESkCsTEAPsjoAXIMK/Q==
   </data>
  </layer>
+ <objectgroup name="Paredes">
+  <object id="7" x="96" y="63" width="224" height="65"/>
+  <object id="8" x="333" y="73" width="68" height="335"/>
+  <object id="9" x="11" y="71" width="72" height="338"/>
+ </objectgroup>
+ <objectgroup name="robos">
+  <object id="15" name="r1" x="192" y="352" width="32" height="32"/>
+  <object id="16" name="r1" x="128" y="352" width="32" height="32"/>
+  <object id="17" name="r1" x="256" y="352" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="alavancas">
+  <object id="24" name="a1" x="128" y="192" width="32" height="32"/>
+  <object id="25" name="a1" x="192" y="192" width="32" height="32"/>
+  <object id="26" name="a1" x="256" y="192" width="32" height="32"/>
+ </objectgroup>
  <layer name="detalhesCenario" width="13" height="13">
   <data encoding="base64" compression="zlib">
    eJxjYBh+QJwMdcTqIQeIDYB+Su3EB5DDilh7KHEPANJIAMs=
+  </data>
+ </layer>
+ <layer name="AlavancasDesenho" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF1AA+ULoHSvcSoScGSs+B0nOp6qLhAwCghQL7
   </data>
  </layer>
 </map>

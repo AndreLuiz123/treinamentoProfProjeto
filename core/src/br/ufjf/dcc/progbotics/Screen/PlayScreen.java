@@ -38,7 +38,7 @@ import java.util.List;
 
 public class PlayScreen implements Screen {
 
-    public static String[] LEVEL_NAMES = {"ProgBotsLevel1.tmx", "ProgBotsLevel2.tmx"};
+    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel2.tmx"};
     private ProgBoticsGame game;
     private Texture texture, constantBackground;
     private OrthographicCamera gameCam;
@@ -71,8 +71,8 @@ public class PlayScreen implements Screen {
 
         this.setLevel(this.level);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
-        gameCam.position.set(1.0500001f,0.55000037f,0.0f);
-        gameCam.zoom = 0.54999983f;
+        gameCam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/4,0.0f);
+        //gameCam.zoom = 0.54999983f;
 
         b2dr = new Box2DDebugRenderer();
 
@@ -88,7 +88,7 @@ public class PlayScreen implements Screen {
 
     public void setLevel(Integer level) {
         this.level = level;
-       // setActivePlayer(1);
+        //setActivePlayer(0);
         activePlayer = 0;
         switch (this.level) {
             case 0:
@@ -96,6 +96,10 @@ public class PlayScreen implements Screen {
                 map = mapLoader.load(LEVEL_NAMES[this.level]);
                 world = new World(new Vector2(0, 0), true);
                 players = new ArrayList<Heroi>();
+
+
+                new B2WorldCreator(world, map, players, this);
+
                 players.add(new Heroi(world, this, "heroi1"));
                 players.add(new Heroi(world, this, "heroi2"));
                 players.add(new Heroi(world, this, "heroi3"));
@@ -111,7 +115,8 @@ public class PlayScreen implements Screen {
                 alavancas.get(0).b2body.setTransform(85 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
                 alavancas.get(1).b2body.setTransform(145 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
                 alavancas.get(2).b2body.setTransform(115 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
-                new B2WorldCreator(world, map);
+
+
                 world.setContactListener(new WorldContactListener(players, alavancas));
 
                 break;
@@ -135,7 +140,7 @@ public class PlayScreen implements Screen {
                 alavancas.get(0).b2body.setTransform(35 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
                 alavancas.get(1).b2body.setTransform(95 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
                 alavancas.get(2).b2body.setTransform(65 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
-                new B2WorldCreator(world, map);
+                new B2WorldCreator(world, map, players, this);
                 world.setContactListener(new WorldContactListener(players, alavancas));
                 break;
             case 2:
@@ -247,6 +252,7 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 setActivePlayer(getActivePlayer() - 1);
+                System.out.println(getActivePlayer());
                 switch (getActivePlayer()){
                     case 0:
                         hud.getPersonagem().setDrawable(hud.getPbRed());
@@ -273,6 +279,7 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 setActivePlayer(getActivePlayer() + 1);
+                System.out.println(getActivePlayer());
                 switch (getActivePlayer()){
                     case 0:
                         hud.getPersonagem().setDrawable(hud.getPbRed());
@@ -385,6 +392,9 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
+                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
+                    hud.controlaComandoEmTela++;
+                }
                //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
@@ -398,6 +408,9 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
+                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
+                    hud.controlaComandoEmTela++;
+                }
                //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
@@ -411,6 +424,9 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
+                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
+                    hud.controlaComandoEmTela++;
+                }
               //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
@@ -424,6 +440,9 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
+                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
+                    hud.controlaComandoEmTela++;
+                }
           //       hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
@@ -437,7 +456,7 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 setLevel(level);
-
+                hud.controlaComandoEmTela=0;
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -513,7 +532,10 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
+
         gamePort.update(width, height);
+        hud.stage.getViewport().update(width,height);
+
     }
 
     @Override
