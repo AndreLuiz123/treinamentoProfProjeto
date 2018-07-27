@@ -194,7 +194,7 @@ public class Heroi extends Sprite {
     private void andaParaEsquerda() {
         posX = b2body.getPosition().x;
         posX2 = getX();
-        vX = -0.3f;
+        vX = -0.5f;
         rotacao = 180;
         cooldown = 1.0f;
     }
@@ -202,7 +202,7 @@ public class Heroi extends Sprite {
     private void andaParaBaixo() {
         posY = b2body.getPosition().y;
         posY2 = getY();
-        vY = -0.3f;
+        vY = -0.5f;
         rotacao = 270;
         cooldown = 1.0f;
     }
@@ -210,7 +210,7 @@ public class Heroi extends Sprite {
     private void andaParaCima() {
         posY = b2body.getPosition().y;
         posY2 = getY();
-        vY = 0.3f;
+        vY = 0.5f;
         rotacao = 90;
         cooldown = 1.0f;
     }
@@ -218,7 +218,7 @@ public class Heroi extends Sprite {
     private void andaParaDireita() {
         posX = b2body.getPosition().x;
         posX2 = getX();
-        vX = 0.3f;
+        vX = 0.5f;
         rotacao = 0;
         cooldown = 1.0f;
     }

@@ -97,8 +97,9 @@ public class Alavanca extends Sprite{
 
             if(!ligada){
                 ligada=true;
+                System.out.println("teste");
             }
-        System.out.println("teste");
+
 
     }
 

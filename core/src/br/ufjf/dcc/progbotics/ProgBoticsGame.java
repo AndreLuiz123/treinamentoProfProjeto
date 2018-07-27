@@ -22,7 +22,7 @@ public class ProgBoticsGame extends Game {
 		PlayScreen playscreen = new PlayScreen(this);
 		MenuScreen menu = new MenuScreen(this);
 		//Screen playscreen = new ScreenTestes(this);
-		playscreen.setLevel(0);
+		//playscreen.setLevel(1);
 		setScreen(menu);
 	}
 

@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="16" tileheight="16" nextobjectid="13">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="16">
  <tileset firstgid="1" name="ProgBotsFinalTileSet" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="900" columns="30">
   <image source="Interior-Furniture.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="901" source="progBotsFinalTileset.tsx"/>
- <layer name="Camada de Tiles 1" width="13" height="13">
+ <layer name="chao" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJzzZmRg8B7Fo3gQYwCoSTIt
+   eJx7w8zA8GYUj+JBjAGZNJ3I
   </data>
  </layer>
- <layer name="ParedesLaser" width="13" height="13">
+ <layer name="Camada de Tiles 2" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYICAD6wQjA3gkiOkh4+NdD3DzR4dKrkNZDc2+/HJgezGZj8+OS82CMYGcMllsEEwNoBLro0NgrEBdDkAmyghew==
+   eJxjYBgFo2BwAwACpAAB
   </data>
  </layer>
- <objectgroup name="limitesDoMapa">
-  <object id="1" x="-6" y="1" width="6" height="207"/>
-  <object id="2" x="208" y="0" width="11" height="208"/>
-  <object id="3" x="0" y="-11" width="208" height="11"/>
-  <object id="4" x="2" y="209" width="206" height="8"/>
-  <object id="11" x="36" y="2" width="29" height="208"/>
-  <object id="12" x="151" y="1" width="26" height="207"/>
+ <objectgroup name="Camada de Objetos 1">
+  <object id="13" x="288" y="112"/>
+  <object id="14" x="347" y="236"/>
+  <object id="15" x="153" y="199"/>
  </objectgroup>
 </map>

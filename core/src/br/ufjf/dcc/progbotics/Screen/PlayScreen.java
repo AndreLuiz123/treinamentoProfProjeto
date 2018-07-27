@@ -38,7 +38,7 @@ import java.util.List;
 
 public class PlayScreen implements Screen {
 
-    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel2.tmx"};
+    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel1.tmx"};
     private ProgBoticsGame game;
     private Texture texture, constantBackground;
     private OrthographicCamera gameCam;
@@ -70,8 +70,6 @@ public class PlayScreen implements Screen {
 
 
         this.setLevel(this.level);
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
-        gameCam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/4,0.0f);
         //gameCam.zoom = 0.54999983f;
 
         b2dr = new Box2DDebugRenderer();
@@ -98,24 +96,22 @@ public class PlayScreen implements Screen {
                 players = new ArrayList<Heroi>();
 
 
-                new B2WorldCreator(world, map, players, this);
-
                 players.add(new Heroi(world, this, "heroi1"));
                 players.add(new Heroi(world, this, "heroi2"));
                 players.add(new Heroi(world, this, "heroi3"));
-                players.get(0).b2body.setTransform(85 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
-                players.get(1).b2body.setTransform(115 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
-                players.get(2).b2body.setTransform(145 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(0).b2body.setTransform(145 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(1).b2body.setTransform(205 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(2).b2body.setTransform(265 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
 
                 alavancas = new ArrayList<Alavanca>();
 
+                new B2WorldCreator(world, map, players, this);
                 alavancas.add(new Alavanca(world, this, players.get(0)));
                 alavancas.add(new Alavanca(world, this, players.get(1)));
                 alavancas.add(new Alavanca(world, this, players.get(2)));
-                alavancas.get(0).b2body.setTransform(85 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
-                alavancas.get(1).b2body.setTransform(145 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
-                alavancas.get(2).b2body.setTransform(115 / ProgBoticsGame.PPM, 100 / ProgBoticsGame.PPM, 0);
-
+                alavancas.get(0).b2body.setTransform(145 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
+                alavancas.get(1).b2body.setTransform(205 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
+                alavancas.get(2).b2body.setTransform(265 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
 
                 world.setContactListener(new WorldContactListener(players, alavancas));
 
@@ -125,6 +121,7 @@ public class PlayScreen implements Screen {
                 map = mapLoader.load(LEVEL_NAMES[this.level]);
                 world = new World(new Vector2(0, 0), true);
                 players = new ArrayList<Heroi>();
+
                 players.add(new Heroi(world, this, "heroi1"));
                 players.add(new Heroi(world, this, "heroi2"));
                 players.add(new Heroi(world, this, "heroi3"));
@@ -149,7 +146,8 @@ public class PlayScreen implements Screen {
             default:
         }
 
-
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
+        gameCam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/4,0.0f);
     }
 
     public TextureAtlas getAtlas() {
@@ -275,6 +273,71 @@ public class PlayScreen implements Screen {
             }
         });
 
+        for(int i=0; i<5; i++) {
+            final Integer xx = i;
+            hud.apagaComando.get(i).addListener(new InputListener() {
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    System.out.println(hud.controlaComandoEmTela+" - "+xx);
+                    players.get(activePlayer).comandos.remove(hud.controlaComandoEmTela+xx);
+                }
+
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                    return true;
+                }
+            });
+        }
+        /*
+        hud.apagaComando.get(1).addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.apagaComando.get(2).addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.apagaComando.get(3).addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+        hud.apagaComando.get(4).addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+        */
         hud.getMoveListaPersonagemDireita().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -457,6 +520,8 @@ public class PlayScreen implements Screen {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 setLevel(level);
                 hud.controlaComandoEmTela=0;
+                activePlayer=0;
+                hud.getPersonagem().setDrawable(hud.getPbRed());
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -484,15 +549,16 @@ public class PlayScreen implements Screen {
             player.update(dt);
         }
 
-        for (Alavanca alavanca : alavancas) {
+           for (Alavanca alavanca : alavancas) {
             alavanca.update(dt);
         }
-        if (alavancas.get(0).isLigada() && alavancas.get(1).isLigada() && alavancas.get(2).isLigada()) {
+/*     if (alavancas.get(0).isLigada() && alavancas.get(1).isLigada() && alavancas.get(2).isLigada()) {
             //game.setScreen(new PlayScreen2(game));
             System.out.println("Passou para fase :"+this.level+1);
             this.setLevel(this.level+1);
+            hud.getPersonagem().setDrawable(hud.getPbRed());
         }
-
+*/
 
     }
 
