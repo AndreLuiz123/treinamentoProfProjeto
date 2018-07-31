@@ -70,6 +70,7 @@ public class Hud implements Disposable {
     public ArrayList<Button> apagaComando;
     Image personagem;
     ArrayList<Image> comandos;
+    ArrayList<Label> numeracaoComando;
 
     Label numeroPersonagem;
 
@@ -202,9 +203,10 @@ public class Hud implements Disposable {
         imagemApagaComandoDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/close-button-down.png"))));
 
 
+
         comandos = new ArrayList<Image>();
         apagaComando = new ArrayList<Button>();
-
+        numeracaoComando = new ArrayList<Label>();
         //  moveListaPersonagemDireita.setStyle();
 
         table.add(lupaLess).expandY().top();
@@ -231,10 +233,14 @@ public class Hud implements Disposable {
             Stack stack = new Stack();
             comandos.add(new Image(imagemAddComando));
             apagaComando.add(new ImageButton(imagemApagaComandoUp, imagemApagaComandoDown));
+            numeracaoComando.add(new Label(String.format("%02d",controlaComandoEmTela+i), new Label.LabelStyle(new BitmapFont(), Color.PURPLE)));
             //  comandos.get(i).setSize(50,50);
             stack.add(comandos.get(i));
+            stack.add(numeracaoComando.get(i));
             stack.add(apagaComando.get(i));
             table.add(stack).expandX().fill(true);
+
+
             //   comandos.get(i).setPosition(moveListaComandosEsquerda.getX() + (i+1)*comandos.get(i).getWidth(), moveListaComandosEsquerda.getY());
             //    stage.addActor(comandos.get(i));
 
@@ -476,8 +482,16 @@ public class Hud implements Disposable {
             } else {
                 this.comandos.get(i).setDrawable(getImagemAddComando());
             }
+
+            numeracaoComando.get(i).setText(String.format("%02d",controlaComandoEmTela+i));
         }
+
+
     }
+
+
+
+
         /*
         if(player.comandos.size()>0) {
 
