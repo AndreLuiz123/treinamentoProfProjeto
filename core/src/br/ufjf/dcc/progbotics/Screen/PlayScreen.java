@@ -279,7 +279,9 @@ public class PlayScreen implements Screen {
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     System.out.println(hud.controlaComandoEmTela+" - "+xx);
-                    players.get(activePlayer).comandos.remove(hud.controlaComandoEmTela+xx);
+                    if(hud.controlaComandoEmTela+xx< players.get(activePlayer).comandos.size())
+                        players.get(activePlayer).comandos.remove(hud.controlaComandoEmTela+xx);
+
                 }
 
                 @Override
@@ -370,9 +372,8 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 
-               if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
-                   hud.controlaComandoEmTela++;
-               }
+                  hud.controlaComandoEmTela++;
+
                 System.out.println(hud.controlaComandoEmTela);
                 System.out.println(players.get(activePlayer).comandos.size());
             }
@@ -387,7 +388,7 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 
-                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela!=0){
+                if( hud.controlaComandoEmTela!=0){
                     hud.controlaComandoEmTela--;
                 }
                 System.out.println(hud.controlaComandoEmTela);
