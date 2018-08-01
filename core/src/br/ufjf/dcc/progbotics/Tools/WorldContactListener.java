@@ -43,6 +43,7 @@ public class WorldContactListener implements ContactListener {
             Alavanca alavanca = (Alavanca) fixB.getUserData();
             if(alavanca.getHeroi().equals(heroi)){
                 alavanca.alavancaChangeState();
+                System.out.println("ALAVANCA LIGADA");
             }
         }
 

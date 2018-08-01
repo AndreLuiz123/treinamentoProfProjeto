@@ -24,15 +24,6 @@
   <object id="15" name="r1" x="128" y="352" width="32" height="32"/>
   <object id="16" name="r1" x="192" y="352" width="32" height="32"/>
   <object id="17" name="r1" x="256" y="352" width="32" height="32"/>
-  <object id="42" x="128" y="288">
-   <ellipse/>
-  </object>
-  <object id="43" x="192" y="288">
-   <ellipse/>
-  </object>
-  <object id="44" x="256" y="288">
-   <ellipse/>
-  </object>
  </objectgroup>
  <objectgroup name="alavancas">
   <object id="24" name="a1" x="128" y="192" width="32" height="32"/>
@@ -46,7 +37,7 @@
  </layer>
  <layer name="AlavancasDesenho" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF1AA+ULoHSvcSoScGSs+B0nOp6qLhAwCghQL7
+   eJxjYBgF1AA+ULoXSvcMlEOGIQAA2tcBZg==
   </data>
  </layer>
 </map>

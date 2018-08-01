@@ -38,7 +38,7 @@ import java.util.List;
 
 public class PlayScreen implements Screen {
 
-    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel1.tmx"};
+    public static String[] LEVEL_NAMES = {"ProgBotsLevel3.tmx", "ProgBotsLevel1.tmx"};
     private ProgBoticsGame game;
     private Texture texture, constantBackground;
     private OrthographicCamera gameCam;
@@ -99,19 +99,19 @@ public class PlayScreen implements Screen {
                 players.add(new Heroi(world, this, "heroi1"));
                 players.add(new Heroi(world, this, "heroi2"));
                 players.add(new Heroi(world, this, "heroi3"));
-                players.get(0).b2body.setTransform(145 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
-                players.get(1).b2body.setTransform(205 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
-                players.get(2).b2body.setTransform(265 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(0).b2body.setTransform(325 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(1).b2body.setTransform(355 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(2).b2body.setTransform(385 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
 
                 alavancas = new ArrayList<Alavanca>();
 
-                new B2WorldCreator(world, map, players, this);
-                alavancas.add(new Alavanca(world, this, players.get(0)));
+                new B2WorldCreator(world, map, players,alavancas, this);
+               /* alavancas.add(new Alavanca(world, this, players.get(0)));
                 alavancas.add(new Alavanca(world, this, players.get(1)));
                 alavancas.add(new Alavanca(world, this, players.get(2)));
-                alavancas.get(0).b2body.setTransform(145 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
-                alavancas.get(1).b2body.setTransform(205 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
-                alavancas.get(2).b2body.setTransform(265 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
+                alavancas.get(0).b2body.setTransform(315 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
+                alavancas.get(1).b2body.setTransform(355 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
+                alavancas.get(2).b2body.setTransform(395 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);     */
 
                 world.setContactListener(new WorldContactListener(players, alavancas));
 
@@ -131,17 +131,43 @@ public class PlayScreen implements Screen {
 
                 alavancas = new ArrayList<Alavanca>();
 
-                alavancas.add(new Alavanca(world, this, players.get(0)));
+              /*  alavancas.add(new Alavanca(world, this, players.get(0)));
                 alavancas.add(new Alavanca(world, this, players.get(1)));
                 alavancas.add(new Alavanca(world, this, players.get(2)));
                 alavancas.get(0).b2body.setTransform(35 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
                 alavancas.get(1).b2body.setTransform(95 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
-                alavancas.get(2).b2body.setTransform(65 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
-                new B2WorldCreator(world, map, players, this);
+                alavancas.get(2).b2body.setTransform(65 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0); */
+                new B2WorldCreator(world, map, players,alavancas, this);
                 world.setContactListener(new WorldContactListener(players, alavancas));
                 break;
-            case 2:
 
+            case 2:
+                mapLoader = new TmxMapLoader();
+                map = mapLoader.load(LEVEL_NAMES[this.level]);
+                world = new World(new Vector2(0, 0), true);
+                players = new ArrayList<Heroi>();
+
+
+                players.add(new Heroi(world, this, "heroi1"));
+                players.add(new Heroi(world, this, "heroi2"));
+                players.add(new Heroi(world, this, "heroi3"));
+                players.get(0).b2body.setTransform(145 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(1).b2body.setTransform(205 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+                players.get(2).b2body.setTransform(265 / ProgBoticsGame.PPM, 31 / ProgBoticsGame.PPM, 0);
+
+                alavancas = new ArrayList<Alavanca>();
+
+                new B2WorldCreator(world, map, players,alavancas, this);
+                /*alavancas.add(new Alavanca(world, this, players.get(0)));
+                alavancas.add(new Alavanca(world, this, players.get(1)));
+                alavancas.add(new Alavanca(world, this, players.get(2)));
+                alavancas.get(0).b2body.setTransform(145 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
+                alavancas.get(1).b2body.setTransform(205 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
+                alavancas.get(2).b2body.setTransform(265 / ProgBoticsGame.PPM, 200 / ProgBoticsGame.PPM, 0);
+                                                                                                                   */
+                world.setContactListener(new WorldContactListener(players, alavancas));
+
+                break;
 
             default:
         }
@@ -571,13 +597,13 @@ public class PlayScreen implements Screen {
            for (Alavanca alavanca : alavancas) {
             alavanca.update(dt);
         }
-/*     if (alavancas.get(0).isLigada() && alavancas.get(1).isLigada() && alavancas.get(2).isLigada()) {
+      if (alavancas.get(0).isLigada() && alavancas.get(1).isLigada() && alavancas.get(2).isLigada()) {
             //game.setScreen(new PlayScreen2(game));
             System.out.println("Passou para fase :"+this.level+1);
             this.setLevel(this.level+1);
             hud.getPersonagem().setDrawable(hud.getPbRed());
         }
-*/
+
 
     }
 

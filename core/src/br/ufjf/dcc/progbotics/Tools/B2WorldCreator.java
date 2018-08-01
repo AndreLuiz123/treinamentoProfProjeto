@@ -26,7 +26,7 @@ import br.ufjf.dcc.progbotics.Sprites.Heroi;
 
 public class B2WorldCreator {
 
-    public B2WorldCreator(World world, TiledMap map, List<Heroi> players, PlayScreen screen){
+    public B2WorldCreator(World world, TiledMap map, List<Heroi> players,List<Alavanca> alavancas, PlayScreen screen){
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -66,7 +66,7 @@ public class B2WorldCreator {
 
          hn = 0;
 
-      /*  for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             bdef.type = BodyDef.BodyType.StaticBody;
             bdef.position.set((rect.getX() + rect.getWidth() / 2) / ProgBoticsGame.PPM, (rect.getY() + rect.getHeight() / 2) / ProgBoticsGame.PPM);
@@ -78,10 +78,11 @@ public class B2WorldCreator {
             body.createFixture(fdef);
 
             Alavanca h = new Alavanca(world, screen, players.get(hn));
-            h.b2body = body;
+          //  h.b2body = body;
             h.b2body.setTransform(bdef.position.x, bdef.position.y, 0);
+            alavancas.add(h);
 
-        }*/
+        }
 
 
 

@@ -1,26 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="11">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="48">
  <tileset firstgid="1" source="progBotsFinalTileset.tsx"/>
  <layer name="Camada de Tiles 1" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJxzZWBgcCMBuwNxKBCHkYDDgTgViNNIwOlAbDGKRzEQAwCAmSmL
+   eJxzZWBgcCMBuwNxKBCHkYDDgTgViNNIwOlAnIEHBwFxMAE16DgJiJNJ1EMKHoxuGg5+BACzXUFJ
   </data>
  </layer>
  <layer name="Paredes" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBhagBGImYCYmQQ9gkAsBMTCNNajCMRKQKxMgp5RQBgAAEYDANk=
+   eJxjYKA/yMGDcYEaPHgoAyYoZgZiViL1CEGxMBCLEqlHCYqVSXXgIAAAhDMHGA==
   </data>
  </layer>
+ <objectgroup name="Paredes">
+  <object id="7" x="96" y="63" width="224" height="65"/>
+  <object id="32" x="0" y="0" height="416"/>
+  <object id="33" x="0" y="0" width="416" height="3"/>
+  <object id="34" x="416" y="0" height="416"/>
+  <object id="35" x="0" y="416" width="416" height="-12"/>
+  <object id="45" x="141" y="229" width="100" height="66"/>
+  <object id="46" x="256" y="256" width="32" height="32"/>
+  <object id="47" x="96" y="256" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="robos">
+  <object id="15" name="r1" x="128" y="352" width="32" height="32"/>
+  <object id="16" name="r1" x="192" y="352" width="32" height="32"/>
+  <object id="17" name="r1" x="256" y="352" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="alavancas">
+  <object id="24" name="a1" x="330" y="115" width="10" height="10"/>
+  <object id="25" name="a1" x="361" y="116" width="10" height="10"/>
+  <object id="26" name="a1" x="394" y="113" width="10" height="11"/>
+ </objectgroup>
  <layer name="detalhesCenario" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBgZQJxIdWI0dQV+gM+NxLqf1mAgwgcAhwQAcg==
+   eJxjYBj6wAeIe4G4Z6AdQgJgAWJGIBYHYjEi9YgAsSBUvTgJdimS5rRBBwA4mQIL
   </data>
  </layer>
- <objectgroup name="Limites">
-  <object id="6" x="0" y="0" width="419" height="419"/>
-  <object id="7" x="-143" y="242"/>
-  <object id="8" x="0" y="0" width="419" height="80"/>
-  <object id="9" x="-78" y="180"/>
-  <object id="10" x="172" y="103" width="70" height="101"/>
- </objectgroup>
+ <layer name="AlavancasDesenho" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BwAwACpAAB
+  </data>
+ </layer>
 </map>
