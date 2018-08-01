@@ -217,16 +217,23 @@ public class Hud implements Disposable {
         table.add();
         table.add(restartLevel).top();
         table.row();
-        table.add(moveCameraDireita);
-        table.row();
-        table.bottom();
+
         table.add(moveListaPersonagemEsquerda).expandX();
         table.add(personagem).expandX().fill(true);
         table.add(moveListaPersonagemDireita).expandX();
+        table.add();
+        table.add();
+        table.add();
+        table.add(moveCameraDireita);
+        table.row();
+        table.bottom();
+        table.add().expandX();
+        table.add().expandX();
         table.add(comandoGirarDireita).expandX();
         table.add(comandoGirarEsquerda).expandX();
         table.add(comandoAndar).expandX();
         table.add(comandoEsperar).expandX();
+        table.add().expandX();
         table.row();
         table.add(moveListaComandosEsquerda).expandX();
         for (int i = 0; i < 5; i++) {
@@ -483,7 +490,7 @@ public class Hud implements Disposable {
                 this.comandos.get(i).setDrawable(getImagemAddComando());
             }
 
-            numeracaoComando.get(i).setText(String.format("%02d",controlaComandoEmTela+i));
+            numeracaoComando.get(i).setText(String.format("%02d",controlaComandoEmTela+i+1));
         }
 
 
