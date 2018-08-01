@@ -38,7 +38,7 @@ import java.util.List;
 
 public class PlayScreen implements Screen {
 
-    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel3.tmx"};
+    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel3.tmx", "ProgBotsLevel4.tmx"};
     private ProgBoticsGame game;
     private Texture texture, constantBackground;
     private OrthographicCamera gameCam;
@@ -121,12 +121,12 @@ public class PlayScreen implements Screen {
                 world = new World(new Vector2(0, 0), true);
                 players = new ArrayList<Heroi>();
 
-                players.add(new Heroi(world, this, "heroi1"));
+               /* players.add(new Heroi(world, this, "heroi1"));
                 players.add(new Heroi(world, this, "heroi2"));
                 players.add(new Heroi(world, this, "heroi3"));
                 players.get(0).b2body.setTransform(130 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
                 players.get(1).b2body.setTransform(160 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
-                players.get(2).b2body.setTransform(180 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);
+                players.get(2).b2body.setTransform(180 / ProgBoticsGame.PPM, 90 / ProgBoticsGame.PPM, 0);*/
 
                 alavancas = new ArrayList<Alavanca>();
 
@@ -619,7 +619,7 @@ public class PlayScreen implements Screen {
         renderer.render();
         //players.get(0).draw(game.batch);
         //Só esta ai para indicar onde estão os objetos. Quando tudo estiver concluido, esta linha pode ser apagada.
-        b2dr.render(world, gameCam.combined);
+        //b2dr.render(world, gameCam.combined);
 
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
