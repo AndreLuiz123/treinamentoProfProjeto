@@ -46,9 +46,10 @@ public class B2WorldCreator {
 
         }
         int hn = 1;
-      /*  for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                bdef.type = BodyDef.BodyType.DynamicBody;
+                bdef.type = BodyDef.BodyType.StaticBody;
+
                 bdef.position.set((rect.getX() + rect.getWidth() / 2) / ProgBoticsGame.PPM, (rect.getY() + rect.getHeight() / 2) / ProgBoticsGame.PPM);
 
                 body = world.createBody(bdef);
@@ -58,11 +59,12 @@ public class B2WorldCreator {
                 body.createFixture(fdef);
 
                 Heroi h = new Heroi(world, screen, "heroi" + hn++);
-                h.b2body = body;
+                //h.b2body = body;
                 players.add(h);
                 h.b2body.setTransform(bdef.position.x, bdef.position.y, 0);
+            body.setTransform(10000000,1000,0);
 
-        }*/
+        }
 
          hn = 0;
 
@@ -78,9 +80,11 @@ public class B2WorldCreator {
             body.createFixture(fdef);
 
             Alavanca h = new Alavanca(world, screen, players.get(hn));
+            hn++;
           //  h.b2body = body;
             h.b2body.setTransform(bdef.position.x, bdef.position.y, 0);
             alavancas.add(h);
+            System.out.println(alavancas.size());
 
         }
 
