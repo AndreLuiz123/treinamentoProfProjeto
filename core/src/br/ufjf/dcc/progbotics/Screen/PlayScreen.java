@@ -452,6 +452,24 @@ public class PlayScreen implements Screen {
             }
         });
 
+
+        hud.comandoEsperar.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_WAIT);
+                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
+                    hud.controlaComandoEmTela++;
+                }
+                //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+
         hud.getComandoAndar().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {

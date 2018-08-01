@@ -25,6 +25,7 @@ public class Heroi extends Sprite {
     public static final String COMMAND_RIGHT = "right";
     public static final String COMMAND_LEFT = "left";
     public static final String COMMAND_DOWN = "down";
+    public static final String COMMAND_WAIT = "wait";
     private final String tipo;
     public World world;
     public Body b2body;
@@ -139,6 +140,8 @@ public class Heroi extends Sprite {
         } else if(comandos.get(comandoAtual).equals(COMMAND_DOWN)){
             vX=0;
             andaParaBaixo();
+        } else if(comandos.get(comandoAtual).equals(COMMAND_WAIT)){
+            naoAnda();
         }
 
             comandoAtual++;
@@ -223,6 +226,15 @@ public class Heroi extends Sprite {
         cooldown = 1.0f;
     }
 
+    private void naoAnda() {
+        posX = b2body.getPosition().x;
+        posX2 = getX();
+        vX = 0;
+        vY = 0;
+        rotacao = 0;
+        cooldown = 1.0f;
+    }
+
     public void movimentos(float dt) {
 
         if(cooldown>0) {
@@ -233,29 +245,6 @@ public class Heroi extends Sprite {
             vX = 0;
             vY = 0;
         }
-        /*
-        if (vX != 0) {
-            setPosition(b2body.getPosition().x, b2body.getPosition().y - getHeight() / 2);
-            xis = vX;
-        } else {
-            setPosition(posX2 + xis, b2body.getPosition().y - getHeight() / 2);
-        }
-
-        if (vY != 0) {
-            setPosition(b2body.getPosition().x, b2body.getPosition().y - getHeight() / 2);
-            ypi = vY;
-        } else {
-            setPosition(b2body.getPosition().x, posY2 + ypi);
-        }
-
-
-       if ((b2body.getPosition().x - posX >= 0.3) || (b2body.getPosition().x - posX <= -0.3)) {
-            vX = 0;
-        }
-        if ((b2body.getPosition().y - posY >= 0.3) || (b2body.getPosition().y - posY <= -0.3)) {
-            vY = 0;
-        }
-        */
 
     }
 
