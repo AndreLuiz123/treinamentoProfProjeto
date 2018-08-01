@@ -21,14 +21,14 @@
   <object id="35" x="0" y="416" width="416" height="-12"/>
  </objectgroup>
  <objectgroup name="robos">
-  <object id="15" name="r1" x="138" y="360" width="10" height="10"/>
-  <object id="16" name="r1" x="202" y="360" width="10" height="10"/>
-  <object id="17" name="r1" x="266" y="360" width="10" height="10"/>
+  <object id="15" name="r1" x="128" y="352" width="32" height="32"/>
+  <object id="16" name="r2" x="192" y="352" width="32" height="32"/>
+  <object id="17" name="r3" x="256" y="352" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="alavancas">
-  <object id="24" name="a1" x="138" y="212" width="10" height="10"/>
-  <object id="25" name="a1" x="202" y="212" width="10" height="10"/>
-  <object id="26" name="a1" x="266" y="212" width="10" height="10"/>
+  <object id="24" name="a1" x="128" y="192" width="32" height="32"/>
+  <object id="25" name="a2" x="192" y="192" width="32" height="32"/>
+  <object id="26" name="a3" x="256" y="192" width="32" height="32"/>
  </objectgroup>
  <layer name="detalhesCenario" width="13" height="13">
   <data encoding="base64" compression="zlib">

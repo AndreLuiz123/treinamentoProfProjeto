@@ -23,9 +23,9 @@
   <object id="17" name="r1" x="334" y="205" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="alavancas">
-  <object id="24" name="a1" x="203" y="372" width="10" height="10"/>
-  <object id="25" name="a1" x="41" y="216" width="10" height="10"/>
-  <object id="26" name="a1" x="379" y="215" width="10" height="11"/>
+  <object id="24" name="a1" x="386" y="212" width="10" height="10"/>
+  <object id="25" name="a1" x="192" y="352" width="32" height="32"/>
+  <object id="26" name="a1" x="49" y="213" width="10" height="11"/>
  </objectgroup>
  <layer name="detalhesCenario" width="13" height="13">
   <data encoding="base64" compression="zlib">
@@ -34,7 +34,7 @@
  </layer>
  <layer name="AlavancasDesenho" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BwAwACpAAB
+   eJxjYBgF5IIeEtT60MwVgw/0Utk8AFFzAWY=
   </data>
  </layer>
 </map>

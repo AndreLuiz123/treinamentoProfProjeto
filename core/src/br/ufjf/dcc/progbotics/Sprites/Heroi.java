@@ -53,7 +53,7 @@ public class Heroi extends Sprite {
 
 
 
-    public Heroi(World world, PlayScreen screen, String tipo) {
+    public Heroi(World world, PlayScreen screen, String tipo, Body body) {
         
         super(screen.getAtlas().findRegion("lpc-2"));
         this.tipo = tipo;
@@ -106,7 +106,8 @@ public class Heroi extends Sprite {
         frames.clear();
 
 
-        defineHeroi(tipo);
+        //defineHeroi(tipo);
+        setB2Body(body);
         linkParadoFrente = new TextureRegion(getTexture(), 0, S*corRobo+1, S, S);
         paradoCostas = new TextureRegion(getTexture(), 0, S*corRobo-1, S, S);
         paradoLado = new TextureRegion(getTexture(), 0, S*corRobo, S, S);
@@ -125,6 +126,21 @@ public class Heroi extends Sprite {
 
     }
 
+
+    public void setB2Body(Body body){
+        this.b2body = body;
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(64/6 / ProgBoticsGame.PPM);
+
+        fdef.shape = shape;
+
+        Fixture fixture = b2body.createFixture(fdef);
+
+        fixture.setUserData(this);
+        body.setUserData(this);
+
+    }
 
     public void rodaComando(){
         if(cooldown > 0 || comandoAtual<0 || comandoAtual > comandos.size()-1) return;

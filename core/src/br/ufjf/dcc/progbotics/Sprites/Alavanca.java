@@ -3,11 +3,14 @@ package br.ufjf.dcc.progbotics.Sprites;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.Map;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import br.ufjf.dcc.progbotics.ProgBoticsGame;
 import br.ufjf.dcc.progbotics.Screen.PlayScreen;
@@ -30,7 +33,7 @@ public class Alavanca extends Sprite{
 
     public  int t, S;
 
-    public Alavanca (World world, PlayScreen screen, Heroi personagem){
+    public Alavanca (World world, PlayScreen screen, Heroi personagem, Body body){
 
         super(screen.getAtlas().findRegion("lpc-2"));
          S=64;
@@ -59,7 +62,8 @@ public class Alavanca extends Sprite{
 
 
 
-        defineAlavanca();
+        //defineAlavanca();
+        setB2Body(body);
 
     }
 
@@ -99,8 +103,11 @@ public class Alavanca extends Sprite{
                 ligada=true;
                 System.out.println("teste");
             }
+    }
 
-
+    public void setB2Body(Body body){
+        this.b2body = body;
+        body.setUserData(this);
     }
 
     public void defineAlavanca() {

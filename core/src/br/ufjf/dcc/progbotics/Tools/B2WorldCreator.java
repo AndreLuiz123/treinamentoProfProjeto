@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -48,44 +49,29 @@ public class B2WorldCreator {
         int hn = 1;
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                bdef.type = BodyDef.BodyType.StaticBody;
-
+                bdef.type = BodyDef.BodyType.DynamicBody;
                 bdef.position.set((rect.getX() + rect.getWidth() / 2) / ProgBoticsGame.PPM, (rect.getY() + rect.getHeight() / 2) / ProgBoticsGame.PPM);
-
                 body = world.createBody(bdef);
-
                 shape.setAsBox(rect.getWidth() / 2 / ProgBoticsGame.PPM, rect.getHeight() / 2 / ProgBoticsGame.PPM);
                 fdef.shape = shape;
-                body.createFixture(fdef);
-
-                Heroi h = new Heroi(world, screen, "heroi" + hn++);
-                //h.b2body = body;
+                Heroi h = new Heroi(world, screen, "heroi" + hn++, body);
+                h.setB2Body(body);
                 players.add(h);
-                h.b2body.setTransform(bdef.position.x, bdef.position.y, 0);
-            body.setTransform(10000000,1000,0);
-
         }
-
          hn = 0;
-
         for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             bdef.type = BodyDef.BodyType.StaticBody;
             bdef.position.set((rect.getX() + rect.getWidth() / 2) / ProgBoticsGame.PPM, (rect.getY() + rect.getHeight() / 2) / ProgBoticsGame.PPM);
-
             body = world.createBody(bdef);
-
             shape.setAsBox(rect.getWidth() / 2 / ProgBoticsGame.PPM, rect.getHeight() / 2 / ProgBoticsGame.PPM);
             fdef.shape = shape;
-            body.createFixture(fdef);
-
-            Alavanca h = new Alavanca(world, screen, players.get(hn));
+            Alavanca h = new Alavanca(world, screen, players.get(hn), body);
             hn++;
-          //  h.b2body = body;
-            h.b2body.setTransform(bdef.position.x, bdef.position.y, 0);
+            body.createFixture(fdef);
+            h.setB2Body(body);
+            //h.b2body.setTransform(bdef.position.x, bdef.position.y, 0);
             alavancas.add(h);
-            System.out.println(alavancas.size());
-
         }
 
 

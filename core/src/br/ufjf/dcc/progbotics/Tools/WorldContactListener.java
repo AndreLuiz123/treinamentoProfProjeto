@@ -23,6 +23,7 @@ public class WorldContactListener implements ContactListener {
     public WorldContactListener(List<Heroi> players, List<Alavanca> alavancas) {
         this.players = players;
         this.alavancas = alavancas;
+        System.out.println(alavancas.toString());
     }
 
     @Override
@@ -32,15 +33,17 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA, fixB;
         fixA = contact.getFixtureA();
         fixB = contact.getFixtureB();
+        System.out.println(fixA +" "+fixB);
+        System.out.println(fixA.getUserData() +" "+fixB.getUserData());
         if(fixA== null || fixB == null) return;
-        if(fixA.getUserData()== null || fixB.getUserData() == null) return;
+        if(fixA.getBody().getUserData()== null || fixB.getBody().getUserData() == null) return;
 
-        System.out.println("A: "+ fixA.getUserData());
-        System.out.println("B: "+ fixB.getUserData());
+        System.out.println("A: "+ fixA.getBody().getUserData());
+        System.out.println("B: "+ fixB.getBody().getUserData());
 
-        if(fixA.getUserData().getClass().equals(Heroi.class) && fixB.getUserData().getClass().equals(Alavanca.class)){
-            Heroi heroi = (Heroi) fixA.getUserData();
-            Alavanca alavanca = (Alavanca) fixB.getUserData();
+        if(fixA.getBody().getUserData().getClass().equals(Alavanca.class) && fixB.getBody().getUserData().getClass().equals(Heroi.class)){
+            Heroi heroi = (Heroi) fixB.getBody().getUserData();
+            Alavanca alavanca = (Alavanca) fixA.getBody().getUserData();
             if(alavanca.getHeroi().equals(heroi)){
                 alavanca.alavancaChangeState();
                 System.out.println("ALAVANCA LIGADA");
