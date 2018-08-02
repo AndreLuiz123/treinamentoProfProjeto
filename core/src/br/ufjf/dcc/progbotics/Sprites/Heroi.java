@@ -66,25 +66,7 @@ public class Heroi extends Sprite {
         stateTimer = 0;
         andandoDireita = true;
 
-
-
-        if(tipo.equals("heroi3")){
-            corRobo=13;
-        }else{
-            if(tipo.equals("heroi2")){
-                corRobo=5;
-            }else{
-                if(tipo.equals("heroi1")){
-                    corRobo=9;
-                }else{
-                    if(tipo.equals("heroi4")){
-                        corRobo=17;
-                    }
-                }
-            }
-        }
-
-
+        getCorRobo();
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
@@ -300,14 +282,12 @@ public class Heroi extends Sprite {
         if((vX<0 || andandoDireita)&& region.isFlipX()){
             region.flip(true,false);
             andandoDireita = true;
-        }else{
-            if((vX>0 || !andandoDireita)&& !region.isFlipX()){
+        }else if((vX>0 || !andandoDireita)&& !region.isFlipX()){
                 region.flip(true,false);
                 andandoDireita = false;
             }
-        }
 
-        //stateTimer = estadoAtual == estadoAnterior ? stateTimer + dt : 0;
+
         stateTimer =  stateTimer<0.4?stateTimer + 2*dt:0 ;
         estadoAnterior = estadoAtual;
 
@@ -318,37 +298,36 @@ public class Heroi extends Sprite {
 
     private State getState() {
 
-
-
         if(vX != 0) {
-
             return State.AndandoLado;
-
-        }else{
-            if(vY > 0){
-                return State.AndandoCostas;
-            }else{
-                if(vY<0){
-                    return State.AndandoFrente;
-                }else{
-                    if(rotacao == 90){
-                        return  State.ParadoCostas;
-                    }else{
-                        if(rotacao == 270){
-                            return  State.ParadoFrente;
-                        }else{
-                            if(rotacao==0 || rotacao==180){
-                                return  State.ParadoLado;
-                            }
-                        }
-                    }
-
-                }
-            }
+        }else if(vY > 0){
+            return State.AndandoCostas;
+        }else if(vY<0){
+            return State.AndandoFrente;
+        }else if(rotacao == 90){
+            return  State.ParadoCostas;
+        }else if(rotacao == 270){
+            return  State.ParadoFrente;
+        }else if(rotacao==0 || rotacao==180){
+            return  State.ParadoLado;
         }
+
         return State.ParadoFrente;
     }
 
+    public int getCorRobo() {
+        if(tipo.equals("heroi3")){
+            corRobo=13;
+        }else if(tipo.equals("heroi2")){
+            corRobo=5;
+        }else if(tipo.equals("heroi1")){
+            corRobo=9;
+        }else if(tipo.equals("heroi4")){
+            corRobo=17;
+        }
+
+        return corRobo;
+    }
 
     public String getTipo() {
         return tipo;
