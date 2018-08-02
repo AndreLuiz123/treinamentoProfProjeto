@@ -203,16 +203,13 @@ public class Heroi extends Sprite {
 
     public void update(float dt) {
 
-         setRegion(getFrame(dt));
+        setRegion(getFrame(dt));
 
         if(pode)
         rodaComando();
 
-
         movimentos(dt);
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - 0.28f*getHeight());
-
-
     }
 
 

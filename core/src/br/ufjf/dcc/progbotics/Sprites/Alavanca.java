@@ -70,17 +70,8 @@ public class Alavanca extends Sprite{
 
 
     public void update(float dt){
-
-        //vermelho: TextureRegion(getTexture(), S*9, S*4+5, S, S);
-        //azul:  TextureRegion(getTexture(), S*9, S*6+5, S, S);
-        //amarelo:  TextureRegion(getTexture(), S*9, S*7+15, S, S);
-        //apagado: new TextureRegion(getTexture(), S*10 - 19, S*7+15, S, S);
-
         estadoAlavanca();
-       // alavanca = new TextureRegion(getTexture(), S*9, S*7+15, S, S);
         setBounds(this.b2body.getPosition().x - 15/ ProgBoticsGame.PPM, this.b2body.getPosition().y - 5/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM);
-//        setRegion(alavanca);
-
     }
 
     public void estadoAlavanca(){

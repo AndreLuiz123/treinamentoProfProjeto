@@ -55,7 +55,6 @@ public class PlayScreen implements Screen {
     private int activePlayer = 0;
     private TextureAtlas atlas;
     private Hud hud;
-    private boolean bul;
 
 
     public PlayScreen(ProgBoticsGame game) {
@@ -68,15 +67,9 @@ public class PlayScreen implements Screen {
 
         constantBackground = new Texture("backgroundProgBotics.png");
 
-
         this.setLevel(this.level);
-        //gameCam.zoom = 0.54999983f;
 
         b2dr = new Box2DDebugRenderer();
-
-
-        bul = false;
-
 
         hud = new Hud(game.batch);
 
@@ -123,77 +116,6 @@ public class PlayScreen implements Screen {
     }
 
     public void handleInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
-          /*  hud.atualizaEnumeracaoPersonagem(false, true);
-            setActivePlayer(getActivePlayer() - 1);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));*/
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
-          /*  hud.atualizaEnumeracaoPersonagem(true, false);
-            setActivePlayer(getActivePlayer() + 1);
-            hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));*/
-
-        }
-
-
-
-            if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-                players.get(getActivePlayer()).comandoAtual = 0;
-                players.get(getActivePlayer()).pode = false;
-            }
-
-            if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-                players.get(getActivePlayer()).rodaComando();
-            }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
-                players.get(getActivePlayer()).pode = true;
-            }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-            /*for (Heroi player : players) {
-                if (!player.comandos.isEmpty()) {
-                    player.comandoAtual = 0;
-                    player.pode = true;
-                }
-            }*/
-            gameCam.translate(0.05f, 0, 0);
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-            /*for (Heroi player : players) {
-                if (!player.comandos.isEmpty()) {
-                    player.comandoAtual = 0;
-                    player.pode = true;
-                }
-            }*/
-            gameCam.translate(-0.05f, 0, 0);
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            /*for (Heroi player : players) {
-                if (!player.comandos.isEmpty()) {
-                    player.comandoAtual = 0;
-                    player.pode = true;
-                }
-            }*/
-            gameCam.translate(0, -0.05f, 0);
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-            /*for (Heroi player : players) {
-                if (!player.comandos.isEmpty()) {
-                    player.comandoAtual = 0;
-                    player.pode = true;
-                }
-            }*/
-            gameCam.translate(0, 0.05f, 0);
-            System.out.println("zoom:"+gameCam.zoom);
-            System.out.println("gameCam position:"+gameCam.position);
-        }
-
 
         hud.getMoveListaPersonagemEsquerda().addListener(new InputListener(){
             @Override
@@ -216,11 +138,9 @@ public class PlayScreen implements Screen {
                     default:
                 }
                 hud.controlaComandoEmTela=0;
-             //   hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -233,65 +153,15 @@ public class PlayScreen implements Screen {
                     System.out.println(hud.controlaComandoEmTela+" - "+xx);
                     if(hud.controlaComandoEmTela+xx< players.get(activePlayer).comandos.size())
                         players.get(activePlayer).comandos.remove(hud.controlaComandoEmTela+xx);
-
                 }
 
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-
                     return true;
                 }
             });
         }
-        /*
-        hud.apagaComando.get(1).addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
-                return true;
-            }
-        });
-
-        hud.apagaComando.get(2).addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
-                return true;
-            }
-        });
-
-        hud.apagaComando.get(3).addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
-                return true;
-            }
-        });
-
-        hud.apagaComando.get(4).addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
-                return true;
-            }
-        });
-        */
         hud.getMoveListaPersonagemDireita().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -313,11 +183,9 @@ public class PlayScreen implements Screen {
                     default:
                 }
                 hud.controlaComandoEmTela=0;
-             //   hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -334,7 +202,6 @@ public class PlayScreen implements Screen {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -351,7 +218,6 @@ public class PlayScreen implements Screen {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -368,11 +234,9 @@ public class PlayScreen implements Screen {
                         player.pode = true;
                     }
                 }
-
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -386,7 +250,6 @@ public class PlayScreen implements Screen {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -402,7 +265,6 @@ public class PlayScreen implements Screen {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -419,7 +281,6 @@ public class PlayScreen implements Screen {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -432,11 +293,9 @@ public class PlayScreen implements Screen {
                 if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
                     hud.controlaComandoEmTela++;
                 }
-               //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -448,11 +307,9 @@ public class PlayScreen implements Screen {
                 if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
                     hud.controlaComandoEmTela++;
                 }
-               //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -464,11 +321,9 @@ public class PlayScreen implements Screen {
                 if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
                     hud.controlaComandoEmTela++;
                 }
-              //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -480,8 +335,7 @@ public class PlayScreen implements Screen {
                 if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
                     hud.controlaComandoEmTela++;
                 }
-          //       hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-            }
+          }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
@@ -499,7 +353,6 @@ public class PlayScreen implements Screen {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-
                 return true;
             }
         });
@@ -510,30 +363,24 @@ public class PlayScreen implements Screen {
 
     public void update(float dt) {
 
-
         hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-
         world.step(dt, 6, 2);
-
         gameCam.update();
-
         renderer.setView(gameCam);
 
         for (Heroi player : players) {
             player.update(dt);
         }
-
-           for (Alavanca alavanca : alavancas) {
+        for (Alavanca alavanca : alavancas) {
             alavanca.update(dt);
         }
-      if (alavancasLigadas()) {
+
+        if (alavancasLigadas()) {
             //game.setScreen(new PlayScreen2(game));
             System.out.println("Passou para fase :"+this.level+1);
             this.setLevel(this.level+1);
             hud.getPersonagem().setDrawable(hud.getPbRed());
         }
-
-
     }
 
     public boolean alavancasLigadas(){
@@ -557,9 +404,8 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        //players.get(0).draw(game.batch);
         //Só esta ai para indicar onde estão os objetos. Quando tudo estiver concluido, esta linha pode ser apagada.
-        b2dr.render(world, gameCam.combined);
+        //b2dr.render(world, gameCam.combined);
 
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -567,14 +413,9 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
 
         game.batch.begin();
-      //  game.batch.draw(constantBackground,0,0);
-      //  for (Alavanca alavanca : alavancas) {
-      //      alavanca.draw(game.batch);
-     //   }
         for (Heroi player : players) {
             player.draw(game.batch);
         }
-
         game.batch.end();
 
         hud.stage.draw();
