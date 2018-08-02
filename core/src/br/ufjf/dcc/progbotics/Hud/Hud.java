@@ -55,7 +55,10 @@ public class Hud implements Disposable {
     TextureRegionDrawable imagemAddComando;
     TextureRegionDrawable imagemLupaPlusUp, imagemLupaPlusDown, imagemLupaLessUp, imagemLupaLessDown;
     TextureRegionDrawable imagemMoveCameraCimaUp, imagemMoveCameraCimaDown, imagemMoveCameraEsquerdaUp, imagemMoveCameraEsquerdaDown, imagemMoveCameraBaixoUp, imagemMoveCameraBaixoDown, imagemMoveCameraDireitaUp, imagemMoveCameraDireitaDown;
-    TextureRegionDrawable pbBlue, pbRed, pbYellow;
+    TextureRegionDrawable pbBlue;
+    TextureRegionDrawable pbRed;
+    TextureRegionDrawable pbYellow;
+    public TextureRegionDrawable pbGreen;
     TextureRegionDrawable imagemRestartUp, imagemRestartDown;
     TextureRegionDrawable imagemApagaComandoUp, imagemApagaComandoDown;
     Image progBotBlue, progBotRed, progBotYellow;
@@ -93,7 +96,7 @@ public class Hud implements Disposable {
         table = new Table();
         table.top();
         table.setFillParent(true);
-        table.setDebug(true);
+//        table.setDebug(true);
 
         enumeraPersonagem = 0;
         controlaComandoEmTela = 0;
@@ -124,7 +127,7 @@ public class Hud implements Disposable {
         //   moveListaComandosEsquerda.setPosition(0, 0);
 
 
-        table.setDebug(true);
+        //table.setDebug(true);
 
         moveListaComandosDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
         //  moveListaComandosDireita.setPosition(Gdx.graphics.getWidth()/2 - moveListaPersonagemDireita.getWidth(), 0);
@@ -164,6 +167,7 @@ public class Hud implements Disposable {
         pbBlue = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/BlueProgBot.png"))));
         pbRed = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/RedProgBot.png"))));
         pbYellow = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/YellowProgBot.png"))));
+        pbGreen = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/GreenProgBot.png"))));
         progBotBlue = new Image(pbRed);
         personagem = new Image(pbRed);
         personagem.setSize(50, 50);
@@ -470,6 +474,8 @@ public class Hud implements Disposable {
     public TextureRegionDrawable getPbYellow() {
         return pbYellow;
     }
+
+    public TextureRegionDrawable getPbGreen() { return pbGreen;}
 
     public Image getPersonagem() {
         return personagem;

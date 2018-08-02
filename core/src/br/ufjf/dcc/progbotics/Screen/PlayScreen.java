@@ -38,7 +38,7 @@ import java.util.List;
 
 public class PlayScreen implements Screen {
 
-    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel2b.tmx","ProgBotsLevel3.tmx", "ProgBotsLevel4.tmx"};
+    public static String[] LEVEL_NAMES = {"ProgBotsLevel1.tmx", "ProgBotsLevel2b.tmx","ProgBotsLevel3b.tmx", "ProgBotsLevel4.tmx","ProgBotsLevel5.tmx","ProgBotsLevel6.tmx","ProgBotsLevel7.tmx"};
     private ProgBoticsGame game;
     private Texture texture, constantBackground;
     private OrthographicCamera gameCam;
@@ -210,6 +210,9 @@ public class PlayScreen implements Screen {
                     case 2:
                         hud.getPersonagem().setDrawable(hud.getPbYellow());
                         break;
+                    case 3:
+                        hud.getPersonagem().setDrawable(hud.pbGreen);
+                        break;
                     default:
                 }
                 hud.controlaComandoEmTela=0;
@@ -303,6 +306,9 @@ public class PlayScreen implements Screen {
                         break;
                     case 2:
                         hud.getPersonagem().setDrawable(hud.getPbYellow());
+                        break;
+                    case 3:
+                        hud.getPersonagem().setDrawable(hud.getPbGreen());
                         break;
                     default:
                 }
@@ -520,7 +526,7 @@ public class PlayScreen implements Screen {
            for (Alavanca alavanca : alavancas) {
             alavanca.update(dt);
         }
-      if (alavancas.get(0).isLigada() && alavancas.get(1).isLigada() && alavancas.get(2).isLigada()) {
+      if (alavancasLigadas()) {
             //game.setScreen(new PlayScreen2(game));
             System.out.println("Passou para fase :"+this.level+1);
             this.setLevel(this.level+1);
@@ -528,6 +534,16 @@ public class PlayScreen implements Screen {
         }
 
 
+    }
+
+    public boolean alavancasLigadas(){
+
+        for(int i=0; i<alavancas.size(); i++){
+            if(!alavancas.get(i).isLigada())
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -552,9 +568,9 @@ public class PlayScreen implements Screen {
 
         game.batch.begin();
       //  game.batch.draw(constantBackground,0,0);
-        for (Alavanca alavanca : alavancas) {
-            alavanca.draw(game.batch);
-        }
+      //  for (Alavanca alavanca : alavancas) {
+      //      alavanca.draw(game.batch);
+     //   }
         for (Heroi player : players) {
             player.draw(game.batch);
         }

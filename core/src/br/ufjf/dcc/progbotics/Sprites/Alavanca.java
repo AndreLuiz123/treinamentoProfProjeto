@@ -35,14 +35,14 @@ public class Alavanca extends Sprite{
 
     public Alavanca (World world, PlayScreen screen, Heroi personagem, Body body){
 
-        super(screen.getAtlas().findRegion("lpc-2"));
+     //   super(screen.getAtlas().findRegion("lpc-2"));
          S=64;
          t=640;
 
         ligada = false;
         this.world = world;
 
-        if(personagem.getTipo().equals("heroi1") ){
+    /*    if(personagem.getTipo().equals("heroi1") ){
             alavanca = new  TextureRegion(getTexture(), S*9, S*4+5, S, S);
         }else{
             if(personagem.getTipo().equals("heroi2") ){
@@ -53,10 +53,10 @@ public class Alavanca extends Sprite{
                 }
             }
         }
-
+*/
         setBounds(0,0,24/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM);
 
-        setRegion(alavanca);
+      //  setRegion(alavanca);
 
         this.personagem = personagem;
 
@@ -79,7 +79,7 @@ public class Alavanca extends Sprite{
         estadoAlavanca();
        // alavanca = new TextureRegion(getTexture(), S*9, S*7+15, S, S);
         setBounds(this.b2body.getPosition().x - 15/ ProgBoticsGame.PPM, this.b2body.getPosition().y - 5/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM,24/ ProgBoticsGame.PPM);
-        setRegion(alavanca);
+//        setRegion(alavanca);
 
     }
 
@@ -91,7 +91,7 @@ public class Alavanca extends Sprite{
         }else{
            // t=S*10 - 19;
 
-            alavanca =  new TextureRegion(getTexture(), S*10 - 19, S*7+15, S, S);
+         //   alavanca =  new TextureRegion(getTexture(), S*10 - 19, S*7+15, S, S);
         }
 
     }

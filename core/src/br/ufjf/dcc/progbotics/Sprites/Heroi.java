@@ -46,7 +46,7 @@ public class Heroi extends Sprite {
     public int comandoAtual = -1;
     public boolean pode= false;
     public boolean click= false;
-
+    float vel;
     int corRobo;
 
 
@@ -76,6 +76,10 @@ public class Heroi extends Sprite {
             }else{
                 if(tipo.equals("heroi1")){
                     corRobo=9;
+                }else{
+                    if(tipo.equals("heroi4")){
+                        corRobo=17;
+                    }
                 }
             }
         }
@@ -123,6 +127,8 @@ public class Heroi extends Sprite {
         posY2 = b2body.getPosition().y;
         xis = 0;
         ypi = 0;
+
+        vel = 0.4f;
 
     }
 
@@ -213,7 +219,7 @@ public class Heroi extends Sprite {
     private void andaParaEsquerda() {
         posX = b2body.getPosition().x;
         posX2 = getX();
-        vX = -0.5f;
+        vX = -1*vel;
         rotacao = 180;
         cooldown = 1.0f;
     }
@@ -221,7 +227,7 @@ public class Heroi extends Sprite {
     private void andaParaBaixo() {
         posY = b2body.getPosition().y;
         posY2 = getY();
-        vY = -0.5f;
+        vY = -1*vel;
         rotacao = 270;
         cooldown = 1.0f;
     }
@@ -229,7 +235,7 @@ public class Heroi extends Sprite {
     private void andaParaCima() {
         posY = b2body.getPosition().y;
         posY2 = getY();
-        vY = 0.5f;
+        vY = vel;
         rotacao = 90;
         cooldown = 1.0f;
     }
@@ -237,7 +243,7 @@ public class Heroi extends Sprite {
     private void andaParaDireita() {
         posX = b2body.getPosition().x;
         posX2 = getX();
-        vX = 0.5f;
+        vX = vel;
         rotacao = 0;
         cooldown = 1.0f;
     }
