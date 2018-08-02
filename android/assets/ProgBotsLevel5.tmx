@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="67">
+ <tileset firstgid="1" source="progBotsFinalTileset.tsx"/>
+ <layer name="Camada de Tiles 1" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxzZWBgcCMBuwNxKBCHkYDDgTgViNNIwOlAnEEAZxKhBhlXAHEliXpIxYPRTUPdjwDdzEJR
+  </data>
+ </layer>
+ <layer name="Paredes" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBieIAeJnYtD3AdNTw0SuxaHeAyF7kJ3AzHuRHcDMe4kF+ByAy534nMDLneSCgCeogqp
+  </data>
+ </layer>
+ <objectgroup name="Paredes">
+  <object id="32" x="0" y="0" height="416"/>
+  <object id="33" x="0" y="0" width="416" height="94"/>
+  <object id="35" x="0" y="416" width="416" height="-12"/>
+  <object id="34" x="416" y="0" height="416"/>
+  <object id="56" x="256" y="128" width="32" height="64"/>
+  <object id="57" x="160" y="128" width="32" height="64"/>
+  <object id="58" x="64" y="128" width="32" height="64"/>
+  <object id="59" x="64" y="224" width="32" height="64"/>
+  <object id="60" x="64" y="320" width="32" height="64"/>
+  <object id="61" x="160" y="320" width="32" height="64"/>
+  <object id="62" x="160" y="224" width="32" height="64"/>
+  <object id="63" x="256" y="224" width="32" height="64"/>
+  <object id="64" x="256" y="320" width="32" height="64"/>
+  <object id="65" x="352" y="320" width="32" height="64"/>
+  <object id="66" x="352" y="224" width="32" height="64"/>
+ </objectgroup>
+ <objectgroup name="robos">
+  <object id="15" name="r1" x="0" y="352" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="alavancas">
+  <object id="24" name="a1" x="352" y="128" width="32" height="64"/>
+ </objectgroup>
+ <layer name="detalhesCenario" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BwAwACpAAB
+  </data>
+ </layer>
+ <layer name="AlavancasDesenho" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BwAwACpAAB
+  </data>
+ </layer>
+</map>
