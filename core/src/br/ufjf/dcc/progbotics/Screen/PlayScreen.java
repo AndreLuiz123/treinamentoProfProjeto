@@ -38,7 +38,7 @@ import java.util.List;
 
 public class PlayScreen implements Screen {
 
-    public static String[] LEVEL_NAMES = {"ProgBotsLevel1.tmx", "ProgBotsLevel2b.tmx","ProgBotsLevel3b.tmx", "ProgBotsLevel4.tmx","ProgBotsLevel5.tmx","ProgBotsLevel6.tmx","ProgBotsLevel7.tmx"};
+    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel2b.tmx","ProgBotsLevel3b.tmx", "ProgBotsLevel4.tmx","ProgBotsLevel5.tmx","ProgBotsLevel6.tmx","ProgBotsLevel7.tmx","ProgBotsLevel8.tmx","ProgBotsLevel9.tmx"};
     private ProgBoticsGame game;
     private Texture texture, constantBackground;
     private OrthographicCamera gameCam;
@@ -211,7 +211,7 @@ public class PlayScreen implements Screen {
                         hud.getPersonagem().setDrawable(hud.getPbYellow());
                         break;
                     case 3:
-                        hud.getPersonagem().setDrawable(hud.pbGreen);
+                        hud.getPersonagem().setDrawable(hud.getPbGreen());
                         break;
                     default:
                 }
@@ -227,7 +227,7 @@ public class PlayScreen implements Screen {
 
         for(int i=0; i<5; i++) {
             final Integer xx = i;
-            hud.apagaComando.get(i).addListener(new InputListener() {
+            hud.getApagaComando().get(i).addListener(new InputListener() {
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     System.out.println(hud.controlaComandoEmTela+" - "+xx);
@@ -323,7 +323,7 @@ public class PlayScreen implements Screen {
         });
 
 
-        hud.moveListaComandosDireita.addListener(new InputListener(){
+        hud.getMoveListaComandosDireita().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 
@@ -339,7 +339,7 @@ public class PlayScreen implements Screen {
             }
         });
 
-        hud.moveListaComandosEsquerda.addListener(new InputListener(){
+        hud.getMoveListaComandosEsquerda().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 
@@ -408,7 +408,7 @@ public class PlayScreen implements Screen {
         });
 
 
-        hud.comandoEsperar.addListener(new InputListener(){
+        hud.getComandoEsperar().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_WAIT);
@@ -425,7 +425,7 @@ public class PlayScreen implements Screen {
         });
 
 
-        hud.getComandoAndar().addListener(new InputListener(){
+        hud.getComandoAndarCima().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
@@ -441,7 +441,7 @@ public class PlayScreen implements Screen {
             }
         });
 
-        hud.getComandoGirarDireita().addListener(new InputListener(){
+        hud.getComandoAndarDireita().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
@@ -457,7 +457,7 @@ public class PlayScreen implements Screen {
             }
         });
 
-        hud.getComandoGirarEsquerda().addListener(new InputListener(){
+        hud.getComandoAndarEsquerda().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
@@ -473,7 +473,7 @@ public class PlayScreen implements Screen {
             }
         });
 
-        hud.getComandoEsperar().addListener(new InputListener(){
+        hud.getComandoAndarBaixo().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
@@ -489,7 +489,7 @@ public class PlayScreen implements Screen {
             }
         });
 
-        hud.restartLevel.addListener(new InputListener(){
+        hud.getRestartLevel().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 setLevel(level);

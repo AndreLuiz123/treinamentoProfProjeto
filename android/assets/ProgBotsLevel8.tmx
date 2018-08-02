@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="32" tileheight="32" nextobjectid="97">
+ <tileset firstgid="1" source="progBotsFinalTileset.tsx"/>
+ <layer name="Camada de Tiles 1" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxzZWBgcCMBuwNxKBCHkYDDgTgViNNIwOlAnEEAZxKhBhlXAHEliXpIxYPRTUPdjwDdzEJR
+  </data>
+ </layer>
+ <layer name="Paredes" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBh6IJcMPbV0sKcXao8PGXbRGvgyQPzTQ6I+eoQbIXsAdpMFWw==
+  </data>
+ </layer>
+ <objectgroup name="Paredes">
+  <object id="32" x="0" y="0" height="416"/>
+  <object id="33" x="0" y="0" width="416" height="3"/>
+  <object id="34" x="416" y="0" height="416"/>
+  <object id="35" x="0" y="416" width="416" height="-12"/>
+  <object id="94" x="192" y="96" width="32" height="128"/>
+  <object id="95" x="192" y="288" width="32" height="128"/>
+  <object id="96" x="0" y="0" width="416" height="96"/>
+ </objectgroup>
+ <objectgroup name="robos">
+  <object id="15" name="r1" x="192" y="224" width="32" height="32"/>
+  <object id="16" name="r2" x="192" y="256" width="32" height="32"/>
+  <object id="17" name="r3" x="224" y="256" width="32" height="32"/>
+  <object id="70" name="r4" x="160" y="256" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="alavancas">
+  <object id="24" name="a1" x="224" y="192" width="32" height="32"/>
+  <object id="25" name="a2" x="160" y="192" width="32" height="32"/>
+  <object id="26" name="a3" x="224" y="288" width="32" height="32"/>
+  <object id="68" name="a4" x="160" y="288" width="32" height="32"/>
+ </objectgroup>
+ <layer name="detalhesCenario" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BwAwACpAAB
+  </data>
+ </layer>
+ <layer name="AlavancasDesenho" width="13" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BwAwACpAAB
+  </data>
+ </layer>
+</map>
