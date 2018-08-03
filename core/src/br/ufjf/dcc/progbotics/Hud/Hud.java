@@ -24,6 +24,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import br.ufjf.dcc.progbotics.ProgBoticsGame;
+import br.ufjf.dcc.progbotics.Screen.MenuScreen;
+import br.ufjf.dcc.progbotics.Screen.PlayScreen;
 import br.ufjf.dcc.progbotics.Sprites.Heroi;
 
 import java.util.ArrayList;
@@ -609,6 +611,40 @@ public class Hud implements Disposable {
             timeCount=0;
             timerJogo.setText(String.format("%2d", timer));
         }
+    }
+
+    public void zerouJogo(final ProgBoticsGame game){
+
+        table.clear();
+
+        Label fimJogo =  new Label("PARABÉNS! VOCÊ VENCEU!", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        fimJogo.setFontScale(2);
+
+
+        Button voltarAoMenu = new TextButton("Voltar ao menu",this.mySkin);
+        voltarAoMenu.setSize(Gdx.graphics.getWidth()/8,Gdx.graphics.getHeight()/10);
+        voltarAoMenu.setPosition(((Gdx.graphics.getWidth()/2)-voltarAoMenu.getWidth()/2),Gdx.graphics.getHeight()/2-voltarAoMenu.getHeight()/10);
+        voltarAoMenu.addListener(new InputListener(){
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                MenuScreen playscreen = new MenuScreen(game);
+                game.setScreen(playscreen);
+
+                return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
+
+        table.add(fimJogo).expandX();
+        table.row();
+        table.add(voltarAoMenu).expandX();
+
     }
 
 

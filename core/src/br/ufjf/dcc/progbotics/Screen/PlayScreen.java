@@ -453,7 +453,6 @@ public class PlayScreen implements Screen {
         }
 
 
-
         if (alavancasLigadas()) {
             //game.setScreen(new PlayScreen2(game));
             hud.timer = 15;
@@ -462,6 +461,13 @@ public class PlayScreen implements Screen {
             this.setLevel(this.level+1);
             hud.getPersonagem().setDrawable(hud.getPbRed());
         }
+
+        if(level==8){
+            hud.zerouJogo(game);
+        }
+
+
+
     }
 
     public boolean alavancasLigadas(){
