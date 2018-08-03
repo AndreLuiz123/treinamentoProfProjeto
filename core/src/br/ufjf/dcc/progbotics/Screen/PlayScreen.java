@@ -55,7 +55,7 @@ public class PlayScreen implements Screen {
     private int activePlayer = 0;
     private TextureAtlas atlas;
     private Hud hud;
-
+    private boolean comandosEmExecucao=false;
 
     public PlayScreen(ProgBoticsGame game) {
 
@@ -90,6 +90,7 @@ public class PlayScreen implements Screen {
                 world.setContactListener(new WorldContactListener(players, alavancas));
                 renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
                 gameCam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/4,0.0f);
+                comandosEmExecucao = false;
     }
 
     public TextureAtlas getAtlas() {
@@ -151,6 +152,7 @@ public class PlayScreen implements Screen {
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     System.out.println(hud.controlaComandoEmTela+" - "+xx);
+                    if(!comandosEmExecucao)
                     if(hud.controlaComandoEmTela+xx< players.get(activePlayer).comandos.size())
                         players.get(activePlayer).comandos.remove(hud.controlaComandoEmTela+xx);
                 }
@@ -234,6 +236,8 @@ public class PlayScreen implements Screen {
                         player.pode = true;
                     }
                 }
+                comandosEmExecucao = true;
+                System.out.println(comandosEmExecucao);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -270,78 +274,97 @@ public class PlayScreen implements Screen {
         });
 
 
-        hud.getComandoEsperar().addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_WAIT);
-                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
-                    hud.controlaComandoEmTela++;
+
+
+            hud.getComandoEsperar().addListener(new InputListener() {
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    if(!comandosEmExecucao) {
+                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_WAIT);
+                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                            hud.controlaComandoEmTela++;
+                        }
+                    }
+                    //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
                 }
-                //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
 
-
-        hud.getComandoAndarCima().addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
-                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
-                    hud.controlaComandoEmTela++;
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
                 }
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
+            });
 
-        hud.getComandoAndarDireita().addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
-                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
-                    hud.controlaComandoEmTela++;
+
+            hud.getComandoAndarCima().addListener(new InputListener() {
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    if(!comandosEmExecucao) {
+                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
+                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                            hud.controlaComandoEmTela++;
+                        }
+                    }
                 }
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
 
-        hud.getComandoAndarEsquerda().addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
-                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
-                    hud.controlaComandoEmTela++;
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
                 }
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
+            });
 
-        hud.getComandoAndarBaixo().addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
-                if(players.get(activePlayer).comandos.size()>5 && hud.controlaComandoEmTela+5!=players.get(activePlayer).comandos.size()){
-                    hud.controlaComandoEmTela++;
+            hud.getComandoAndarDireita().addListener(new InputListener() {
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    if(!comandosEmExecucao) {
+                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
+                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                            hud.controlaComandoEmTela++;
+                        }
+                    }
                 }
-          }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 
-                return true;
-            }
-        });
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+            });
+
+            hud.getComandoAndarEsquerda().addListener(new InputListener() {
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    if(!comandosEmExecucao) {
+                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
+                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                            hud.controlaComandoEmTela++;
+                        }
+                    }
+                }
+
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+            });
+
+            hud.getComandoAndarBaixo().addListener(new InputListener() {
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    if(!comandosEmExecucao) {
+                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
+                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                            hud.controlaComandoEmTela++;
+                        }
+                    }
+                }
+
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                    return true;
+                }
+            });
+
+
 
         hud.getRestartLevel().addListener(new InputListener(){
             @Override

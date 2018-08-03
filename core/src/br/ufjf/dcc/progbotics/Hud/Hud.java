@@ -268,7 +268,6 @@ public class Hud implements Disposable {
         imagem2.setMinWidth(size);
     }
 
-
     public Viewport getViewport() {
         return viewport;
     }
