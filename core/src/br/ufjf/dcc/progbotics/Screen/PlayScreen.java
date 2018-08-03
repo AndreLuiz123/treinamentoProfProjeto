@@ -115,6 +115,7 @@ public class PlayScreen implements Screen {
                 renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
                 gameCam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/4,0.0f);
                 comandosEmExecucao = false;
+
     }
 
     public TextureAtlas getAtlas() {
@@ -414,6 +415,8 @@ public class PlayScreen implements Screen {
                 activePlayer=0;
                 hud.getPersonagem().setDrawable(hud.getPbRed());
                 comandosUtilizados.add(1, comandosUtilizados.get(13) + 1);
+                hud.timer = 10;
+                hud.timerJogo.setText(String.format("%2d", hud.timer));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -439,8 +442,22 @@ public class PlayScreen implements Screen {
             alavanca.update(dt);
         }
 
+        if(comandosEmExecucao){
+            hud.contaTempo(dt);
+            if(hud.timer==0){
+
+                for(i=0; i<players.size(); i++){
+                    players.get(i).perdeu();
+                }
+            }
+        }
+
+
+
         if (alavancasLigadas()) {
             //game.setScreen(new PlayScreen2(game));
+            hud.timer = 15;
+            hud.timerJogo.setText(String.format("%2d", hud.timer));
             System.out.println("Passou para fase :"+this.level+1);
             this.setLevel(this.level+1);
             hud.getPersonagem().setDrawable(hud.getPbRed());

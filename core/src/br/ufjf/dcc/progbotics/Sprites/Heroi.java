@@ -329,6 +329,11 @@ public class Heroi extends Sprite {
         return corRobo;
     }
 
+    public void perdeu(){
+        vY=0;
+        vX=0;
+    }
+
     public String getTipo() {
         return tipo;
     }

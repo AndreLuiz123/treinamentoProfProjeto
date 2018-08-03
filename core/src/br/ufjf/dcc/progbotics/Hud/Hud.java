@@ -80,11 +80,15 @@ public class Hud implements Disposable {
     private ArrayList<Label> numeracaoComando;
 
     private Label numeroPersonagem;
+    public Label timerJogo;
     private Skin mySkin;
 
     public int controlaComandoEmTela;
 
     public Table table;
+
+    public int timer;
+    public float timeCount;
 
     public Hud(SpriteBatch sb) {
         viewport = new FitViewport(ProgBoticsGame.V_WIDTH, ProgBoticsGame.V_HEIGHT);
@@ -96,6 +100,9 @@ public class Hud implements Disposable {
 
         enumeraPersonagem = 0;
         controlaComandoEmTela = 0;
+
+        timer = 10;
+        timeCount = 0;
 
         mySkin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
 
@@ -112,6 +119,9 @@ public class Hud implements Disposable {
         moveListaPersonagemDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
 
         numeroPersonagem = new Label(String.format("%3d", enumeraPersonagem), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timerJogo =  new Label(String.format("%2d", timer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timerJogo.setFontScale(3);
+
 
         moveListaComandosEsquerda = new ImageButton(imagemEsquerdaUp, imagemEsquerdaDown);
 
@@ -195,7 +205,7 @@ public class Hud implements Disposable {
         table.add(lupaPlus).top();
         table.add();
         table.add();
-        table.add();
+        table.add(timerJogo).top();
         table.add();
         table.add(restartLevel).top();
         table.row();
@@ -589,8 +599,22 @@ public class Hud implements Disposable {
         return personagem;
     }
 
+    public void contaTempo(float dt){
+
+        timeCount+=dt;
+
+        if(timer!=0)
+        if(timeCount>1){
+            timer--;
+            timeCount=0;
+            timerJogo.setText(String.format("%2d", timer));
+        }
+    }
+
+
 
     public void update() {
+
 
     }
 
