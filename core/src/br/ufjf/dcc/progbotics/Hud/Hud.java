@@ -184,7 +184,7 @@ public class Hud implements Disposable {
         sizeCorretoImagem(imagemRestartUp, imagemRestartDown, 50);
         restartLevel = new ImageButton(imagemRestartUp, imagemRestartDown);
 
-        imagemApagaComandoUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/close-button.png"))));
+        imagemApagaComandoUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/imagemVazia.png"))));
         imagemApagaComandoDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("orange/raw/close-button-down.png"))));
 
         comandos = new ArrayList<Image>();
@@ -219,11 +219,16 @@ public class Hud implements Disposable {
         table.add(moveListaComandosEsquerda).expandX();
         for (int i = 0; i < 5; i++) {
             Stack stack = new Stack();
+            Table table2 = new Table();
+            table2.setDebug(true);
+
             comandos.add(new Image(imagemAddComando));
             apagaComando.add(new ImageButton(imagemApagaComandoUp, imagemApagaComandoDown));
             numeracaoComando.add(new Label(String.format("%02d",controlaComandoEmTela+i), new Label.LabelStyle(new BitmapFont(), Color.PURPLE)));
+
+            table2.add(numeracaoComando.get(i)).expandY().top().expandX().left();
             stack.add(comandos.get(i));
-            stack.add(numeracaoComando.get(i));
+            stack.add(table2);
             stack.add(apagaComando.get(i));
             table.add(stack).expandX().fill(true);
         }
