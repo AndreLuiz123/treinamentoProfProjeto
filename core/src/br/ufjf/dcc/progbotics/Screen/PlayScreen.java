@@ -260,15 +260,17 @@ public class PlayScreen implements Screen {
         hud.getMoveCameraDireita().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                for (Heroi player : players) {
-                    if (!player.comandos.isEmpty()) {
-                        player.comandoAtual = 0;
-                        player.pode = true;
+                if(!comandosEmExecucao) {
+                    for (Heroi player : players) {
+                        if (!player.comandos.isEmpty()) {
+                            player.comandoAtual = 0;
+                            player.pode = true;
+                        }
                     }
+                    comandosEmExecucao = true;
+                    System.out.println(comandosEmExecucao);
+                    comandosUtilizados.add(1, comandosUtilizados.get(4) + 1);
                 }
-                comandosEmExecucao = true;
-                System.out.println(comandosEmExecucao);
-                comandosUtilizados.add(1, comandosUtilizados.get(4) + 1);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
