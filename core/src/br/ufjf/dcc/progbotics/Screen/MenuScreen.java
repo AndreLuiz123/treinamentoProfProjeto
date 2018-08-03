@@ -3,6 +3,7 @@ package br.ufjf.dcc.progbotics.Screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -24,6 +25,8 @@ public class MenuScreen implements Screen {
     private ProgBoticsGame game;
     private Viewport gamePort;
     private Stage stage;
+
+
     Table table;
 
     Skin skin;
@@ -34,8 +37,15 @@ public class MenuScreen implements Screen {
 
         this.game = game;
 
-        gamePort = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        gamePort = new FitViewport(ProgBoticsGame.V_WIDTH, ProgBoticsGame.V_HEIGHT);
+        stage = new Stage(gamePort, game.batch);
+
+        table = new Table();
+        table.top();
+        table.setFillParent(true);
+
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
+
 
         jogar = new TextButton("Jogar",skin);
         jogar.setSize(Gdx.graphics.getWidth()/8,Gdx.graphics.getHeight()/10);
@@ -74,11 +84,6 @@ public class MenuScreen implements Screen {
             }
         });
 
-        stage = new Stage();
-        table = new Table();
-        table.top();
-        table.setFillParent(true);
-        table.setDebug(true);
 
         table.row();
         table.add();
@@ -102,11 +107,19 @@ public class MenuScreen implements Screen {
     @Override
     public void render(float delta) {
 
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act();
+
+
+        game.batch.setProjectionMatrix(stage.getCamera().combined);
+
+
         stage.draw();
+
+
 
     }
 

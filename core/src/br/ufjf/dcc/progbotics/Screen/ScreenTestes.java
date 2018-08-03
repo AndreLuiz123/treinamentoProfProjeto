@@ -28,14 +28,6 @@ public class ScreenTestes implements Screen {
 
     public ScreenTestes(ProgBoticsGame game){
 
-
-        personagens = new ArrayList<String>();
-
-        personagens.add("ProgBot1");
-        personagens.add("ProgBot2");
-        personagens.add("ProgBot3");
-        personagens.add("ProgBot4");
-
         this.hud = new Hud(game.batch);
         this.game = game;
 
