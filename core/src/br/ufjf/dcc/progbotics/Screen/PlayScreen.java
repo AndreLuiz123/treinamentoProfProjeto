@@ -31,6 +31,7 @@ import br.ufjf.dcc.progbotics.Tools.WorldContactListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by Andre Luiz on 15/11/2017.
@@ -56,6 +57,8 @@ public class PlayScreen implements Screen {
     private TextureAtlas atlas;
     private Hud hud;
     private boolean comandosEmExecucao=false;
+    public ArrayList<Integer> comandosUtilizados;
+    int i=0;
 
     public PlayScreen(ProgBoticsGame game) {
 
@@ -74,6 +77,27 @@ public class PlayScreen implements Screen {
         hud = new Hud(game.batch);
 
         handleInput();
+
+        /*Comandos da variavel comandosUtilizados:
+        * comandosUtilizados.get(0) <- numero de vezes que o comando  moveListaPersonagensEsquerda é utilizado
+        * comandosUtilizados.get(1) <- numero de vezes que o comando  moveListaPersonagensDireita é utilizado
+        * comandosUtilizados.get(2) <- numero de vezes que o comando  moveListaComandosEsquerda é utilizado
+        * comandosUtilizados.get(3) <- numero de vezes que o comando  moveListaComandosDireita é utilizado
+        * comandosUtilizados.get(4) <- numero de vezes que o comando  executarComandos é utilizado
+        * comandosUtilizados.get(5) <- numero de vezes que o comando  lupaPlus é utilizado
+        * comandosUtilizados.get(6) <- numero de vezes que o comando  lupaLess é utilizado
+        * comandosUtilizados.get(7) <- numero de vezes que o comando  esperar é utilizado
+        * comandosUtilizados.get(8) <- numero de vezes que o comando  andarParaCima é utilizado
+        * comandosUtilizados.get(9) <- numero de vezes que o comando  andarParaDireita é utilizado
+        * comandosUtilizados.get(10) <- numero de vezes que o comando andarParaEsquerda é utilizado
+        * comandosUtilizados.get(11) <- numero de vezes que o comando andarParaBaixo é utilizado
+        * comandosUtilizados.get(12) <- numero de vezes que o comando apagarComando é utilizado
+        * comandosUtilizados.get(13) <- numero de vezes que o comando restartLevel é utilizado
+        * */
+        comandosUtilizados = new ArrayList<Integer>();
+        for(int i=0; i<14; i++)
+        comandosUtilizados.add(0);
+
 
     }
 
@@ -101,7 +125,6 @@ public class PlayScreen implements Screen {
         return game;
     }
 
-
     @Override
     public void show() {
         Gdx.input.setInputProcessor(hud.stage);
@@ -121,6 +144,7 @@ public class PlayScreen implements Screen {
         hud.getMoveListaPersonagemEsquerda().addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+
                 setActivePlayer(getActivePlayer() - 1);
                 System.out.println(getActivePlayer());
                 switch (getActivePlayer()){
@@ -139,6 +163,8 @@ public class PlayScreen implements Screen {
                     default:
                 }
                 hud.controlaComandoEmTela=0;
+                comandosUtilizados.add(0,comandosUtilizados.get(0)+1);
+
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -153,8 +179,10 @@ public class PlayScreen implements Screen {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     System.out.println(hud.controlaComandoEmTela+" - "+xx);
                     if(!comandosEmExecucao)
-                    if(hud.controlaComandoEmTela+xx< players.get(activePlayer).comandos.size())
-                        players.get(activePlayer).comandos.remove(hud.controlaComandoEmTela+xx);
+                    if(hud.controlaComandoEmTela+xx< players.get(activePlayer).comandos.size()) {
+                        players.get(activePlayer).comandos.remove(hud.controlaComandoEmTela + xx);
+                        comandosUtilizados.add(1, comandosUtilizados.get(12) + 1);
+                    }
                 }
 
                 @Override
@@ -185,22 +213,7 @@ public class PlayScreen implements Screen {
                     default:
                 }
                 hud.controlaComandoEmTela=0;
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
-
-
-        hud.getMoveListaComandosDireita().addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-
-                  hud.controlaComandoEmTela++;
-
-                System.out.println(hud.controlaComandoEmTela);
-                System.out.println(players.get(activePlayer).comandos.size());
+                comandosUtilizados.add(1, comandosUtilizados.get(1) + 1);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -217,6 +230,8 @@ public class PlayScreen implements Screen {
                 }
                 System.out.println(hud.controlaComandoEmTela);
                 System.out.println(players.get(activePlayer).comandos.size());
+                comandosUtilizados.add(1, comandosUtilizados.get(2) + 1);
+
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -225,6 +240,21 @@ public class PlayScreen implements Screen {
         });
 
 
+        hud.getMoveListaComandosDireita().addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+
+                  hud.controlaComandoEmTela++;
+
+                System.out.println(hud.controlaComandoEmTela);
+                System.out.println(players.get(activePlayer).comandos.size());
+                comandosUtilizados.add(1, comandosUtilizados.get(3) + 1);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
 
 
         hud.getMoveCameraDireita().addListener(new InputListener(){
@@ -238,6 +268,7 @@ public class PlayScreen implements Screen {
                 }
                 comandosEmExecucao = true;
                 System.out.println(comandosEmExecucao);
+                comandosUtilizados.add(1, comandosUtilizados.get(4) + 1);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -251,6 +282,7 @@ public class PlayScreen implements Screen {
                 gameCam.zoom-=0.05;
                 System.out.println("zoom:"+gameCam.zoom);
                 System.out.println("gameCam position:"+gameCam.position);
+                comandosUtilizados.add(1, comandosUtilizados.get(5) + 1);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -266,6 +298,7 @@ public class PlayScreen implements Screen {
                 gameCam.zoom+=0.05;
                 System.out.println("zoom:"+gameCam.zoom);
                 System.out.println("gameCam position:"+gameCam.position);
+                comandosUtilizados.add(1, comandosUtilizados.get(6) + 1);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -283,6 +316,7 @@ public class PlayScreen implements Screen {
                         players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_WAIT);
                         if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
                             hud.controlaComandoEmTela++;
+                            comandosUtilizados.add(1, comandosUtilizados.get(7) + 1);
                         }
                     }
                     //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
@@ -302,6 +336,7 @@ public class PlayScreen implements Screen {
                         players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
                         if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
                             hud.controlaComandoEmTela++;
+                            comandosUtilizados.add(1, comandosUtilizados.get(8) + 1);
                         }
                     }
                 }
@@ -319,6 +354,7 @@ public class PlayScreen implements Screen {
                         players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
                         if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
                             hud.controlaComandoEmTela++;
+                            comandosUtilizados.add(1, comandosUtilizados.get(9) + 1);
                         }
                     }
                 }
@@ -336,6 +372,7 @@ public class PlayScreen implements Screen {
                         players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
                         if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
                             hud.controlaComandoEmTela++;
+                            comandosUtilizados.add(1, comandosUtilizados.get(10) + 1);
                         }
                     }
                 }
@@ -353,6 +390,7 @@ public class PlayScreen implements Screen {
                         players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
                         if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
                             hud.controlaComandoEmTela++;
+                            comandosUtilizados.add(1, comandosUtilizados.get(11) + 1);
                         }
                     }
                 }
@@ -373,6 +411,7 @@ public class PlayScreen implements Screen {
                 hud.controlaComandoEmTela=0;
                 activePlayer=0;
                 hud.getPersonagem().setDrawable(hud.getPbRed());
+                comandosUtilizados.add(1, comandosUtilizados.get(13) + 1);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -481,4 +520,5 @@ public class PlayScreen implements Screen {
     public World getWorld() {
         return world;
     }
+
 }
