@@ -8,7 +8,7 @@
  </layer>
  <layer name="Paredes" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBieIAeJnYtD3AdNTw0SuxaHeAyF7kJ3AzHuRHcDMe4kF+ByAy534nMDLneSCgCeogqp
+   eJxjYBieIAeJnYtDHB3UILFrcYhTA+TgYONzZw0ONrXdicsNuNyJzw243EkqAACbAwoB
   </data>
  </layer>
  <objectgroup name="Paredes">
@@ -32,7 +32,7 @@
   <object id="15" name="r1" x="0" y="352" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="alavancas">
-  <object id="24" name="a1" x="352" y="128" width="32" height="64"/>
+  <object id="24" name="a1" x="320" y="128" width="32" height="64"/>
  </objectgroup>
  <layer name="detalhesCenario" width="13" height="13">
   <data encoding="base64" compression="zlib">
@@ -41,7 +41,7 @@
  </layer>
  <layer name="AlavancasDesenho" width="13" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BwAwACpAAB
+   eJxjYBiZwIcMPTFUd8UoIAYAAAjjAKk=
   </data>
  </layer>
 </map>
