@@ -103,7 +103,7 @@ public class Hud implements Disposable {
         enumeraPersonagem = 0;
         controlaComandoEmTela = 0;
 
-        timer = 10;
+        timer = 15;
         timeCount = 0;
 
         mySkin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
@@ -203,48 +203,7 @@ public class Hud implements Disposable {
         apagaComando = new ArrayList<Button>();
         numeracaoComando = new ArrayList<Label>();
 
-        table.add(lupaLess).expandY().top();
-        table.add(lupaPlus).top();
-        table.add();
-        table.add();
-        table.add(timerJogo).top();
-        table.add();
-        table.add(restartLevel).top();
-        table.row();
-        table.add(moveListaPersonagemEsquerda).expandX();
-        table.add(personagem).expandX().fill(true);
-        table.add(moveListaPersonagemDireita).expandX();
-        table.add();
-        table.add();
-        table.add();
-        table.add(moveCameraDireita);
-        table.row();
-        table.bottom();
-        table.add().expandX();
-        table.add(comandoEsperar).expandX();
-        table.add(comandoAndarDireita).expandX();
-        table.add(comandoAndarEsquerda).expandX();
-        table.add(comandoAndarCima).expandX();
-        table.add(comandoAndarBaixo).expandX();
-        table.add().expandX();
-        table.row();
-        table.add(moveListaComandosEsquerda).expandX();
-        for (int i = 0; i < 5; i++) {
-            Stack stack = new Stack();
-            Table table2 = new Table();
-            table2.setDebug(true);
-
-            comandos.add(new Image(imagemAddComando));
-            apagaComando.add(new ImageButton(imagemApagaComandoUp, imagemApagaComandoDown));
-            numeracaoComando.add(new Label(String.format("%02d",controlaComandoEmTela+i), new Label.LabelStyle(new BitmapFont(), Color.PURPLE)));
-
-            table2.add(numeracaoComando.get(i)).expandY().top().expandX().left();
-            stack.add(comandos.get(i));
-            stack.add(table2);
-            stack.add(apagaComando.get(i));
-            table.add(stack).expandX().fill(true);
-        }
-        table.add(moveListaComandosDireita).expandX();
+       jogando();
 
         stage.addActor(table);
 
@@ -646,6 +605,86 @@ public class Hud implements Disposable {
         table.add(voltarAoMenu).expandX();
 
     }
+
+    public void perdeuJogo(final ProgBoticsGame game){
+
+        table.clear();
+
+        Label fimJogo =  new Label("VOCÊ PERDEU!", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        fimJogo.setFontScale(2);
+
+        Button voltarAoMenu = new TextButton("Voltar ao menu",this.mySkin);
+        voltarAoMenu.addListener(new InputListener(){
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                MenuScreen playscreen = new MenuScreen(game);
+                game.setScreen(playscreen);
+
+                return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
+
+        table.add(fimJogo).expandX();
+        table.row();
+        table.add(restartLevel).expandX();
+        table.row();
+        table.add(voltarAoMenu).expandX();
+
+    }
+
+    public void jogando(){
+        table.add(lupaLess).expandY().top();
+        table.add(lupaPlus).top();
+        table.add();
+        table.add();
+        table.add(timerJogo).top();
+        table.add();
+        table.add(restartLevel).top();
+        table.row();
+        table.add(moveListaPersonagemEsquerda).expandX();
+        table.add(personagem).expandX().fill(true);
+        table.add(moveListaPersonagemDireita).expandX();
+        table.add();
+        table.add();
+        table.add();
+        table.add(moveCameraDireita);
+        table.row();
+        table.bottom();
+        table.add().expandX();
+        table.add(comandoEsperar).expandX();
+        table.add(comandoAndarDireita).expandX();
+        table.add(comandoAndarEsquerda).expandX();
+        table.add(comandoAndarCima).expandX();
+        table.add(comandoAndarBaixo).expandX();
+        table.add().expandX();
+        table.row();
+        table.add(moveListaComandosEsquerda).expandX();
+        for (int i = 0; i < 5; i++) {
+            Stack stack = new Stack();
+            Table table2 = new Table();
+            table2.setDebug(true);
+
+            comandos.add(new Image(imagemAddComando));
+            apagaComando.add(new ImageButton(imagemApagaComandoUp, imagemApagaComandoDown));
+            numeracaoComando.add(new Label(String.format("%02d",controlaComandoEmTela+i), new Label.LabelStyle(new BitmapFont(), Color.PURPLE)));
+
+            table2.add(numeracaoComando.get(i)).expandY().top().expandX().left();
+            stack.add(comandos.get(i));
+            stack.add(table2);
+            stack.add(apagaComando.get(i));
+            table.add(stack).expandX().fill(true);
+        }
+        table.add(moveListaComandosDireita).expandX();
+
+    }
+
 
 
 

@@ -56,7 +56,7 @@ public class PlayScreen implements Screen {
     private int activePlayer = 0;
     private TextureAtlas atlas;
     private Hud hud;
-    private boolean comandosEmExecucao=false;
+    private boolean comandosEmExecucao=false, perdeuJogo;
     public ArrayList<Integer> comandosUtilizados;
     int i=0;
 
@@ -93,9 +93,10 @@ public class PlayScreen implements Screen {
         * comandosUtilizados.get(11) <- numero de vezes que o comando andarParaBaixo é utilizado
         * comandosUtilizados.get(12) <- numero de vezes que o comando apagarComando é utilizado
         * comandosUtilizados.get(13) <- numero de vezes que o comando restartLevel é utilizado
+        * comandosUtilizados.get(14) <- numero de vezes que o jogador nao passa de nivel
         * */
         comandosUtilizados = new ArrayList<Integer>();
-        for(int i=0; i<14; i++)
+        for(int i=0; i<15; i++)
         comandosUtilizados.add(0);
 
 
@@ -415,8 +416,13 @@ public class PlayScreen implements Screen {
                 activePlayer=0;
                 hud.getPersonagem().setDrawable(hud.getPbRed());
                 comandosUtilizados.add(1, comandosUtilizados.get(13) + 1);
-                hud.timer = 10;
+                hud.timer = 15;
                 hud.timerJogo.setText(String.format("%2d", hud.timer));
+                if(perdeuJogo){
+                    hud.table.clear();
+                    hud.jogando();
+                    perdeuJogo = false;
+                }
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -448,6 +454,8 @@ public class PlayScreen implements Screen {
 
                 for(i=0; i<players.size(); i++){
                     players.get(i).perdeu();
+                    hud.perdeuJogo(this.game);
+                    perdeuJogo = true;
                 }
             }
         }
