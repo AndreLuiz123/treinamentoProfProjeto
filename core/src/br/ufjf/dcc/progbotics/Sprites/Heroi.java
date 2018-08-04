@@ -110,7 +110,7 @@ public class Heroi extends Sprite {
         xis = 0;
         ypi = 0;
 
-        vel = 0.4f;
+        vel = 0.32f;
 
     }
 
