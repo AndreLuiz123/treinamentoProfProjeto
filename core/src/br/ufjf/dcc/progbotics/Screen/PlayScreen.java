@@ -289,6 +289,7 @@ public class PlayScreen implements Screen {
                     System.out.println(comandosEmExecucao);
                     comandosUtilizados.add(1, comandosUtilizados.get(4) + 1);
                     registroAtual.executado();
+                    System.out.println(registroAtual);
                 }
             }
 
@@ -474,9 +475,11 @@ public class PlayScreen implements Screen {
                     hud.perdeuJogo(this.game);
                     perdeuJogo = true;
                 }
-                registroAtual.finalizado("falha");
-                registroAtual = null;
-                System.out.println(registro);
+                if(registroAtual!=null) {
+                    registroAtual.finalizado("falha");
+                    registroAtual = null;
+                    System.out.println(registro);
+                }
             }
         }
 
@@ -488,6 +491,7 @@ public class PlayScreen implements Screen {
             //hud.timerJogo.setText(String.format("%2d", hud.timer));
             System.out.println("Passou para fase :" + this.level + 1);
             registroAtual.finalizado("sucesso");
+            System.out.printf(registroAtual.toString());
             registroAtual = null;
             this.setLevel(this.level + 1);
             hud.getPersonagem().setDrawable(hud.getPbRed());
