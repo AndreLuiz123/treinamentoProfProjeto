@@ -120,8 +120,10 @@ public class Hud implements Disposable {
 
         moveListaPersonagemDireita = new ImageButton(imagemDireitaUp, imagemDireitaDown);
 
-        numeroPersonagem = new Label(String.format("%3d", enumeraPersonagem), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timerJogo =  new Label(String.format("%2d", timer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        numeroPersonagem = new Label(""+enumeraPersonagem, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        //numeroPersonagem = new Label(String.format("%3d", enumeraPersonagem), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timerJogo =  new Label(""+timer, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        //timerJogo =  new Label(String.format("%2d", timer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timerJogo.setFontScale(3);
 
 
@@ -232,7 +234,8 @@ public class Hud implements Disposable {
             } else {
                 this.comandos.get(i).setDrawable(getImagemAddComando());
             }
-            numeracaoComando.get(i).setText(String.format("%02d",controlaComandoEmTela+i+1));
+            numeracaoComando.get(i).setText(""+(controlaComandoEmTela+i+1));
+            //numeracaoComando.get(i).setText(String.format("%02d",controlaComandoEmTela+i+1));
         }
     }
 
@@ -568,7 +571,8 @@ public class Hud implements Disposable {
         if(timeCount>1){
             timer--;
             timeCount=0;
-            timerJogo.setText(String.format("%2d", timer));
+            //timerJogo.setText(String.format("%2d", timer));
+            timerJogo.setText(""+timer);
         }
     }
 
@@ -673,7 +677,8 @@ public class Hud implements Disposable {
 
             comandos.add(new Image(imagemAddComando));
             apagaComando.add(new ImageButton(imagemApagaComandoUp, imagemApagaComandoDown));
-            numeracaoComando.add(new Label(String.format("%02d",controlaComandoEmTela+i), new Label.LabelStyle(new BitmapFont(), Color.PURPLE)));
+            //numeracaoComando.add(new Label(String.format("%02d",controlaComandoEmTela+i), new Label.LabelStyle(new BitmapFont(), Color.PURPLE)));
+            numeracaoComando.add(new Label(""+(controlaComandoEmTela+i), new Label.LabelStyle(new BitmapFont(), Color.PURPLE)));
 
             table2.add(numeracaoComando.get(i)).expandY().top().expandX().left();
             stack.add(comandos.get(i));

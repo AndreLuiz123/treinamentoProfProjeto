@@ -27,6 +27,7 @@ import br.ufjf.dcc.progbotics.ProgBoticsGame;
 import br.ufjf.dcc.progbotics.Sprites.Alavanca;
 import br.ufjf.dcc.progbotics.Sprites.Heroi;
 import br.ufjf.dcc.progbotics.Tools.B2WorldCreator;
+import br.ufjf.dcc.progbotics.Tools.Registro;
 import br.ufjf.dcc.progbotics.Tools.WorldContactListener;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ import java.util.Vector;
 
 public class PlayScreen implements Screen {
 
-    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel2b.tmx","ProgBotsLevel3b.tmx", "ProgBotsLevel4.tmx","ProgBotsLevel5.tmx","ProgBotsLevel6.tmx","ProgBotsLevel7.tmx","ProgBotsLevel8.tmx","ProgBotsLevel9.tmx"};
+    public static String[] LEVEL_NAMES = {"ProgBotsLevel2.tmx", "ProgBotsLevel2b.tmx", "ProgBotsLevel3b.tmx", "ProgBotsLevel4.tmx", "ProgBotsLevel5.tmx", "ProgBotsLevel6.tmx", "ProgBotsLevel7.tmx", "ProgBotsLevel8.tmx", "ProgBotsLevel9.tmx"};
     private ProgBoticsGame game;
     private Texture texture, constantBackground;
     private OrthographicCamera gameCam;
@@ -50,22 +51,25 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
     private List<Heroi> players;
+    private List<Registro> registro;
+    private Registro registroAtual;
     private Rectangle rect;
     private List<Alavanca> alavancas;
     private Integer level = 0;
     private int activePlayer = 0;
     private TextureAtlas atlas;
     private Hud hud;
-    private boolean comandosEmExecucao=false, perdeuJogo;
+    private boolean comandosEmExecucao = false, perdeuJogo;
     public ArrayList<Integer> comandosUtilizados;
-    int i=0;
+    int i = 0;
 
     public PlayScreen(ProgBoticsGame game) {
+        registro = new ArrayList<Registro>();
 
         atlas = new TextureAtlas("teste.pack");
 
         this.game = game;
-        gameCam = new OrthographicCamera(0,0);
+        gameCam = new OrthographicCamera(0, 0);
         gamePort = new FitViewport(ProgBoticsGame.V_WIDTH / ProgBoticsGame.PPM, ProgBoticsGame.V_HEIGHT / ProgBoticsGame.PPM, gameCam);
 
         constantBackground = new Texture("backgroundProgBotics.png");
@@ -79,25 +83,25 @@ public class PlayScreen implements Screen {
         handleInput();
 
         /*Comandos da variavel comandosUtilizados:
-        * comandosUtilizados.get(0) <- numero de vezes que o comando  moveListaPersonagensEsquerda é utilizado
-        * comandosUtilizados.get(1) <- numero de vezes que o comando  moveListaPersonagensDireita é utilizado
-        * comandosUtilizados.get(2) <- numero de vezes que o comando  moveListaComandosEsquerda é utilizado
-        * comandosUtilizados.get(3) <- numero de vezes que o comando  moveListaComandosDireita é utilizado
-        * comandosUtilizados.get(4) <- numero de vezes que o comando  executarComandos é utilizado
-        * comandosUtilizados.get(5) <- numero de vezes que o comando  lupaPlus é utilizado
-        * comandosUtilizados.get(6) <- numero de vezes que o comando  lupaLess é utilizado
-        * comandosUtilizados.get(7) <- numero de vezes que o comando  esperar é utilizado
-        * comandosUtilizados.get(8) <- numero de vezes que o comando  andarParaCima é utilizado
-        * comandosUtilizados.get(9) <- numero de vezes que o comando  andarParaDireita é utilizado
-        * comandosUtilizados.get(10) <- numero de vezes que o comando andarParaEsquerda é utilizado
-        * comandosUtilizados.get(11) <- numero de vezes que o comando andarParaBaixo é utilizado
-        * comandosUtilizados.get(12) <- numero de vezes que o comando apagarComando é utilizado
-        * comandosUtilizados.get(13) <- numero de vezes que o comando restartLevel é utilizado
-        * comandosUtilizados.get(14) <- numero de vezes que o jogador nao passa de nivel
-        * */
+         * comandosUtilizados.get(0) <- numero de vezes que o comando  moveListaPersonagensEsquerda é utilizado
+         * comandosUtilizados.get(1) <- numero de vezes que o comando  moveListaPersonagensDireita é utilizado
+         * comandosUtilizados.get(2) <- numero de vezes que o comando  moveListaComandosEsquerda é utilizado
+         * comandosUtilizados.get(3) <- numero de vezes que o comando  moveListaComandosDireita é utilizado
+         * comandosUtilizados.get(4) <- numero de vezes que o comando  executarComandos é utilizado
+         * comandosUtilizados.get(5) <- numero de vezes que o comando  lupaPlus é utilizado
+         * comandosUtilizados.get(6) <- numero de vezes que o comando  lupaLess é utilizado
+         * comandosUtilizados.get(7) <- numero de vezes que o comando  esperar é utilizado
+         * comandosUtilizados.get(8) <- numero de vezes que o comando  andarParaCima é utilizado
+         * comandosUtilizados.get(9) <- numero de vezes que o comando  andarParaDireita é utilizado
+         * comandosUtilizados.get(10) <- numero de vezes que o comando andarParaEsquerda é utilizado
+         * comandosUtilizados.get(11) <- numero de vezes que o comando andarParaBaixo é utilizado
+         * comandosUtilizados.get(12) <- numero de vezes que o comando apagarComando é utilizado
+         * comandosUtilizados.get(13) <- numero de vezes que o comando restartLevel é utilizado
+         * comandosUtilizados.get(14) <- numero de vezes que o jogador nao passa de nivel
+         * */
         comandosUtilizados = new ArrayList<Integer>();
-        for(int i=0; i<15; i++)
-        comandosUtilizados.add(0);
+        for (int i = 0; i < 15; i++)
+            comandosUtilizados.add(0);
 
 
     }
@@ -105,17 +109,25 @@ public class PlayScreen implements Screen {
     public void setLevel(Integer level) {
         this.level = level;
         //setActivePlayer(0);
+        if(registroAtual!=null){
+            registroAtual.finalizado("interrompido");
+            registroAtual = null;
+        }
+
+        registroAtual = new Registro(LEVEL_NAMES[this.level],"jogagor");
+        registro.add(registroAtual);
+        System.out.println(registroAtual);
         activePlayer = 0;
-                mapLoader = new TmxMapLoader();
-                map = mapLoader.load(LEVEL_NAMES[this.level]);
-                world = new World(new Vector2(0, 0), true);
-                players = new ArrayList<Heroi>();
-                alavancas = new ArrayList<Alavanca>();
-                new B2WorldCreator(world, map, players,alavancas, this);
-                world.setContactListener(new WorldContactListener(players, alavancas));
-                renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
-                gameCam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/4,0.0f);
-                comandosEmExecucao = false;
+        mapLoader = new TmxMapLoader();
+        map = mapLoader.load(LEVEL_NAMES[this.level]);
+        world = new World(new Vector2(0, 0), true);
+        players = new ArrayList<Heroi>();
+        alavancas = new ArrayList<Alavanca>();
+        new B2WorldCreator(world, map, players, alavancas, this);
+        world.setContactListener(new WorldContactListener(players, alavancas));
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / ProgBoticsGame.PPM);
+        gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 4, 0.0f);
+        comandosEmExecucao = false;
 
     }
 
@@ -143,13 +155,13 @@ public class PlayScreen implements Screen {
 
     public void handleInput() {
 
-        hud.getMoveListaPersonagemEsquerda().addListener(new InputListener(){
+        hud.getMoveListaPersonagemEsquerda().addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
                 setActivePlayer(getActivePlayer() - 1);
                 System.out.println(getActivePlayer());
-                switch (getActivePlayer()){
+                switch (getActivePlayer()) {
                     case 0:
                         hud.getPersonagem().setDrawable(hud.getPbRed());
                         break;
@@ -164,27 +176,28 @@ public class PlayScreen implements Screen {
                         break;
                     default:
                 }
-                hud.controlaComandoEmTela=0;
-                comandosUtilizados.add(0,comandosUtilizados.get(0)+1);
+                hud.controlaComandoEmTela = 0;
+                comandosUtilizados.add(0, comandosUtilizados.get(0) + 1);
 
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
 
-        for(int i=0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             final Integer xx = i;
             hud.getApagaComando().get(i).addListener(new InputListener() {
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    System.out.println(hud.controlaComandoEmTela+" - "+xx);
-                    if(!comandosEmExecucao)
-                    if(hud.controlaComandoEmTela+xx< players.get(activePlayer).comandos.size()) {
-                        players.get(activePlayer).comandos.remove(hud.controlaComandoEmTela + xx);
-                        comandosUtilizados.add(1, comandosUtilizados.get(12) + 1);
-                    }
+                    System.out.println(hud.controlaComandoEmTela + " - " + xx);
+                    if (!comandosEmExecucao)
+                        if (hud.controlaComandoEmTela + xx < players.get(activePlayer).comandos.size()) {
+                            players.get(activePlayer).comandos.remove(hud.controlaComandoEmTela + xx);
+                            comandosUtilizados.add(1, comandosUtilizados.get(12) + 1);
+                        }
                 }
 
                 @Override
@@ -194,12 +207,12 @@ public class PlayScreen implements Screen {
             });
         }
 
-        hud.getMoveListaPersonagemDireita().addListener(new InputListener(){
+        hud.getMoveListaPersonagemDireita().addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 setActivePlayer(getActivePlayer() + 1);
                 System.out.println(getActivePlayer());
-                switch (getActivePlayer()){
+                switch (getActivePlayer()) {
                     case 0:
                         hud.getPersonagem().setDrawable(hud.getPbRed());
                         break;
@@ -214,20 +227,21 @@ public class PlayScreen implements Screen {
                         break;
                     default:
                 }
-                hud.controlaComandoEmTela=0;
+                hud.controlaComandoEmTela = 0;
                 comandosUtilizados.add(1, comandosUtilizados.get(1) + 1);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
 
-        hud.getMoveListaComandosEsquerda().addListener(new InputListener(){
+        hud.getMoveListaComandosEsquerda().addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-                if( hud.controlaComandoEmTela!=0){
+                if (hud.controlaComandoEmTela != 0) {
                     hud.controlaComandoEmTela--;
                 }
                 System.out.println(hud.controlaComandoEmTela);
@@ -235,34 +249,36 @@ public class PlayScreen implements Screen {
                 comandosUtilizados.add(1, comandosUtilizados.get(2) + 1);
 
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
 
 
-        hud.getMoveListaComandosDireita().addListener(new InputListener(){
+        hud.getMoveListaComandosDireita().addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-                  hud.controlaComandoEmTela++;
+                hud.controlaComandoEmTela++;
 
                 System.out.println(hud.controlaComandoEmTela);
                 System.out.println(players.get(activePlayer).comandos.size());
                 comandosUtilizados.add(1, comandosUtilizados.get(3) + 1);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
 
 
-        hud.getMoveCameraDireita().addListener(new InputListener(){
+        hud.getMoveCameraDireita().addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if(!comandosEmExecucao) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (!comandosEmExecucao) {
                     for (Heroi player : players) {
                         if (!player.comandos.isEmpty()) {
                             player.comandoAtual = 0;
@@ -272,164 +288,165 @@ public class PlayScreen implements Screen {
                     comandosEmExecucao = true;
                     System.out.println(comandosEmExecucao);
                     comandosUtilizados.add(1, comandosUtilizados.get(4) + 1);
+                    registroAtual.executado();
                 }
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
 
-        hud.getLupaPlus().addListener(new InputListener(){
+        hud.getLupaPlus().addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                gameCam.zoom-=0.05;
-                System.out.println("zoom:"+gameCam.zoom);
-                System.out.println("gameCam position:"+gameCam.position);
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.zoom -= 0.05;
+                System.out.println("zoom:" + gameCam.zoom);
+                System.out.println("gameCam position:" + gameCam.position);
                 comandosUtilizados.add(1, comandosUtilizados.get(5) + 1);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
 
 
-
-        hud.getLupaLess().addListener(new InputListener(){
+        hud.getLupaLess().addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                gameCam.zoom+=0.05;
-                System.out.println("zoom:"+gameCam.zoom);
-                System.out.println("gameCam position:"+gameCam.position);
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gameCam.zoom += 0.05;
+                System.out.println("zoom:" + gameCam.zoom);
+                System.out.println("gameCam position:" + gameCam.position);
                 comandosUtilizados.add(1, comandosUtilizados.get(6) + 1);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
 
 
-
-
-            hud.getComandoEsperar().addListener(new InputListener() {
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    if(!comandosEmExecucao) {
-                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_WAIT);
-                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
-                            hud.controlaComandoEmTela++;
-                            comandosUtilizados.add(1, comandosUtilizados.get(7) + 1);
-                        }
-                    }
-                    //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
-                }
-
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-            });
-
-
-            hud.getComandoAndarCima().addListener(new InputListener() {
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    if(!comandosEmExecucao) {
-                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
-                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
-                            hud.controlaComandoEmTela++;
-                            comandosUtilizados.add(1, comandosUtilizados.get(8) + 1);
-                        }
-                    }
-                }
-
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-            });
-
-            hud.getComandoAndarDireita().addListener(new InputListener() {
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    if(!comandosEmExecucao) {
-                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
-                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
-                            hud.controlaComandoEmTela++;
-                            comandosUtilizados.add(1, comandosUtilizados.get(9) + 1);
-                        }
-                    }
-                }
-
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-            });
-
-            hud.getComandoAndarEsquerda().addListener(new InputListener() {
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    if(!comandosEmExecucao) {
-                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
-                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
-                            hud.controlaComandoEmTela++;
-                            comandosUtilizados.add(1, comandosUtilizados.get(10) + 1);
-                        }
-                    }
-                }
-
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-            });
-
-            hud.getComandoAndarBaixo().addListener(new InputListener() {
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    if(!comandosEmExecucao) {
-                        players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
-                        if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
-                            hud.controlaComandoEmTela++;
-                            comandosUtilizados.add(1, comandosUtilizados.get(11) + 1);
-                        }
-                    }
-                }
-
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-
-                    return true;
-                }
-            });
-
-
-
-        hud.getRestartLevel().addListener(new InputListener(){
+        hud.getComandoEsperar().addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (!comandosEmExecucao) {
+                    players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_WAIT);
+                    if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                        hud.controlaComandoEmTela++;
+                        comandosUtilizados.add(1, comandosUtilizados.get(7) + 1);
+                    }
+                }
+                //  hud.atualizaComandosDoHeroi(players.get(getActivePlayer()));
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+
+
+        hud.getComandoAndarCima().addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (!comandosEmExecucao) {
+                    players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_UP);
+                    if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                        hud.controlaComandoEmTela++;
+                        comandosUtilizados.add(1, comandosUtilizados.get(8) + 1);
+                    }
+                }
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+
+        hud.getComandoAndarDireita().addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (!comandosEmExecucao) {
+                    players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_RIGHT);
+                    if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                        hud.controlaComandoEmTela++;
+                        comandosUtilizados.add(1, comandosUtilizados.get(9) + 1);
+                    }
+                }
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+
+        hud.getComandoAndarEsquerda().addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (!comandosEmExecucao) {
+                    players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_LEFT);
+                    if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                        hud.controlaComandoEmTela++;
+                        comandosUtilizados.add(1, comandosUtilizados.get(10) + 1);
+                    }
+                }
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+
+        hud.getComandoAndarBaixo().addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (!comandosEmExecucao) {
+                    players.get(getActivePlayer()).colocaComandos(Heroi.COMMAND_DOWN);
+                    if (players.get(activePlayer).comandos.size() > 5 && hud.controlaComandoEmTela + 5 != players.get(activePlayer).comandos.size()) {
+                        hud.controlaComandoEmTela++;
+                        comandosUtilizados.add(1, comandosUtilizados.get(11) + 1);
+                    }
+                }
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
+
+        hud.getRestartLevel().addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 setLevel(level);
-                hud.controlaComandoEmTela=0;
-                activePlayer=0;
+                hud.controlaComandoEmTela = 0;
+                activePlayer = 0;
                 hud.getPersonagem().setDrawable(hud.getPbRed());
                 comandosUtilizados.add(1, comandosUtilizados.get(13) + 1);
                 hud.timer = 15;
-                hud.timerJogo.setText(String.format("%2d", hud.timer));
-                if(perdeuJogo){
+                hud.timerJogo.setText(("" + hud.timer));
+                //hud.timerJogo.setText(String.format("%2d", hud.timer));
+                if (perdeuJogo) {
                     hud.table.clear();
                     hud.jogando();
                     perdeuJogo = false;
                 }
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
-
 
 
     }
@@ -448,15 +465,18 @@ public class PlayScreen implements Screen {
             alavanca.update(dt);
         }
 
-        if(comandosEmExecucao){
+        if (comandosEmExecucao) {
             hud.contaTempo(dt);
-            if(hud.timer==0){
+            if (hud.timer == 0) {
 
-                for(i=0; i<players.size(); i++){
+                for (i = 0; i < players.size(); i++) {
                     players.get(i).perdeu();
                     hud.perdeuJogo(this.game);
                     perdeuJogo = true;
                 }
+                registroAtual.finalizado("falha");
+                registroAtual = null;
+                System.out.println(registro);
             }
         }
 
@@ -464,30 +484,31 @@ public class PlayScreen implements Screen {
         if (alavancasLigadas()) {
             //game.setScreen(new PlayScreen2(game));
             hud.timer = 15;
-            hud.timerJogo.setText(String.format("%2d", hud.timer));
-            System.out.println("Passou para fase :"+this.level+1);
-            this.setLevel(this.level+1);
+            hud.timerJogo.setText(("" + hud.timer));
+            //hud.timerJogo.setText(String.format("%2d", hud.timer));
+            System.out.println("Passou para fase :" + this.level + 1);
+            registroAtual.finalizado("sucesso");
+            registroAtual = null;
+            this.setLevel(this.level + 1);
             hud.getPersonagem().setDrawable(hud.getPbRed());
         }
 
-        if(level==8){
+        if (level == 8) {
             hud.zerouJogo(game);
         }
 
 
-
     }
 
-    public boolean alavancasLigadas(){
+    public boolean alavancasLigadas() {
 
-        for(int i=0; i<alavancas.size(); i++){
-            if(!alavancas.get(i).isLigada())
-            return false;
+        for (int i = 0; i < alavancas.size(); i++) {
+            if (!alavancas.get(i).isLigada())
+                return false;
         }
 
         return true;
     }
-
 
 
     @Override
@@ -520,7 +541,7 @@ public class PlayScreen implements Screen {
     public void resize(int width, int height) {
 
         gamePort.update(width, height);
-        hud.stage.getViewport().update(width,height);
+        hud.stage.getViewport().update(width, height);
 
     }
 

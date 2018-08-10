@@ -80,4 +80,15 @@ public class Registro {
         this.conclusao = new Date();
     }
 
+    @Override
+    public String toString() {
+        return "Registro{" +
+                "cenario='" + cenario + '\'' +
+                ", jogador='" + jogador + '\'' +
+                ", inicio=" + inicio +
+                ", execucao=" + execucao +
+                ", conclusao=" + conclusao +
+                ", resultado='" + resultado + '\'' +
+                '}';
+    }
 }

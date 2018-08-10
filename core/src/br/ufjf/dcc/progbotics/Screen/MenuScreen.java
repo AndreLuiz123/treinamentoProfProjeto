@@ -74,7 +74,7 @@ public class MenuScreen implements Screen {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.exit(0);
+                //System.exit(0);
                 return super.touchDown(event, x, y, pointer, button);
             }
 
